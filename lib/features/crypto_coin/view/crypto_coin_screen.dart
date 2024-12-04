@@ -1,3 +1,4 @@
+import 'package:crypto_currency/repositories/crypto_compare/models/crypto_coin.dart';
 import 'package:flutter/material.dart';
 
 class CryptoCoinScreen extends StatefulWidget {
@@ -21,7 +22,7 @@ class _CryptoCoinScreenState extends State<CryptoCoinScreen> {
     CryptoCoinScreenArguments arguments = args as CryptoCoinScreenArguments;
 
     setState(() {
-      title = arguments.title;
+      title = arguments.coin.name;
     });
 
     super.didChangeDependencies();
@@ -34,7 +35,7 @@ class _CryptoCoinScreenState extends State<CryptoCoinScreen> {
   }
 
 class CryptoCoinScreenArguments {
-  final String title;
+  final CryptoCoin coin;
 
-  CryptoCoinScreenArguments(this.title);
+  CryptoCoinScreenArguments(this.coin);
 }
