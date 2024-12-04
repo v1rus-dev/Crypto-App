@@ -8,9 +8,11 @@ class CryptoCurrencyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final platformBrightness = MediaQuery.of(context).platformBrightness;
+    final isDark = platformBrightness == Brightness.dark;
     return MaterialApp(
       title: 'Crypto Currency App',
-      theme: lightTheme,
+      theme: isDark ? darkTheme : lightTheme,
       routes: routes,
     );
   }
