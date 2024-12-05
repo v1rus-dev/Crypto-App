@@ -1,4 +1,6 @@
+import 'package:crypto_currency/utils/env.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 
 import 'crypto_compare.dart';
 
@@ -31,5 +33,13 @@ class CryptoCompareRepository implements AbstractCryptoCompareRepository {
       return CryptoCoin(name: e.key, priceInUSD: price, imageUrl: '$fullURL/$imageUrl', changePrcDay: changePctDay);
     }).toList();
     return cryptoCoinsList;
+  }
+
+  @override
+  Future<List<CryptoCoin>> getAllCoins() async {
+    debugPrint("Get All coins");
+    const API_KEY = Env.cryptoCompareApiKey;
+    debugPrint(API_KEY);
+    return Future.value([]);
   }
 }
