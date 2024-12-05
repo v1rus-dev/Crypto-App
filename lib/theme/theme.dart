@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 final lightTheme = ThemeData(
-    primarySwatch: Colors.yellow,
+    primarySwatch: Colors.grey,
     useMaterial3: false,
     listTileTheme: const ListTileThemeData(iconColor: Colors.black),
     scaffoldBackgroundColor: Colors.white,

@@ -42,6 +42,7 @@ dependencies:
   flutter_bloc: ^8.1.6
   meta: ^1.15.0
   bloc: ^8.1.4
+  salomon_bottom_bar: ^3.3.2
 
 dev_dependencies:
   flutter_test:
@@ -70,6 +71,9 @@ flutter:
     - assets/
     - assets/images/
     - assets/svg/
+    - assets/icons/
+    - assets/icons/crypto/
+    - assets/mapping/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

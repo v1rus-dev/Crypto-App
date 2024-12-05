@@ -7,9 +7,7 @@ import 'package:get_it/get_it.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CryptoListScreen extends StatefulWidget {
-  const CryptoListScreen({super.key, this.title});
-
-  final String? title;
+  const CryptoListScreen({super.key});
 
   @override
   State<CryptoListScreen> createState() => CryptoListScreenState();

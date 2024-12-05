@@ -1,5 +1,6 @@
 import 'package:crypto_currency/features/crypto_coin/view/crypto_coin_screen.dart';
 import 'package:crypto_currency/repositories/crypto_compare/models/crypto_coin.dart';
+import 'package:crypto_currency/widgets/crypto_icon.dart';
 import 'package:flutter/material.dart';
 
 class CryptoItem extends StatelessWidget {
@@ -12,32 +13,46 @@ class CryptoItem extends StatelessWidget {
     var theme = Theme.of(context);
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
-      child:Container(
-            padding: const EdgeInsets.fromLTRB(8, 8, 16, 8),
-            child: Row(
-              children: [
-                SizedBox(
-                  width: 40,
-                  height: 40,
-                  child: Image.network(coin.imageUrl),
+      child: Container(
+          padding: const EdgeInsets.fromLTRB(8, 8, 16, 8),
+          child: Row(
+            children: [
+              SizedBox(
+                width: 36,
+                height: 36,
+                child: CryptoIcon(name: coin.name, imageUri: coin.imageUrl),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      coin.name,
+                      style: theme.textTheme.bodyLarge,
+                    )
+                  ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      Text(
-                        coin.name,
-                        style: theme.textTheme.bodyLarge,
-                      )
-                    ],
-                  ),
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      '\$ ${coin.priceInUSD.toStringAsFixed(3)}',
+                      selectionColor: Colors.black,
+                      style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "${coin.changePrcDay >0 ? '+' : '-'} ${coin.changePrcDay.toStringAsFixed(3)}",
+                      style: theme.textTheme.bodySmall?.copyWith(color: coin.changePrcDay > 0 ? Colors.green : Colors.red),
+                    )
+                  ],
                 ),
-                Text(
-                  '${coin.priceInUSD.toStringAsFixed(3)} \$',
-                  selectionColor: Colors.black,
-                )
-              ],
-            )),
+              )
+            ],
+          )),
       onTap: () {
         Navigator.of(context).pushNamed(CryptoCoinScreen.routeName,
             arguments: CryptoCoinScreenArguments(coin));

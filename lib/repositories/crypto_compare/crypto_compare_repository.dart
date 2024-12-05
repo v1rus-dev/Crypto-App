@@ -12,9 +12,13 @@ class CryptoCompareRepository implements AbstractCryptoCompareRepository {
   final String fullURL = "https://cryptocompare.com";
 
   @override
-  Future<List<CryptoCoin>> getCoinsList() async {
+  Future<List<CryptoCoin>> getSelectedCoinsList(List<String> coins) async {
+    final fsyms = coins.join(',');
     final response = await dio
-        .get('$baseUrl/data/pricemultifull?fsyms=BTC,ETH&tsyms=USD,EUR,BEL,RUB');
+        .get('$baseUrl/data/pricemultifull', queryParameters: {
+          'fsyms': fsyms,
+          'tsyms': 'USD,EUR,BEL,RUB'
+        });
 
     final data = response.data as Map<String, dynamic>;
     final dataRaw = data['RAW'] as Map<String, dynamic>;
@@ -23,7 +27,8 @@ class CryptoCompareRepository implements AbstractCryptoCompareRepository {
       final usdData = (e.value as Map<String, dynamic>)['USD'] as Map<String, dynamic>;
       final price = usdData['PRICE'];
       final imageUrl = usdData['IMAGEURL'];
-      return CryptoCoin(name: e.key, priceInUSD: price, imageUrl: '$fullURL/$imageUrl');
+      final changePctDay = usdData['CHANGEPCTDAY'];
+      return CryptoCoin(name: e.key, priceInUSD: price, imageUrl: '$fullURL/$imageUrl', changePrcDay: changePctDay);
     }).toList();
     return cryptoCoinsList;
   }
