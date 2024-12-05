@@ -23,13 +23,6 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  static const List<Widget> _pages = <Widget>[
-    CryptoListScreen(),
-    CryptoAllListScreen(),
-    NewsScreen(),
-    AccountScreen()
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,8 +30,10 @@ class _HomeScreenState extends State<HomeScreen> {
         items: [
           ApplicationBottomBarItem(icon: Icon(Icons.home), title: Text('Home')),
           ApplicationBottomBarItem(icon: Icon(Icons.list), title: Text('List')),
-          ApplicationBottomBarItem(icon: Icon(Icons.newspaper), title: Text("News")),
-          ApplicationBottomBarItem(icon: Icon(Icons.person), title: Text("Profile"))
+          ApplicationBottomBarItem(
+              icon: Icon(Icons.newspaper), title: Text("News")),
+          ApplicationBottomBarItem(
+              icon: Icon(Icons.person), title: Text("Profile"))
         ],
         selectedItemColor: HexColor.fromHex("0177FF"),
         unselectedItemColor: Colors.white,
@@ -47,7 +42,15 @@ class _HomeScreenState extends State<HomeScreen> {
         currentIndex: _selectedIndex,
         onTap: onItemTapped,
       ),
-      body: _pages[_selectedIndex],
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: const [
+          CryptoListScreen(),
+          CryptoAllListScreen(),
+          NewsScreen(),
+          AccountScreen()
+        ],
+      ),
     );
   }
 }
