@@ -28,8 +28,6 @@ class _CryptoIconState extends State<CryptoIcon> {
     final String jsonString = await rootBundle.loadString('assets/mapping/crypto_mapping.json');
     final Map<String, dynamic> mapping = json.decode(jsonString);
 
-    debugPrint("Name: $name");
-
     return mapping[name];
   }
 

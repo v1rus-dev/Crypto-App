@@ -40,13 +40,17 @@ class CryptoItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      '\$ ${coin.priceInUSD.toStringAsFixed(3)}',
+                      '\$ ${coin.priceInUSD.toStringAsFixed(coin.priceInUSD > 1 ? 3 : 6)}',
                       selectionColor: Colors.black,
-                      style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+                      style: theme.textTheme.bodyMedium
+                          ?.copyWith(fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      "${coin.changePrcDay >0 ? '+' : '-'} ${coin.changePrcDay.toStringAsFixed(3)}",
-                      style: theme.textTheme.bodySmall?.copyWith(color: coin.changePrcDay > 0 ? Colors.green : Colors.red),
+                      "${coin.changePrcDay > 0 ? '+' : '-'} ${coin.changePrcDay.toStringAsFixed(3)}",
+                      style: theme.textTheme.bodySmall?.copyWith(
+                          color: coin.changePrcDay > 0
+                              ? Colors.green
+                              : Colors.red),
                     )
                   ],
                 ),

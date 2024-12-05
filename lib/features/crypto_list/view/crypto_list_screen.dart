@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:crypto_currency/features/crypto_list/bloc/crypto_list_bloc.dart';
 import 'package:crypto_currency/features/crypto_list/widgets/widgets.dart';
 import 'package:crypto_currency/repositories/crypto_compare/crypto_compare.dart';
@@ -14,7 +16,8 @@ class CryptoListScreen extends StatefulWidget {
 }
 
 class CryptoListScreenState extends State<CryptoListScreen> {
-  final _cryptoListBloc = CryptoListBloc(GetIt.I<AbstractCryptoCompareRepository>());
+  final _cryptoListBloc =
+      CryptoListBloc(GetIt.I<AbstractCryptoCompareRepository>());
 
   @override
   void initState() {
@@ -26,36 +29,54 @@ class CryptoListScreenState extends State<CryptoListScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
-      appBar: MainAppbar(title: "Next.io".toUpperCase()),
-      body: BlocBuilder<CryptoListBloc, CryptoListState>(
-        bloc: _cryptoListBloc,
-        builder: (context, state) {
-          switch (state) {
-            case CryptoListInitial():
-              return Container();
-            case CryptoListLoading():
-              return const Center(child: CircularProgressIndicator());
-            case CryptoListSuccess():
-                     return ListView.separated(
-              itemCount: state.coinsList.length,
-              separatorBuilder: (context, index) => const Divider(),
-              itemBuilder: (context, i) {
-                return CryptoItem(coin: state.coinsList[i]);
-              });
-            case CryptoListLoadingFailure():
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text('Something went wrong', style: theme.textTheme.titleMedium),
-                    Text('Please try again later', style: theme.textTheme.bodyMedium)
-                  ],
-                ),
-              );
-          }
-        },
-      )
+        appBar: MainAppbar(title: "Next.io".toUpperCase()),
+        body: RefreshIndicator(
+          onRefresh: () async {
+            final completer = Completer();
+            _cryptoListBloc.add(LoadCryptoList(complerer: completer));
+            return completer.future;
+          },
+          child: BlocBuilder<CryptoListBloc, CryptoListState>(
+              bloc: _cryptoListBloc,
+              builder: (context, state) {
+                switch (state) {
+                  case CryptoListInitial():
+                    return Container();
+                  case CryptoListLoading():
+                    return const Center(child: CircularProgressIndicator());
+                  case CryptoListSuccess():
+                    return ListView.separated(
+                        itemCount: state.coinsList.length,
+                        separatorBuilder: (context, index) => const Divider(),
+                        itemBuilder: (context, i) {
+                          return CryptoItem(coin: state.coinsList[i]);
+                        });
+                  case CryptoListLoadingFailure():
+                    return SomethingWentWrong(onTap: () {});
+                }
+              }),
+        ));
+  }
+}
+
+class SomethingWentWrong extends StatelessWidget {
+  const SomethingWentWrong({super.key, this.onTap});
+
+  final Function()? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text('Something went wrong', style: theme.textTheme.titleMedium),
+          Text('Please try again later', style: theme.textTheme.bodyMedium),
+          OutlinedButton(onPressed: onTap, child: Text("Try again"))
+        ],
+      ),
     );
   }
 }
