@@ -17,6 +17,7 @@ class CryptoListBloc extends Bloc<CryptoListEvent, CryptoListState> {
               final cryptoCoinsList = await repository.getCoinsList();
               emit(CryptoListSuccess(coinsList: cryptoCoinsList));
             } catch (e) {
+              debugPrint(e.toString());
               emit(CryptoListLoadingFailure(exception: e));
             }
           }

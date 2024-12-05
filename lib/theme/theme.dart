@@ -6,14 +6,15 @@ final lightTheme = ThemeData(
     listTileTheme: const ListTileThemeData(iconColor: Colors.black),
     scaffoldBackgroundColor: Colors.white,
     appBarTheme: const AppBarTheme(
-        backgroundColor: Colors.yellow,
+        backgroundColor: Colors.white,
         titleTextStyle: TextStyle(
             color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
         elevation: 0),
     textTheme: const TextTheme(
         displayLarge: TextStyle(fontWeight: FontWeight.bold),
         titleMedium: TextStyle(fontWeight: FontWeight.bold, fontSize: 21),
-        bodyMedium: TextStyle(fontSize: 14)));
+        bodyMedium: TextStyle(fontSize: 16),
+        bodyLarge: TextStyle(fontSize: 18)));
 
 final darkTheme = ThemeData(
     primarySwatch: Colors.grey,
@@ -29,4 +30,6 @@ final darkTheme = ThemeData(
         displayLarge: TextStyle(fontWeight: FontWeight.bold),
         titleMedium: TextStyle(
             fontWeight: FontWeight.bold, fontSize: 21, color: Colors.white),
-        bodyMedium: TextStyle(fontSize: 14, color: Colors.white)));
+        bodyMedium: TextStyle(fontSize: 16, color: Colors.white),
+        bodyLarge: TextStyle(fontSize: 18, color: Colors.white)),
+        cardTheme: const CardTheme(color: Colors.grey));

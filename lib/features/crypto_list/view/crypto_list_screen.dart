@@ -1,6 +1,7 @@
 import 'package:crypto_currency/features/crypto_list/bloc/crypto_list_bloc.dart';
 import 'package:crypto_currency/features/crypto_list/widgets/widgets.dart';
 import 'package:crypto_currency/repositories/crypto_compare/crypto_compare.dart';
+import 'package:crypto_currency/widgets/main_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,8 +28,7 @@ class CryptoListScreenState extends State<CryptoListScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
-      appBar: AppBar(
-          title: Text(widget.title ?? 'Default Title'), centerTitle: true),
+      appBar: MainAppbar(title: "Next.io".toUpperCase()),
       body: BlocBuilder<CryptoListBloc, CryptoListState>(
         bloc: _cryptoListBloc,
         builder: (context, state) {
@@ -58,15 +58,6 @@ class CryptoListScreenState extends State<CryptoListScreen> {
           }
         },
       )
-      
-      // (_cryptoCoinsList == null)
-      //     ? const Center(child: CircularProgressIndicator())
-      //     : ListView.separated(
-      //         itemCount: _cryptoCoinsList!.length,
-      //         separatorBuilder: (context, index) => const Divider(),
-      //         itemBuilder: (context, i) {
-      //           return CryptoItem(coin: _cryptoCoinsList![i]);
-      //         }),
     );
   }
 }

@@ -1,0 +1,15 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M60 120C27 120 0 93.0006 0 59.7012C0.3 26.7019 27 -0.297518 60.3 0.00247602C93.3 0.30247 120 27.0019 120 60.6012C119.7 93.3006 93 120 60 120Z" fill="#EDF0F4"/>
+<mask id="mask0_1_5420" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="34" y="34" width="52" height="52">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M34 34H86V86H34V34Z" fill="white"/>
+</mask>
+<g mask="url(#mask0_1_5420)">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M49.4019 45.9454L61.3652 33.9838L85.9092 33.9058L85.8361 58.4514L70.3466 73.9409L58.3801 85.9074L33.9449 85.8716L33.9092 61.4365L49.4019 45.9454ZM82.3472 36.0004L62.2297 36.0605L50.9002 47.3916H70.9559L82.3472 36.0004ZM47.3187 50.9715V71.0273L36.0217 82.3243L35.9908 62.2994L47.3187 50.9715ZM37.4939 83.7981L57.5188 83.8258L57.5204 83.8274L68.8467 72.5011H48.7909L37.4939 83.7981ZM49.4003 70.4163V49.4716H70.3466V70.4163H49.4003ZM72.4266 48.8623V68.9196L83.7561 57.5885L83.8178 37.471L72.4266 48.8623Z" fill="url(#paint0_linear_1_5420)"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_1_5420" x1="33.9092" y1="60.1251" x2="86.3431" y2="60.1251" gradientUnits="userSpaceOnUse">
+<stop stop-color="#3333FF"/>
+<stop offset="1" stop-color="#8080FF"/>
+</linearGradient>
+</defs>
+</svg>
