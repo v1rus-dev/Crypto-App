@@ -26,7 +26,7 @@ class CryptoListBloc extends Bloc<CryptoListEvent, CryptoListState> {
               debugPrint(e.toString());
               emit(CryptoListLoadingFailure(exception: e));
             } finally {
-              event.complerer?.complete();
+              event.completer?.complete();
             }
           }
       }

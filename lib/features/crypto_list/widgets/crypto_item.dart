@@ -1,4 +1,4 @@
-import 'package:crypto_currency/features/crypto_coin/view/crypto_coin_screen.dart';
+import 'package:crypto_currency/features/one_coin_details/view/one_coin_details_screen.dart';
 import 'package:crypto_currency/repositories/crypto_compare/models/crypto_coin.dart';
 import 'package:crypto_currency/widgets/crypto_icon.dart';
 import 'package:flutter/material.dart';
@@ -58,8 +58,8 @@ class CryptoItem extends StatelessWidget {
             ],
           )),
       onTap: () {
-        Navigator.of(context).pushNamed(CryptoCoinScreen.routeName,
-            arguments: CryptoCoinScreenArguments(coin));
+        Navigator.of(context).pushNamed(OneCoinDetailScreen.routeName,
+            arguments: OneCoinDetailScreenArguments(coin));
       },
     );
   }
