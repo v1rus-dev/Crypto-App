@@ -47,7 +47,7 @@ class CryptoItem extends StatelessWidget {
                           ?.copyWith(fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      "${coin.changePrcDay > 0 ? '+' : '-'} ${coin.changePrcDay.toStringAsFixed(3)}",
+                      "${coin.changePrcDay > 0 ? '+' : ''}${coin.changePrcDay.toStringAsFixed(3)}",
                       style: theme.textTheme.bodySmall?.copyWith(
                           color: coin.changePrcDay > 0
                               ? Colors.green
