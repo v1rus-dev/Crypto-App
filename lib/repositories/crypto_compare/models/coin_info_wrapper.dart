@@ -5,7 +5,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'coin_info_wrapper.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(createToJson: false)
 class CoinInfoWrapper extends Equatable {
   @JsonKey(name: 'Response')
   final String response;
@@ -16,8 +16,6 @@ class CoinInfoWrapper extends Equatable {
   const CoinInfoWrapper({required this.response, required this.data});
 
   factory CoinInfoWrapper.fromJson(Map<String, dynamic> json) => _$CoinInfoWrapperFromJson(json);
-
-  Map<String, dynamic> toJson() => _$CoinInfoWrapperToJson(this);  
 
 @override
 List<Object?> get props => [response, data];

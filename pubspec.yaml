@@ -50,6 +50,7 @@ dependencies:
   envied: ^1.0.0
   json_annotation: ^4.9.0
   fl_chart: ^0.69.2
+  gap: ^3.0.1
 
 dev_dependencies:
   flutter_test:

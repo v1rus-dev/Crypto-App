@@ -1,10 +1,12 @@
 import 'dart:convert';
 
+import 'package:crypto_currency/repositories/crypto_compare/models/coin_full_data.dart';
 import 'package:crypto_currency/repositories/crypto_compare/models/coin_info.dart';
 import 'package:crypto_currency/repositories/crypto_compare/models/coin_info_wrapper.dart';
 import 'package:crypto_currency/utils/env.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 import 'crypto_compare.dart';
 
@@ -65,7 +67,6 @@ class CryptoCompareRepository implements AbstractCryptoCompareRepository {
     Map<String, dynamic> dataMap = response.data as Map<String, dynamic>;
 
     final coinInfoWrapper = CoinInfoWrapper.fromJson(dataMap);
-    debugPrint("CoinInfo ${coinInfoWrapper.data[coinName]}");
 
     return coinInfoWrapper.data[coinName];
   }
@@ -79,5 +80,30 @@ class CryptoCompareRepository implements AbstractCryptoCompareRepository {
     final dataMap = data['Data'] as Map<String, dynamic>;
     debugPrint(dataMap['BTC'].toString());
     return Future.value([]);
+  }
+
+  @override
+  Future<List<CoinFullData>> getCoinFullData(String coinName) async {
+    // TODO: implement getCoinFullData
+
+    final listOfCurrency = ['USD'];
+
+    String tsyms = listOfCurrency.join(',');
+
+    final response = await dio.get('$baseUrl/data/pricemultifull',
+        queryParameters: {'fsyms': coinName, 'tsyms': tsyms});
+
+    final data = response.data as Map<String, dynamic>;
+    final rawData = data['RAW'] as Map<String, dynamic>;
+    final coinInfoByCurrency = rawData[coinName] as Map<String, dynamic>;
+
+    List<CoinFullData> result = [];
+
+    listOfCurrency.forEach((currency) {
+      final info = coinInfoByCurrency[currency] as Map<String, dynamic>;
+      result.add(CoinFullData.fromJson(info));
+    });
+
+    return Future.value(result);
   }
 }
