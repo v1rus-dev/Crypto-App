@@ -6,10 +6,10 @@ sealed class CryptoCoinEvent extends Equatable {
 
 final class CryptoCoinLoadingData extends CryptoCoinEvent {
   final Completer? completer;
-  final String name;
+  final CryptoCoin coin;
 
-  const CryptoCoinLoadingData({this.completer, required this.name});
+  const CryptoCoinLoadingData({this.completer, required this.coin});
 
   @override
-  List<Object?> get props => [name];
+  List<Object?> get props => [coin];
 }

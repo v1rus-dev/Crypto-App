@@ -6,7 +6,7 @@ abstract class AbstractCryptoCompareRepository {
 
   Future<List<CryptoSimplePrice>> getSimpleCoinPrice(String coinName);
 
-  Future<CoinInfo> getCoinInfo(String coinName);
+  Future<CoinInfo?> getCoinInfo(String coinName);
 
   Future<List<CryptoCoin>> getAllCoins();
 }

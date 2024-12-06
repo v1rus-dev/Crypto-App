@@ -30,7 +30,8 @@ class CryptoItem extends StatelessWidget {
                   children: [
                     Text(
                       coin.name,
-                      style: theme.textTheme.bodyLarge,
+                      style: theme.textTheme.bodyMedium
+                          ?.copyWith(fontWeight: FontWeight.bold),
                     )
                   ],
                 ),

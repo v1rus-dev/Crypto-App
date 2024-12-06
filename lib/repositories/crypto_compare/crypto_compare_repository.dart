@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:crypto_currency/repositories/crypto_compare/models/coin_info.dart';
+import 'package:crypto_currency/repositories/crypto_compare/models/coin_info_wrapper.dart';
 import 'package:crypto_currency/utils/env.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -46,25 +49,25 @@ class CryptoCompareRepository implements AbstractCryptoCompareRepository {
     debugPrint("Data: $data");
 
     final list = <CryptoSimplePrice>[];
-    data.forEach((key, value) {
-      debugPrint("Value: $value");
-      list.add(CryptoSimplePrice(name: key, price: value));
-    });
+    // data.forEach((key, value) {
+    //   debugPrint("Value: $value");
+    //   list.add(CryptoSimplePrice(name: key, price: value));
+    // });
 
     return list;
   }
 
   @override
-  Future<CoinInfo> getCoinInfo(String coinName) async {
+  Future<CoinInfo?> getCoinInfo(String coinName) async {
     const API_KEY = Env.cryptoCompareApiKey;
-    final response = await dio
+    Response response = await dio
         .get('$baseUrl/data/all/coinlist', queryParameters: {'fsym': coinName});
+    Map<String, dynamic> dataMap = response.data as Map<String, dynamic>;
 
-    return const CoinInfo(
-        name: "name",
-        coinName: "coinName",
-        fullName: "fullName",
-        description: "description");
+    final coinInfoWrapper = CoinInfoWrapper.fromJson(dataMap);
+    debugPrint("CoinInfo ${coinInfoWrapper.data[coinName]}");
+
+    return coinInfoWrapper.data[coinName];
   }
 
   @override

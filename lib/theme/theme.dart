@@ -13,7 +13,8 @@ final lightTheme = ThemeData(
     textTheme: const TextTheme(
         displayLarge: TextStyle(fontWeight: FontWeight.bold),
         titleMedium: TextStyle(fontWeight: FontWeight.bold, fontSize: 21),
-        bodyMedium: TextStyle(fontSize: 16),
+        bodyMedium: TextStyle(fontSize: 14),
+        bodySmall: TextStyle(fontSize: 12),
         bodyLarge: TextStyle(fontSize: 18)));
 
 final darkTheme = ThemeData(

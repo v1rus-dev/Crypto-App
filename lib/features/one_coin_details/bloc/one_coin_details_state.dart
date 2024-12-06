@@ -1,24 +1,32 @@
 part of 'one_coin_details_bloc.dart';
 
-sealed class CryptoCoinState extends Equatable {
-  const CryptoCoinState();
+sealed class OneCoinDetailsState extends Equatable {
+  const OneCoinDetailsState();
 }
 
-final class CryptoCoinInitial extends CryptoCoinState {
+final class OneCoinDetailsInitial extends OneCoinDetailsState {
   @override
   List<Object?> get props => [];
 }
 
-final class CryptoCoinLoading extends CryptoCoinState {
+final class OneCoinDetailsLoading extends OneCoinDetailsState {
   @override
   List<Object?> get props => [];
 }
 
-final class CryptoCoinSuccess extends CryptoCoinState {
-  const CryptoCoinSuccess({required this.coin, required this.simplePrice});
+// ignore: must_be_immutable
+final class OneCoinDetailsFailure extends OneCoinDetailsState {
+  Object? exception;
+
+  @override
+  List<Object?> get props => [exception];
+}
+
+final class OneCoinDetailsSuccess extends OneCoinDetailsState {
+  const OneCoinDetailsSuccess({required this.coin, required this.coinInfo});
   final CryptoCoin coin;
-  final CryptoSimplePrice simplePrice;
+  final CoinInfo coinInfo;
 
   @override
-  List<Object?> get props => [coin, simplePrice];
+  List<Object?> get props => [coin, coinInfo];
 }
