@@ -1,4 +1,8 @@
-import 'package:crypto_currency/features/crypto_all_list/bloc/crypto_all_list_bloc.dart';
+import 'package:crypto_currency/features/crypto_all_list/domain/bloc/crypto_all_list_bloc.dart';
+import 'package:crypto_currency/features/crypto_all_list/domain/datasources/crypto_all_list_local_datasource.dart';
+import 'package:crypto_currency/features/crypto_all_list/domain/datasources/crypto_all_list_remote_datasource.dart';
+import 'package:crypto_currency/features/crypto_all_list/domain/repository/crypto_all_list_repository.dart';
+import 'package:crypto_currency/features/crypto_list/bloc/crypto_list_bloc.dart';
 import 'package:crypto_currency/features/crypto_list/widgets/crypto_item.dart';
 import 'package:crypto_currency/repositories/crypto_compare/crypto_compare.dart';
 import 'package:flutter/material.dart';
@@ -14,13 +18,15 @@ class CryptoAllListScreen extends StatefulWidget {
 
 class _CryptoAllListScreenState extends State<CryptoAllListScreen> {
   final _cryptoAllListBloc = CryptoAllListBloc(
-      cryptoCompareRepository: GetIt.I.get<AbstractCryptoCompareRepository>());
+      repository: CryptoAllListRepository(
+          localDatasource: CryptoAllListLocalDatasource(),
+          remoteDatasource: CryptoAllListRemoteDatasource()));
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _cryptoAllListBloc.add(LoadAllList());
+    _cryptoAllListBloc.add(CryptoAllListInitialEvent());
   }
 
   @override
@@ -32,23 +38,14 @@ class _CryptoAllListScreenState extends State<CryptoAllListScreen> {
       body: BlocBuilder<CryptoAllListBloc, CryptoAllListState>(
           bloc: _cryptoAllListBloc,
           builder: (context, state) {
-            switch (state) {
-              case CryptoAllListInitial():
-                return Container();
-              case CryptoAllListLoading():
-                return const Center(
-                    child: CircularProgressIndicator.adaptive());
-              case CryptoAllListErrorLoading():
-                return const Center(
-                  child: Text("Error"),
-                );
-              case CryptoAllListLoadingSuccess():
-                return ListView.separated(
-                    separatorBuilder: (context, index) => const Divider(),
-                    itemCount: state.list.length,
-                    itemBuilder: (context, index) {
-                      return CryptoItem(coin: state.list[index]);
-                    });
+            if (state.isLoading) {
+              return const Center(child: CircularProgressIndicator.adaptive());
+            } else {
+              return ListView.builder(
+                itemCount: state.list.length,
+                itemBuilder: (context, index) {
+                  return CryptoItem(coin: state.list[index]);
+                });
             }
           }),
     );

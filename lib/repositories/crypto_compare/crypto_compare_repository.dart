@@ -32,13 +32,13 @@ class CryptoCompareRepository implements AbstractCryptoCompareRepository {
       final price = usdData['PRICE'];
       final imageUrl = usdData['IMAGEURL'];
       final changePctDay = usdData['CHANGEPCTDAY'];
-      return CryptoCoin(
-          name: e.key,
-          priceInUSD: price,
-          imageUrl: '$fullURL/$imageUrl',
-          changePrcDay: changePctDay);
+      // return CryptoCoin(
+      //     name: e.key,
+      //     priceInUSD: price,
+      //     imageUrl: '$fullURL/$imageUrl',
+      //     changePrcDay: changePctDay);
     }).toList();
-    return cryptoCoinsList;
+    return Future(() => []);
   }
 
   @override

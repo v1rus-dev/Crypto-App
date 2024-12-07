@@ -41,7 +41,7 @@ class CryptoItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      '\$ ${coin.priceInUSD.toStringAsFixed(coin.priceInUSD > 1 ? 3 : 6)}',
+                      '\$',
                       selectionColor: Colors.black,
                       style: theme.textTheme.bodyMedium
                           ?.copyWith(fontWeight: FontWeight.bold),
@@ -64,21 +64,4 @@ class CryptoItem extends StatelessWidget {
       },
     );
   }
-
-  // ListTile(
-  //   title: Text(
-  //     coin.name,
-  //     style: theme.textTheme.titleMedium!,
-  //   ),
-  //   subtitle: Text(
-  //     "${coin.priceInUSD} \$",
-  //     style: theme.textTheme.bodyMedium,
-  //   ),
-  //   leading: Image.network(coin.imageUrl),
-  //   trailing: const Icon(Icons.arrow_forward),
-  //   onTap: () {
-  //     Navigator.of(context).pushNamed(CryptoCoinScreen.routeName,
-  //         arguments: CryptoCoinScreenArguments(coin));
-  //   },
-  // );
 }
