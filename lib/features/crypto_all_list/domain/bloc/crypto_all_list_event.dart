@@ -8,11 +8,20 @@ final class CryptoAllListInitialEvent extends CryptoAllListEvent {
   List<Object?> get props => [];
 }
 
-final class LoadAllList extends CryptoAllListEvent {
+final class CryptoAllListLoadAllListEvent extends CryptoAllListEvent {
   final Completer? completer;
 
-  LoadAllList({this.completer});
+  CryptoAllListLoadAllListEvent({this.completer});
 
   @override
   List<Object?> get props => [completer];
+}
+
+final class CryptoAllListUpdateSearchEvent extends CryptoAllListEvent {
+  final String search;
+
+  CryptoAllListUpdateSearchEvent({required this.search});
+
+  @override
+  List<Object?> get props => [search];
 }

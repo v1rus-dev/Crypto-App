@@ -10,4 +10,5 @@ final class AppImages {
   static String moon = 'assets/svg/moon.svg';
   static String sunFilled = 'assets/svg/sun_filled.svg';
   static String moonFilled = 'assets/svg/moon_filled.svg';
+  static String search = 'assets/svg/search.svg';
 }

@@ -5,10 +5,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CryptoIcon extends StatefulWidget {
-  const CryptoIcon({super.key, required this.name, required this.imageUri});
+  const CryptoIcon({super.key, required this.name});
 
   final String name;
-  final String imageUri;
 
   @override
   State<CryptoIcon> createState() => _CryptoIconState();

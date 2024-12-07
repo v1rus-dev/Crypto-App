@@ -26,7 +26,7 @@ class OneCoinTopPart extends StatelessWidget {
               SizedBox(
                   width: 44,
                   height: 44,
-                  child: CryptoIcon(name: coinSmallName, imageUri: "")),
+                  child: CryptoIcon(name: coinSmallName)),
               const Gap(16),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

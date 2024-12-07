@@ -25,7 +25,7 @@ class CryptoItem extends StatelessWidget {
                 SizedBox(
                   width: 56,
                   height: 56,
-                  child: CryptoIcon(name: coin.name, imageUri: coin.imageUrl),
+                  child: CryptoIcon(name: coin.name),
                 ),
                 const Gap(20),
                 Column(

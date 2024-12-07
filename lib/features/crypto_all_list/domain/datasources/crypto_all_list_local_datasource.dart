@@ -17,10 +17,14 @@ class CryptoAllListLocalDatasource extends LocalDatasource<CryptoCoin> {
   Future<List<CryptoCoin>> getList() async {
     var cryptoCoins = box.values;
 
-    if (cryptoCoins == null || cryptoCoins == [] || cryptoCoins.isEmpty) {
-      cryptoCoins = [];
-    }
     return Future(() => cryptoCoins.toList());
+  }
+
+  Future<List<CryptoCoin>> search(String search) async {
+    var filteredCoins = box.values.where((c) =>
+        c.name.toLowerCase().contains(search.toLowerCase()) ||
+        c.coinName.toLowerCase().contains(search.toLowerCase()));
+    return Future(() => filteredCoins.toList());
   }
 
   Future<void> resetList(List<CryptoCoin> list) async {

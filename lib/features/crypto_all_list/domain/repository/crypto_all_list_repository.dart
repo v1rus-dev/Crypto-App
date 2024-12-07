@@ -22,6 +22,8 @@ class CryptoAllListRepository {
 
   Future<List<CryptoCoin>> getList() => _localDatasource.getList();
 
+  Future<List<CryptoCoin>> search(String search) => _localDatasource.search(search);
+
   Future<void> updateAllCryptoCoinsList(List<CryptoCoin> list) async {
     _localDatasource.resetList(list);
   }

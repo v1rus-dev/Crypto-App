@@ -4,6 +4,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 part 'crypto_coin.g.dart';
 
 @HiveType(typeId: 1)
+// ignore: must_be_immutable
 class CryptoCoin extends Equatable {
   @HiveField(0)
   final String name;
@@ -22,21 +23,29 @@ class CryptoCoin extends Equatable {
   @HiveField(7)
   final String imageUrl;
   @HiveField(8)
-
   final double changePrcDay;
 
-    CryptoCoin({
-    required this.name,
-    required this.coinName,
-    required this.algorithm,
-    required this.isTrading,
-    required this.imageUrl,
-    required this.changePrcDay,
-    this.fullCoinName,
-    this.launchDate,
-    this.platformType
-  });
+  CryptoCoin(
+      {required this.name,
+      required this.coinName,
+      required this.algorithm,
+      required this.isTrading,
+      required this.imageUrl,
+      required this.changePrcDay,
+      this.fullCoinName,
+      this.launchDate,
+      this.platformType});
 
-@override
-List<Object?> get props => [name, coinName, fullCoinName, algorithm, isTrading, launchDate, platformType, imageUrl, changePrcDay];
+  @override
+  List<Object?> get props => [
+        name,
+        coinName,
+        fullCoinName,
+        algorithm,
+        isTrading,
+        launchDate,
+        platformType,
+        imageUrl,
+        changePrcDay
+      ];
 }
