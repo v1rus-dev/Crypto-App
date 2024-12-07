@@ -5,6 +5,7 @@ import 'package:crypto_currency/features/crypto_all_list/domain/repository/crypt
 import 'package:crypto_currency/features/crypto_all_list/widgets/crypto_coin_grid_view.dart';
 import 'package:crypto_currency/features/crypto_list/bloc/crypto_list_bloc.dart';
 import 'package:crypto_currency/features/crypto_list/widgets/crypto_item.dart';
+import 'package:crypto_currency/features/one_coin_details/one_coin_details.dart';
 import 'package:crypto_currency/repositories/crypto_compare/crypto_compare.dart';
 import 'package:crypto_currency/utils/app_images.dart';
 import 'package:crypto_currency/widgets/search_appbar.dart';
@@ -61,6 +62,12 @@ class _CryptoAllListScreenState extends State<CryptoAllListScreen> {
                     itemBuilder: (_, index) {
                       return CryptoCoinGridView(
                           key: Key(state.list[index].name),
+                          onTap: () => {
+                                Navigator.pushNamed(
+                                    context, OneCoinDetailScreen.routeName,
+                                    arguments: OneCoinDetailScreenArguments(
+                                        state.list[index]))
+                              },
                           name: state.list[index].name,
                           fullName: state.list[index].coinName);
                     }),
