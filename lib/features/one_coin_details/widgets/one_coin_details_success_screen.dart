@@ -30,6 +30,8 @@ class OneCoinDetailsSuccessScreenState
             const OneCoinTopPart(),
             const Gap(24),
             Divider(
+              height: 1,
+              thickness: 2,
               color: HexColor.fromHex("#E6E6E6"),
             ),
             const Gap(24),
