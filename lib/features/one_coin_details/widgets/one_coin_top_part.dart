@@ -1,4 +1,5 @@
 import 'package:crypto_currency/features/one_coin_details/bloc/one_coin_details_bloc.dart';
+import 'package:crypto_currency/generated/l10n.dart';
 import 'package:crypto_currency/utils/app_images.dart';
 import 'package:crypto_currency/utils/color_extensions.dart';
 import 'package:crypto_currency/widgets/crypto_icon.dart';
@@ -90,7 +91,7 @@ class OneCoinTopPart extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            "High",
+                            S.of(context).high_value,
                             style: theme.textTheme.bodyMedium
                                 ?.copyWith(color: HexColor.fromHex("727272")),
                           ),
@@ -106,7 +107,7 @@ class OneCoinTopPart extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            "Low",
+                            S.of(context).low_value,
                             style: theme.textTheme.bodyMedium
                                 ?.copyWith(color: HexColor.fromHex("727272")),
                           ),
