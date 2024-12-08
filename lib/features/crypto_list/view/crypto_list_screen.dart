@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:crypto_currency/features/crypto_list/bloc/crypto_list_bloc.dart';
+import 'package:crypto_currency/features/crypto_list/widgets/empty_selected_crypto_list.dart';
 import 'package:crypto_currency/features/crypto_list/widgets/widgets.dart';
 import 'package:crypto_currency/repositories/crypto_compare/crypto_compare.dart';
 import 'package:crypto_currency/widgets/main_appbar.dart';
@@ -32,30 +33,15 @@ class CryptoListScreenState extends State<CryptoListScreen> {
     return Scaffold(
         appBar: MainAppbar(title: "Next.io".toUpperCase()),
         body: RefreshIndicator.adaptive(
-          onRefresh: () async {
-            final completer = Completer();
-            _cryptoListBloc.add(LoadCryptoList(completer: completer));
-            return completer.future;
-          },
-          child: BlocBuilder<CryptoListBloc, CryptoListState>(
-              bloc: _cryptoListBloc,
-              builder: (context, state) {
-                switch (state) {
-                  case CryptoListInitial():
-                    return Container();
-                  case CryptoListLoading():
-                    return const Center(child: CircularProgressIndicator());
-                  case CryptoListSuccess():
-                    return ListView.separated(
-                        itemCount: state.coinsList.length,
-                        separatorBuilder: (context, index) => const Divider(),
-                        itemBuilder: (context, i) {
-                          return CryptoItem(coin: state.coinsList[i]);
-                        });
-                  case CryptoListLoadingFailure():
-                    return SomethingWentWrong(onTap: () {});
-                }
-              }),
-        ));
+            onRefresh: () async {
+              final completer = Completer();
+              _cryptoListBloc.add(LoadCryptoList(completer: completer));
+              return completer.future;
+            },
+            child: BlocBuilder<CryptoListBloc, CryptoListState>(
+                bloc: _cryptoListBloc,
+                builder: (context, state) {
+                  return const EmptySelectedCryptoList();
+                })));
   }
 }
