@@ -22,3 +22,17 @@ final class OneCoinDetailsUpdatePrices extends OneCoinDetailsEvent {
   @override
   List<Object?> get props => [cointInfoEntity];
 }
+
+final class OneCoinDetailsUpdateHistory extends OneCoinDetailsEvent {
+  final List<CoinHistoryEntity> minuteHistory;
+  final List<CoinHistoryEntity> hourHistory;
+  final List<CoinHistoryEntity> dayHistory;
+
+  const OneCoinDetailsUpdateHistory(
+      {required this.minuteHistory,
+      required this.hourHistory,
+      required this.dayHistory});
+
+  @override
+  List<Object?> get props => [minuteHistory, hourHistory, dayHistory];
+}

@@ -49,6 +49,7 @@ class _CryptoAllListScreenState extends State<CryptoAllListScreen> {
         builder: (context, state) => Scaffold(
             resizeToAvoidBottomInset: false,
             body: CustomScrollView(
+              physics: const AlwaysScrollableScrollPhysics(),
               slivers: [
                 const SliverAppBar(
                   backgroundColor: Colors.white,
@@ -68,9 +69,17 @@ class _CryptoAllListScreenState extends State<CryptoAllListScreen> {
                         ],
                       )),
                 ),
-                const SliverGap(24),
-                SliverAlignedGrid.extent(
-                    itemBuilder: (BuildContext context, int index) {
+                const SliverToBoxAdapter(
+                  child: SizedBox(
+                    height: 16,
+                  ),
+                ),
+                SliverGrid.builder(
+                  itemCount: state.list.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2),
+                    itemBuilder: (context, index) {
                       return CryptoCoinGridView(
                         key: Key(state.list[index].name),
                         name: state.list[index].name,
@@ -80,8 +89,7 @@ class _CryptoAllListScreenState extends State<CryptoAllListScreen> {
                               OneCoinDetailRoute(coin: state.list[index]));
                         },
                       );
-                    },
-                    maxCrossAxisExtent: 400)
+                    })
                 // SliverAnimatedGrid(
                 //     initialItemCount: 0,
                 //     itemBuilder: (BuildContext context, int index,

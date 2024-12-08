@@ -18,25 +18,6 @@ class CryptoAllListBloc extends Bloc<CryptoAllListEvent, CryptoAllListState> {
     on<CryptoAllListUpdateSearchEvent>(_updateSearchHandler);
   }
 
-  // Future<void> test(
-  //     CryptoAllListEvent event, Emitter<CryptoAllListState> emit) async {
-  //   switch (event) {
-  //     case LoadAllList():
-  //       {
-  //         try {
-  //           if (state == CryptoAllListInitial) {
-  //             emit.call(CryptoAllListLoading());
-  //           }
-
-  //           final list = await repository.getAllCoins();
-  //         } catch (e) {
-  //           debugPrint(e.toString());
-  //           emit.call(CryptoAllListErrorLoading(e as Error));
-  //         } finally {
-  //           event.completer?.complete();
-  //         }
-  //       }
-  //   }
 
   Future<void> _initialEventHandler(CryptoAllListInitialEvent event,
       Emitter<CryptoAllListState> stateEmitter) async {
