@@ -13,13 +13,20 @@ class OneCoinInfoEntity extends Equatable {
   final double lowDay;
   @JsonKey(name: 'CHANGEPCTDAY')
   final double changePrcDay;
+  @JsonKey(name: 'TOTALVOLUME24H')
+  final double totalVoduleOfDay;
 
   const OneCoinInfoEntity(
-      {required this.price, required this.highDay, required this.lowDay, required this.changePrcDay});
+      {required this.price,
+      required this.highDay,
+      required this.lowDay,
+      required this.changePrcDay,
+      required this.totalVoduleOfDay});
 
   factory OneCoinInfoEntity.fromJson(Map<String, dynamic> json) =>
       _$OneCoinInfoEntityFromJson(json);
 
   @override
-  List<Object?> get props => [price, highDay, lowDay, changePrcDay];
+  List<Object?> get props =>
+      [price, highDay, lowDay, changePrcDay, totalVoduleOfDay];
 }
