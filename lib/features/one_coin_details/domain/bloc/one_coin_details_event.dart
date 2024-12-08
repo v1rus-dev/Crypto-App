@@ -18,3 +18,12 @@ final class OneCoinDetailsStartPeriodicTimer extends OneCoinDetailsEvent {
   @override
   List<Object?> get props => [];
 }
+
+final class OneCoinDetailsUpdatePrices extends OneCoinDetailsEvent {
+  final OneCoinInfoEntity? cointInfoEntity;
+
+  const OneCoinDetailsUpdatePrices({required this.cointInfoEntity});
+
+  @override
+  List<Object?> get props => [cointInfoEntity];
+}

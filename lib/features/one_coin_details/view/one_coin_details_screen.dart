@@ -38,8 +38,6 @@ class _OneCoinDetailScreenState extends State<OneCoinDetailScreen> {
 
     _cryptoCoinBloc.add(OneCoinDetailsLoadingData(coin: widget.coin));
 
-    _cryptoCoinBloc.add(OneCoinDetailsStartPeriodicTimer());
-
     super.didChangeDependencies();
   }
 
@@ -67,12 +65,6 @@ class _OneCoinDetailScreenState extends State<OneCoinDetailScreen> {
               },
             ),
           )));
-
-  @override
-  void dispose() {
-    _cryptoCoinBloc.close();
-    super.dispose();
-  }
 }
 
 class OneCoinDetailScreenArguments {

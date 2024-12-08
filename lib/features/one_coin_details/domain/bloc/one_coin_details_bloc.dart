@@ -20,17 +20,16 @@ class OneCoinDetailsBloc
 
   OneCoinDetailsBloc({required this.repository})
       : super(OneCoinDetailsState(isLoading: true)) {
+    timer ??= _timer();
     on<OneCoinDetailsLoadingData>(_loadingDataEventHandler);
-    on<OneCoinDetailsStartPeriodicTimer>(_startTimer);
+    on<OneCoinDetailsUpdatePrices>(_updatePricesState);
   }
 
   Future<void> _loadingDataEventHandler(OneCoinDetailsLoadingData event,
       Emitter<OneCoinDetailsState> emitter) async {
     coin = event.coin;
     emitter.call(state.copyWith(coin: coin));
-    debugPrint("Coin name: ${coin.name}");
     final result = await repository.load(coin.name);
-    debugPrint("Result: $result");
 
     if (result != null) {
       emitter.call(state.copyWith(
@@ -42,35 +41,35 @@ class OneCoinDetailsBloc
     }
   }
 
-  Future<void> _startTimer(OneCoinDetailsStartPeriodicTimer event,
+  Future<void> _updatePricesState(OneCoinDetailsUpdatePrices event,
       Emitter<OneCoinDetailsState> emitter) async {
-    timer ??= _timer();
-  }
+    final result = event.cointInfoEntity;
 
-  @override
-  Future<void> close() {
-    // TODO: implement close
-    timer?.cancel();
-    return super.close();
+    if (result != null) {
+      emitter.call(state.copyWith(
+          isLoading: false,
+          price: result.price,
+          lowerPrice: result.lowDay,
+          maxPrice: result.highDay));
+    }
   }
 
   Timer _timer() {
     return Timer.periodic(const Duration(seconds: 10), (timer) async {
       OneCoinInfoEntity? result = await getOneCoinInfo(coin.name);
 
-      debugPrint("Timer tick: ${result?.price}");
-      if (result != null) {
-        emit(state.copyWith(
-            isLoading: false,
-            price: result.price,
-            lowerPrice: result.lowDay,
-            maxPrice: result.highDay));
-      }
+      add(OneCoinDetailsUpdatePrices(cointInfoEntity: result));
     });
   }
 
   Future<OneCoinInfoEntity?> getOneCoinInfo(String coinName) async {
     final result = await repository.load(coinName);
     return result;
+  }
+
+  @override
+  Future<void> close() {
+    timer?.cancel();
+    return super.close();
   }
 }
