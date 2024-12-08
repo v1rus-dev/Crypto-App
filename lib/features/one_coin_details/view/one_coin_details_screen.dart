@@ -44,27 +44,19 @@ class _OneCoinDetailScreenState extends State<OneCoinDetailScreen> {
   @override
   Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(title: Text(title ?? '...')),
-      body: RefreshIndicator.adaptive(
-          onRefresh: () async {
-            final completer = Completer();
-            _cryptoCoinBloc.add(OneCoinDetailsLoadingData(
-                coin: widget.coin, completer: completer));
-            return completer.future;
+      body: BlocProvider(
+        create: (context) => _cryptoCoinBloc,
+        child: BlocBuilder<OneCoinDetailsBloc, OneCoinDetailsState>(
+          bloc: _cryptoCoinBloc,
+          builder: (context, state) {
+            if (state.isLoading) {
+              return const Center(child: CircularProgressIndicator.adaptive());
+            } else {
+              return const OneCoinDetailsSuccessScreen();
+            }
           },
-          child: BlocProvider(
-            create: (context) => _cryptoCoinBloc,
-            child: BlocBuilder<OneCoinDetailsBloc, OneCoinDetailsState>(
-              bloc: _cryptoCoinBloc,
-              builder: (context, state) {
-                if (state.isLoading) {
-                  return const Center(
-                      child: CircularProgressIndicator.adaptive());
-                } else {
-                  return const OneCoinDetailsSuccessScreen();
-                }
-              },
-            ),
-          )));
+        ),
+      ));
 }
 
 class OneCoinDetailScreenArguments {

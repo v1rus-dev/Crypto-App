@@ -55,16 +55,33 @@ class OneCoinHistoryPartState extends State<OneCoinHistoryPart> {
                       gridData: const FlGridData(show: false),
                       borderData: FlBorderData(show: false),
                       titlesData: const FlTitlesData(show: false),
+                      lineTouchData: LineTouchData(
+                          enabled: true,
+                          touchTooltipData: LineTouchTooltipData(
+                              tooltipRoundedRadius: 8,
+                              getTooltipColor: (LineBarSpot touchedSpot) =>
+                                  HexColor.fromHex('#727272'),
+                              getTooltipItems:
+                                  (List<LineBarSpot> touchedBarSpots) {
+                                return defaultLineTooltipItem(touchedBarSpots)
+                                    .map((item) {
+                                  return LineTooltipItem(
+                                      item.text,
+                                      item.textStyle
+                                          .copyWith(color: Colors.white));
+                                }).toList();
+                              })),
                       lineBarsData: [
                         LineChartBarData(
                             dotData: const FlDotData(show: false),
                             isCurved: true,
+                            barWidth: 2,
                             color: HexColor.fromHex("#14BB25"),
-                            curveSmoothness: 0,
+                            curveSmoothness: 0.1,
                             spots: getSpots(state))
                       ]),
                   curve: Curves.linear,
-                  duration: const Duration(milliseconds: 300),
+                  duration: const Duration(milliseconds: 200),
                 ),
               ),
             ),

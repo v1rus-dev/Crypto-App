@@ -14,6 +14,8 @@ class OneCoinTopPart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final greenColor = HexColor.fromHex('#14BB25');
+    final redColor = HexColor.fromHex('#EF5859');
     return BlocBuilder<OneCoinDetailsBloc, OneCoinDetailsState>(
       builder: (context, state) {
         return Padding(
@@ -75,9 +77,11 @@ class OneCoinTopPart extends StatelessWidget {
                       ),
                       const Gap(4),
                       Text(
-                        "${(state.changePrcDay > 0) ? '+' : ''}${state.changePrcDay.toStringAsFixed(3)}",
-                        style: theme.textTheme.bodyMedium
-                            ?.copyWith(color: (state.changePrcDay < 0) ? Colors.red : Colors.green),
+                        "${(state.changePrcDay > 0) ? '+' : '-'} ${state.changePrcDay.abs().toStringAsFixed(3)}",
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                            color: (state.changePrcDay < 0)
+                                ? redColor
+                                : greenColor),
                       )
                     ],
                   ),
@@ -91,7 +95,7 @@ class OneCoinTopPart extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                '${S.of(context).high_value}:',
+                                S.of(context).high_value,
                                 style: theme.textTheme.bodyMedium?.copyWith(
                                     color: HexColor.fromHex("727272")),
                               ),
@@ -108,7 +112,7 @@ class OneCoinTopPart extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                '${S.of(context).low_value}: ',
+                                S.of(context).low_value,
                                 style: theme.textTheme.bodyMedium?.copyWith(
                                     color: HexColor.fromHex("727272")),
                               ),
