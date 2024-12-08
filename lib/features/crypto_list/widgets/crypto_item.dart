@@ -15,8 +15,8 @@ class CryptoItem extends StatelessWidget {
     return Material(
       child: InkWell(
         onTap: () {
-          Navigator.of(context).pushNamed(OneCoinDetailScreen.routeName,
-              arguments: OneCoinDetailScreenArguments(coin));
+          // Navigator.of(context).pushNamed(OneCoinDetailScreen.routeName,
+          //     arguments: OneCoinDetailScreenArguments(coin));
         },
         child: Container(
             padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),

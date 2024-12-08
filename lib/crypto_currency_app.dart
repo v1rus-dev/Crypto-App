@@ -4,16 +4,16 @@ import 'router/router.dart';
 import 'theme/theme.dart';
 
 class CryptoCurrencyApp extends StatelessWidget {
-  const CryptoCurrencyApp({super.key});
+  CryptoCurrencyApp({super.key});
+
+  final _appRouter = AppRouter();
 
   @override
   Widget build(BuildContext context) {
     final platformBrightness = MediaQuery.of(context).platformBrightness;
     final isDark = platformBrightness == Brightness.dark;
-    return MaterialApp(
-      title: 'Crypto Currency App',
-      theme: isDark ? darkTheme : lightTheme,
-      routes: routes,
-    );
+
+    return MaterialApp.router(
+        title: 'Crypto Currency App', routerConfig: _appRouter.config());
   }
 }

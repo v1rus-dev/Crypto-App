@@ -1,3 +1,4 @@
+import 'package:auto_route/annotations.dart';
 import 'package:crypto_currency/features/account/account.dart';
 import 'package:crypto_currency/features/crypto_all_list/view/view.dart';
 import 'package:crypto_currency/features/crypto_list/view/view.dart';
@@ -7,6 +8,7 @@ import 'package:crypto_currency/widgets/application_bottom_bar/application_botto
 import 'package:crypto_currency/widgets/application_bottom_bar/application_bottom_bar_item.dart';
 import 'package:flutter/material.dart';
 
+@RoutePage()
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 

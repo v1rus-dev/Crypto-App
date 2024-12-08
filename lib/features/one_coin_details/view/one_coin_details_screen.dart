@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:auto_route/annotations.dart';
 import 'package:crypto_currency/features/one_coin_details/bloc/one_coin_details_bloc.dart';
 import 'package:crypto_currency/features/one_coin_details/widgets/one_coin_details_success_screen.dart';
 import 'package:crypto_currency/repositories/crypto_compare/models/crypto_coin.dart';
@@ -8,10 +9,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
+@RoutePage()
 class OneCoinDetailScreen extends StatefulWidget {
-  const OneCoinDetailScreen({super.key});
+  const OneCoinDetailScreen({super.key, required this.coin});
 
-  static const routeName = "/coin";
+  final CryptoCoin coin;
 
   @override
   State<OneCoinDetailScreen> createState() => _OneCoinDetailScreenState();
@@ -21,21 +23,14 @@ class _OneCoinDetailScreenState extends State<OneCoinDetailScreen> {
   final _cryptoCoinBloc = OneCoinDetailsBloc(GetIt.I.get());
 
   String? title;
-  late OneCoinDetailScreenArguments arguments;
 
   @override
   void didChangeDependencies() {
-    final args = ModalRoute.of(context)?.settings.arguments;
-    assert(args != null && args is OneCoinDetailScreenArguments,
-        'You must provide CryptoCoinScreenArguments!!!');
-
-    arguments = args as OneCoinDetailScreenArguments;
-
     setState(() {
-      title = arguments.coin.name;
+      title = widget.coin.name;
     });
 
-    _cryptoCoinBloc.add(OneCoinDetailsLoadingData(coin: arguments.coin));
+    _cryptoCoinBloc.add(OneCoinDetailsLoadingData(coin: widget.coin));
 
     _cryptoCoinBloc.add(OneCoinDetailsStartPeriodicTimer());
 
@@ -49,7 +44,7 @@ class _OneCoinDetailScreenState extends State<OneCoinDetailScreen> {
           onRefresh: () async {
             final completer = Completer();
             _cryptoCoinBloc.add(OneCoinDetailsLoadingData(
-                coin: arguments.coin, completer: completer));
+                coin: widget.coin, completer: completer));
             return completer.future;
           },
           child: BlocBuilder<OneCoinDetailsBloc, OneCoinDetailsState>(
@@ -63,7 +58,7 @@ class _OneCoinDetailScreenState extends State<OneCoinDetailScreen> {
                       child: CircularProgressIndicator.adaptive());
                 case OneCoinDetailsSuccess():
                   return OneCoinDetailsSuccessScreen(
-                    coin: arguments.coin,
+                    coin: widget.coin,
                     coinInfo: state.coinInfo,
                   );
                 case OneCoinDetailsFailure():

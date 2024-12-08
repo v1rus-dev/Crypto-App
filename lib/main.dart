@@ -35,5 +35,5 @@ void main() async {
     BlocProvider<SettingsBloc>(
       create: (BuildContext context) => SettingsBloc(),
     )
-  ], child: const CryptoCurrencyApp()));
+  ], child: CryptoCurrencyApp()));
 }

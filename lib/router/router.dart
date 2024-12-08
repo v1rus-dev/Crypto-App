@@ -1,8 +1,21 @@
-import 'package:crypto_currency/features/home/view/home_screen.dart';
+import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:crypto_currency/router/router.gr.dart';
 
-import '../features/one_coin_details/one_coin_details.dart';
+@AutoRouterConfig()
+class AppRouter extends RootStackRouter {
+  @override
+  // TODO: implement defaultRouteType
+  RouteType get defaultRouteType => const RouteType.adaptive();
 
-final routes = {
-  '/': (context) => const HomeScreen(),
-  '/coin': (context) => const OneCoinDetailScreen()
-};
+  @override
+  List<AutoRoute> get routes => [
+    AutoRoute(page: HomeRoute.page, path: '/'),
+    AutoRoute(page: OneCoinDetailRoute.page)
+    ];
+}
+
+// final routes = {
+//   '/': (context) => const HomeScreen(),
+//   '/coin': (context) => const OneCoinDetailScreen()
+// };
