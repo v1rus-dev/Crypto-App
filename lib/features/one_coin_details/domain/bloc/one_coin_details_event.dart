@@ -14,11 +14,6 @@ final class OneCoinDetailsLoadingData extends OneCoinDetailsEvent {
   List<Object?> get props => [coin];
 }
 
-final class OneCoinDetailsStartPeriodicTimer extends OneCoinDetailsEvent {
-  @override
-  List<Object?> get props => [];
-}
-
 final class OneCoinDetailsUpdatePrices extends OneCoinDetailsEvent {
   final OneCoinInfoEntity? cointInfoEntity;
 

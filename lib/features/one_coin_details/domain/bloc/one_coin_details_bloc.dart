@@ -20,7 +20,13 @@ class OneCoinDetailsBloc
 
   OneCoinDetailsBloc({required this.repository})
       : super(OneCoinDetailsState(isLoading: true)) {
-    timer ??= _timer();
+
+    timer = Timer.periodic(const Duration(seconds: 10), (timer) async {
+      OneCoinInfoEntity? result = await getOneCoinInfo(coin.name);
+
+      add(OneCoinDetailsUpdatePrices(cointInfoEntity: result));
+    });
+    
     on<OneCoinDetailsLoadingData>(_loadingDataEventHandler);
     on<OneCoinDetailsUpdatePrices>(_updatePricesState);
   }
@@ -52,14 +58,6 @@ class OneCoinDetailsBloc
           lowerPrice: result.lowDay,
           maxPrice: result.highDay));
     }
-  }
-
-  Timer _timer() {
-    return Timer.periodic(const Duration(seconds: 10), (timer) async {
-      OneCoinInfoEntity? result = await getOneCoinInfo(coin.name);
-
-      add(OneCoinDetailsUpdatePrices(cointInfoEntity: result));
-    });
   }
 
   Future<OneCoinInfoEntity?> getOneCoinInfo(String coinName) async {
