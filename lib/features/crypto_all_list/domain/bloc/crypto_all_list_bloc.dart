@@ -65,16 +65,18 @@ class CryptoAllListBloc extends Bloc<CryptoAllListEvent, CryptoAllListState> {
 
   Future<void> _updateSearchHandler(CryptoAllListUpdateSearchEvent event,
       Emitter<CryptoAllListState> stateEmitter) async {
-        if (event.search.trim().isEmpty) {
-          await _getListForDatabase(stateEmitter);
-          return;
-        } else {
-          await _getListForDatabaseBySearch(stateEmitter, event.search);
-          return;
-        }
-      }
+    debugPrint("New search: ${event.search}");
+    if (event.search.trim().isEmpty) {
+      await _getListForDatabase(stateEmitter);
+      return;
+    } else {
+      await _getListForDatabaseBySearch(stateEmitter, event.search);
+      return;
+    }
+  }
 
-  _getListForDatabaseBySearch(Emitter<CryptoAllListState> stateEmitter, String search) async {
+  _getListForDatabaseBySearch(
+      Emitter<CryptoAllListState> stateEmitter, String search) async {
     final list = await repository.search(search);
     stateEmitter.call(state.copyWith(list: list));
   }

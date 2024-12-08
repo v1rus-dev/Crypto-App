@@ -12,6 +12,7 @@ final lightTheme = ThemeData(
         elevation: 0),
     textTheme: const TextTheme(
         displayLarge: TextStyle(fontWeight: FontWeight.bold),
+        titleLarge: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
         titleMedium: TextStyle(fontWeight: FontWeight.bold, fontSize: 21),
         bodyMedium: TextStyle(fontSize: 14),
         bodySmall: TextStyle(fontSize: 12),
