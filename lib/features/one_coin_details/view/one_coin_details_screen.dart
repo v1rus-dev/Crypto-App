@@ -1,7 +1,10 @@
 import 'dart:async';
 
 import 'package:auto_route/annotations.dart';
-import 'package:crypto_currency/features/one_coin_details/bloc/one_coin_details_bloc.dart';
+import 'package:crypto_currency/features/one_coin_details/domain/bloc/one_coin_details_bloc.dart';
+import 'package:crypto_currency/features/one_coin_details/domain/datasource/one_coin_local_datasource.dart';
+import 'package:crypto_currency/features/one_coin_details/domain/datasource/one_coin_network_datasource.dart';
+import 'package:crypto_currency/features/one_coin_details/domain/repository/one_coin_repository.dart';
 import 'package:crypto_currency/features/one_coin_details/widgets/one_coin_details_success_screen.dart';
 import 'package:crypto_currency/repositories/crypto_compare/models/crypto_coin.dart';
 import 'package:crypto_currency/widgets/something_went_wrong.dart';
@@ -20,7 +23,10 @@ class OneCoinDetailScreen extends StatefulWidget {
 }
 
 class _OneCoinDetailScreenState extends State<OneCoinDetailScreen> {
-  final _cryptoCoinBloc = OneCoinDetailsBloc(GetIt.I.get());
+  final _cryptoCoinBloc = OneCoinDetailsBloc(
+      repository: OneCoinRepository(
+          localDatasource: OneCoinLocalDatasource(),
+          networkDatasource: OneCoinNetworkDatasource()));
 
   String? title;
 
@@ -47,29 +53,24 @@ class _OneCoinDetailScreenState extends State<OneCoinDetailScreen> {
                 coin: widget.coin, completer: completer));
             return completer.future;
           },
-          child: BlocBuilder<OneCoinDetailsBloc, OneCoinDetailsState>(
-            bloc: _cryptoCoinBloc,
-            builder: (context, state) {
-              switch (state) {
-                case OneCoinDetailsInitial():
-                  return Container();
-                case OneCoinDetailsLoading():
+          child: BlocProvider(
+            create: (context) => _cryptoCoinBloc,
+            child: BlocBuilder<OneCoinDetailsBloc, OneCoinDetailsState>(
+              bloc: _cryptoCoinBloc,
+              builder: (context, state) {
+                if (state.isLoading) {
                   return const Center(
                       child: CircularProgressIndicator.adaptive());
-                case OneCoinDetailsSuccess():
-                  return OneCoinDetailsSuccessScreen(
-                    coin: widget.coin,
-                    coinInfo: state.coinInfo,
-                  );
-                case OneCoinDetailsFailure():
-                  return const SomethingWentWrong();
-              }
-            },
+                } else {
+                  return const OneCoinDetailsSuccessScreen();
+                }
+              },
+            ),
           )));
 
   @override
   void dispose() {
-    _cryptoCoinBloc.add(OneCoinDetailsDispose());
+    _cryptoCoinBloc.close();
     super.dispose();
   }
 }
