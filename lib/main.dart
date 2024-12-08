@@ -9,18 +9,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   GetIt.I.registerSingleton(Dio());
   GetIt.I.registerLazySingleton<AbstractCryptoCompareRepository>(
       () => CryptoCompareRepository(dio: GetIt.I.get()));
   GetIt.I.registerLazySingleton<CryptoCompareApi>(() => CryptoCompareApi());
 
+  const allListCoinsBox = 'all_coins_list_box';
+
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   await Hive.initFlutter();
 
   Hive.registerAdapter(CryptoCoinAdapter());
 
-  final allListBox = await Hive.openBox<CryptoCoin>('all_coins_list_box');
+  final allListBox = await Hive.openBox<CryptoCoin>(allListCoinsBox);
 
   GetIt.I.registerSingleton<Box<CryptoCoin>>(allListBox);
 

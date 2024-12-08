@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "463124186784",
+    "project_id": "crypto-currency-883ee",
+    "storage_bucket": "crypto-currency-883ee.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:463124186784:android:0f68ad274a299cacbb2bc5",
+        "android_client_info": {
+          "package_name": "yegor.cheprasov.crypto_currency"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLGjDIpAOBVydXlt7DMWytzr3dAfe3vlg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
