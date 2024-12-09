@@ -1,15 +1,14 @@
-import 'package:crypto_currency/utils/app_images.dart';
 import 'package:crypto_currency/utils/color_extensions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class SearchTextField extends StatefulWidget {
   const SearchTextField(
-      {super.key, required this.hintText, this.leadingIcon, this.onChanged});
+      {super.key, required this.hintText, this.leadingIcon, this.onChanged, this.controller});
 
   final String hintText;
   final Widget? leadingIcon;
   final ValueChanged<String>? onChanged;
+  final TextEditingController? controller;
 
   @override
   State<SearchTextField> createState() => _SearchTextFieldState();
@@ -20,6 +19,7 @@ class _SearchTextFieldState extends State<SearchTextField> {
   Widget build(BuildContext context) {
     return TextField(
       onChanged: widget.onChanged,
+      controller: widget.controller,
       style: const TextStyle(fontSize: 14, color: Colors.black),
       decoration: InputDecoration(
         prefixIconConstraints:

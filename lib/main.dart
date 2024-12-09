@@ -26,7 +26,7 @@ void main() async {
   Bloc.observer = TalkerBlocObserver(
       talker: talker,
       settings: const TalkerBlocLoggerSettings(
-          printStateFullData: false, printEventFullData: false));
+          printStateFullData: true, printEventFullData: false));
 
   const allListCoinsBox = 'all_coins_list_box';
 

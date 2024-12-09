@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:crypto_currency/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -15,8 +14,8 @@ class CryptoCurrencyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final platformBrightness = MediaQuery.of(context).platformBrightness;
-    final isDark = platformBrightness == Brightness.dark;
+    // final platformBrightness = MediaQuery.of(context).platformBrightness;
+    // final isDark = platformBrightness == Brightness.dark;
 
     return MaterialApp.router(
       localizationsDelegates: const [

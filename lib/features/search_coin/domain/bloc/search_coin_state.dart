@@ -1,10 +1,24 @@
 part of 'search_coin_bloc.dart';
 
-sealed class SearchCoinState extends Equatable {
-  const SearchCoinState();
-  
-  @override
-  List<Object> get props => [];
-}
+final class SearchCoinState extends Equatable {
+    SearchCoinState({
+    required this.nothingFound,
+  });
 
-final class SearchCoinInitial extends SearchCoinState {}
+  final bool nothingFound;
+
+  final SearchHintsController searchHintsController = SearchHintsController();
+  final SearchResultController searchResultController = SearchResultController();
+
+  @override
+  List<Object> get props => [nothingFound];
+
+  
+  SearchCoinState copyWith({
+    bool? nothingFound
+  }) {
+    return SearchCoinState(
+          nothingFound: nothingFound ?? this.nothingFound,
+    );
+  }
+}
