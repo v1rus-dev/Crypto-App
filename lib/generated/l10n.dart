@@ -69,6 +69,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Search token`
+  String get search_token {
+    return Intl.message(
+      'Search token',
+      name: 'search_token',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

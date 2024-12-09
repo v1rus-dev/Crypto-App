@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 final class AppImages {
   static String bitcoinLogo = 'assets/svg/bitcoin-logo.svg';
   static String bell = 'assets/svg/bell.svg';

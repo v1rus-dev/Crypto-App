@@ -5,11 +5,13 @@ import 'package:crypto_currency/features/crypto_all_list/domain/datasources/cryp
 import 'package:crypto_currency/features/crypto_all_list/domain/repository/crypto_all_list_repository.dart';
 import 'package:crypto_currency/features/crypto_all_list/widgets/all_list_toolbar.dart';
 import 'package:crypto_currency/features/crypto_all_list/widgets/crypto_coin_grid_view.dart';
+import 'package:crypto_currency/features/search_coin/view/search_coin_bottom_sheet.dart';
 import 'package:crypto_currency/router/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
+@RoutePage()
 class CryptoAllListScreen extends StatefulWidget {
   const CryptoAllListScreen({super.key});
 
@@ -41,19 +43,30 @@ class _CryptoAllListScreenState extends State<CryptoAllListScreen> {
             body: CustomScrollView(
               physics: const AlwaysScrollableScrollPhysics(),
               slivers: [
-                const SliverAppBar(
+                SliverAppBar(
                   backgroundColor: Colors.white,
                   shadowColor: Colors.grey,
                   floating: true,
                   snap: true,
-                  toolbarHeight: 70,
                   bottom: PreferredSize(
-                      preferredSize: Size.fromHeight(48),
+                      preferredSize: const Size.fromHeight(48),
                       child: Column(
                         children: [
-                          AllListToolbar(),
-                          Gap(24),
-                          Divider(
+                          AllListToolbar(onTap: () {
+                            showModalBottomSheet(
+                                context: context,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(32)),
+                                showDragHandle: true,
+                                isScrollControlled: true,
+                                useRootNavigator: true,
+                                useSafeArea: true,
+                                builder: (buildContext) {
+                                  return const SearchCoinBottomSheet();
+                                });
+                          }),
+                          const Gap(24),
+                          const Divider(
                             height: 1,
                           )
                         ],
@@ -65,7 +78,7 @@ class _CryptoAllListScreenState extends State<CryptoAllListScreen> {
                   ),
                 ),
                 SliverGrid.builder(
-                  itemCount: state.list.length,
+                    itemCount: state.list.length,
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2),
@@ -80,77 +93,9 @@ class _CryptoAllListScreenState extends State<CryptoAllListScreen> {
                         },
                       );
                     })
-                // SliverAnimatedGrid(
-                //     initialItemCount: 0,
-                //     itemBuilder: (BuildContext context, int index,
-                //         Animation<double> animation) {
-                //       return CryptoCoinGridView(
-                //         key: Key(state.list[index].name),
-                //         name: state.list[index].name,
-                //         fullName: state.list[index].coinName,
-                //         onTap: () {
-                //           AutoRouter.of(context).push(
-                //               OneCoinDetailRoute(coin: state.list[index]));
-                //         },
-                //       );
-                //     },
-                //     gridDelegate:
-                //         const SliverGridDelegateWithFixedCrossAxisCount(
-                //             crossAxisCount: 2))
-                // SliverAnimatedGrid(
-                //   itemBuilder: (BuildContext context, int index) {
-                //     return Container(
-                //       alignment: Alignment.center,
-                //       child: CryptoCoinGridView(
-                //         key: Key(state.list[index].name),
-                //         name: state.list[index].name,
-                //         fullName: state.list[index].coinName,
-                //         onTap: () {
-                //           AutoRouter.of(context).push(
-                //               OneCoinDetailRoute(coin: state.list[index]));
-                //         },
-                //       ),
-                //     );
-                //   },
-                //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                //       crossAxisCount: 2),
-                // )
               ],
             )),
       ),
     );
   }
-
-  // return Scaffold(
-  //   body: BlocBuilder<CryptoAllListBloc, CryptoAllListState>(
-  //       bloc: _cryptoAllListBloc,
-  //       builder: (context, state) {
-  //         if (state.isLoading) {
-  //           return const Center(child: CircularProgressIndicator.adaptive());
-  //         } else {
-  //           return Padding(
-  //             padding: const EdgeInsets.symmetric(horizontal: 8),
-  //             child: GridView.builder(
-  //                 gridDelegate:
-  //                     const SliverGridDelegateWithMaxCrossAxisExtent(
-  //                         maxCrossAxisExtent: 300),
-  //                 itemCount: state.list.length,
-  //                 itemBuilder: (_, index) {
-  //                   return CryptoCoinGridView(
-  //                       key: Key(state.list[index].name),
-  //                       onTap: () => {
-  //                             AutoRouter.of(context).push(
-  //                                 OneCoinDetailRoute(coin: state.list[index]))
-  //                             // Navigator.pushNamed(
-  //                             //     context, OneCoinDetailScreen.routeName,
-  //                             //     arguments: OneCoinDetailScreenArguments(
-  //                             //         state.list[index]))
-  //                           },
-  //                       name: state.list[index].name,
-  //                       fullName: state.list[index].coinName);
-  //                 }),
-  //           );
-  //         }
-  //       }),
-  // );
 }

@@ -1,10 +1,16 @@
 import 'package:crypto_currency/features/crypto_all_list/domain/bloc/crypto_all_list_bloc.dart';
-import 'package:crypto_currency/widgets/search_text_field.dart';
+import 'package:crypto_currency/generated/l10n.dart';
+import 'package:crypto_currency/utils/app_images.dart';
+import 'package:crypto_currency/utils/color_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
 
 class AllListToolbar extends StatefulWidget {
-  const AllListToolbar({super.key});
+  const AllListToolbar({super.key, required this.onTap});
+
+  final VoidCallback onTap;
 
   @override
   State<AllListToolbar> createState() => _AllListToolbarState();
@@ -17,12 +23,38 @@ class _AllListToolbarState extends State<AllListToolbar> {
         builder: (context, state) {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: SearchTextField(
-              hintText: 'Search Token',
-              onChanged: (value) {
-                BlocProvider.of<CryptoAllListBloc>(context)
-                    .add(CryptoAllListUpdateSearchEvent(search: value));
-              },
+            child: Material(
+              child: InkWell(
+                customBorder: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16)),
+                onTap: () {
+                  widget.onTap.call();
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      border: Border.all(width: 1, color: Colors.grey),
+                      borderRadius: BorderRadius.circular(16)),
+                  child: SizedBox(
+                    height: 48,
+                    width: double.infinity,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const Gap(16),
+                        SvgPicture.asset(AppImages.search),
+                        const Gap(16),
+                        Text(
+                          S.current.search_token,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium
+                              ?.copyWith(color: HexColor.fromHex('#727272')),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
             ),
           );
         },
