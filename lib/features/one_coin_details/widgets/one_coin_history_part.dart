@@ -103,7 +103,6 @@ class OneCoinHistoryPartState extends State<OneCoinHistoryPart> {
   List<FlSpot> getSpots(OneCoinDetailsState state) {
     switch (_selectedHistoryPart) {
       case HistoryPart.Minute:
-        debugPrint("STATE: $state");
         final res = state.history.minuteHistory.map((item) {
           return FlSpot(item.x, item.y);
         }).toList();

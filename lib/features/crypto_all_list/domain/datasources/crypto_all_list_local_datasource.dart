@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:crypto_currency/repositories/crypto_compare/crypto_compare.dart';
+import 'package:crypto_currency/repositories/crypto_compare/models/crypto_coin.dart';
 import 'package:crypto_currency/utils/local_datasource.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';

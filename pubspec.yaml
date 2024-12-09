@@ -58,6 +58,9 @@ dependencies:
   firebase_core: ^3.8.1
   firebase_crashlytics: ^4.2.0
   auto_route: ^9.2.2
+  talker_flutter: ^4.5.2
+  talker_dio_logger: ^4.5.2
+  talker_bloc_logger: ^4.5.2
 
 dev_dependencies:
   flutter_test:

@@ -20,7 +20,6 @@ class _AllListToolbarState extends State<AllListToolbar> {
             child: SearchTextField(
               hintText: 'Search Token',
               onChanged: (value) {
-                debugPrint("VALUE: $value");
                 BlocProvider.of<CryptoAllListBloc>(context)
                     .add(CryptoAllListUpdateSearchEvent(search: value));
               },

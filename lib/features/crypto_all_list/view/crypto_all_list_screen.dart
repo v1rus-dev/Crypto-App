@@ -5,20 +5,10 @@ import 'package:crypto_currency/features/crypto_all_list/domain/datasources/cryp
 import 'package:crypto_currency/features/crypto_all_list/domain/repository/crypto_all_list_repository.dart';
 import 'package:crypto_currency/features/crypto_all_list/widgets/all_list_toolbar.dart';
 import 'package:crypto_currency/features/crypto_all_list/widgets/crypto_coin_grid_view.dart';
-import 'package:crypto_currency/features/crypto_list/bloc/crypto_list_bloc.dart';
-import 'package:crypto_currency/features/crypto_list/widgets/crypto_item.dart';
-import 'package:crypto_currency/features/one_coin_details/one_coin_details.dart';
-import 'package:crypto_currency/repositories/crypto_compare/crypto_compare.dart';
 import 'package:crypto_currency/router/router.gr.dart';
-import 'package:crypto_currency/utils/app_images.dart';
-import 'package:crypto_currency/widgets/search_appbar.dart';
-import 'package:crypto_currency/widgets/search_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
-import 'package:get_it/get_it.dart';
 
 class CryptoAllListScreen extends StatefulWidget {
   const CryptoAllListScreen({super.key});

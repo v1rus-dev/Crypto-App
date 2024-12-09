@@ -54,10 +54,6 @@ class OneCoinDetailsBloc
     final historyHour = await repository.loadHistoryForHour(coin.name);
     final historyDay = await repository.loadHistoryForDay(coin.name);
 
-    debugPrint('Minute: ${historyMinute.toString()}');
-    debugPrint('Hour: ${historyHour.toString()}');
-    debugPrint('Day: ${historyDay.toString()}');
-
     add(OneCoinDetailsUpdateHistory(
         minuteHistory: historyMinute ?? [],
         hourHistory: historyHour ?? [],

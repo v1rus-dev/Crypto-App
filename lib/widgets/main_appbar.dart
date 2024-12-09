@@ -7,9 +7,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class MainAppbar extends StatelessWidget implements PreferredSizeWidget {
-  const MainAppbar({super.key, required this.title});
+  const MainAppbar({super.key, required this.title, this.actions});
 
   final String title;
+  final List<Widget>? actions;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +32,7 @@ class MainAppbar extends StatelessWidget implements PreferredSizeWidget {
       ),
       shadowColor: const Color.fromARGB(255, 224, 224, 224),
       elevation: 1,
+      actions: actions,
     );
   }
 

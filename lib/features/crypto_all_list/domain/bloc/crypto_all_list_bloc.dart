@@ -2,10 +2,12 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:crypto_currency/features/crypto_all_list/domain/repository/crypto_all_list_repository.dart';
-import 'package:crypto_currency/repositories/crypto_compare/crypto_compare.dart';
+import 'package:crypto_currency/repositories/crypto_compare/models/crypto_coin.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:meta/meta.dart';
+import 'package:talker_flutter/talker_flutter.dart';
 
 part 'crypto_all_list_event.dart';
 part 'crypto_all_list_state.dart';
@@ -22,7 +24,7 @@ class CryptoAllListBloc extends Bloc<CryptoAllListEvent, CryptoAllListState> {
   Future<void> _initialEventHandler(CryptoAllListInitialEvent event,
       Emitter<CryptoAllListState> stateEmitter) async {
     final databaseIsEmpty = repository.databaseIsEmpty();
-    debugPrint("Database is empty: $databaseIsEmpty");
+    GetIt.I.get<Talker>().debug("Database is empty");
 
     if (!databaseIsEmpty) {
       await _getListForDatabase(stateEmitter);
@@ -46,7 +48,6 @@ class CryptoAllListBloc extends Bloc<CryptoAllListEvent, CryptoAllListState> {
 
   Future<void> _updateSearchHandler(CryptoAllListUpdateSearchEvent event,
       Emitter<CryptoAllListState> stateEmitter) async {
-    debugPrint("New search: ${event.search}");
     if (event.search.trim().isEmpty) {
       await _getListForDatabase(stateEmitter);
       return;

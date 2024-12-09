@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class SettingsBloc extends Bloc<SettingsEvents, SettingsState> {
   SettingsBloc() : super(SettingsState()) {
     on<UpdateThemeSettingsEvent>(_updateTheme);
-    debugPrint("Create setting bloc");
   }
 
   _updateTheme(SettingsEvents event, Emitter<SettingsState> emitterState) {}

@@ -33,7 +33,6 @@ class CryptoCompareApi extends Api {
     final internalData =
         (response.data as Map<String, dynamic>)['Data'] as Map<String, dynamic>;
     final internalDataV2 = internalData['Data'] as List<dynamic>;
-    debugPrint("Internal data V2: ${internalDataV2.toString()}");
 
     return Future(() {
       return internalDataV2.map((map) {
