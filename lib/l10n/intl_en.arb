@@ -1,4 +1,5 @@
 {
     "high_value": "High",
-    "low_value": "Low"
+    "low_value": "Low",
+    "search_token": "Search token"
 }

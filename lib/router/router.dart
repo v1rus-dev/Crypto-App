@@ -10,12 +10,7 @@ class AppRouter extends RootStackRouter {
 
   @override
   List<AutoRoute> get routes => [
-    AutoRoute(page: HomeRoute.page, path: '/'),
-    AutoRoute(page: OneCoinDetailRoute.page)
-    ];
+        AutoRoute(page: HomeRoute.page, path: '/'),
+        AutoRoute(page: OneCoinDetailRoute.page)
+      ];
 }
-
-// final routes = {
-//   '/': (context) => const HomeScreen(),
-//   '/coin': (context) => const OneCoinDetailScreen()
-// };
