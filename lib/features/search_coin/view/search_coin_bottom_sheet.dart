@@ -1,9 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:crypto_currency/features/search_coin/domain/bloc/search_coin_bloc.dart';
 import 'package:crypto_currency/features/search_coin/domain/datasource/local_search_coins_datasource.dart';
 import 'package:crypto_currency/features/search_coin/domain/repository/search_coin_repository.dart';
 import 'package:crypto_currency/features/search_coin/widgets/coin_search_result.dart';
 import 'package:crypto_currency/features/search_coin/widgets/hint.dart';
 import 'package:crypto_currency/generated/l10n.dart';
+import 'package:crypto_currency/router/router.gr.dart';
 import 'package:crypto_currency/widgets/search_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,13 +42,16 @@ class _SearchCoinBottomSheetState extends State<SearchCoinBottomSheet> {
       create: (context) => _searchCoinBloc,
       child: BlocBuilder<SearchCoinBloc, SearchCoinState>(
         builder: (context, state) {
-          return CustomScrollView(
-            slivers: [
-              _buildHeader(),
-              const SliverGap(16),
-              _buildHints(state),
-              _buildSearchList(state)
-            ],
+          return Scaffold(
+            body: CustomScrollView(
+              slivers: [
+                _buildHeader(),
+                const SliverGap(16),
+                _buildHints(state),
+                const SliverGap(16),
+                _buildSearchList(state),
+              ],
+            ),
           );
         },
       ),
@@ -72,15 +77,12 @@ class _SearchCoinBottomSheetState extends State<SearchCoinBottomSheet> {
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     scrollDirection: Axis.horizontal,
                     itemCount: snapshot.data?.length ?? 0,
-                    separatorBuilder: (context, index) {
-                      return const SizedBox(width: 8);
-                    },
-                    itemBuilder: (buildContext, index) {
-                      return Hint(
-                          hintText: (snapshot.data ?? [])[index],
-                          onTap: (value) =>
-                              {textEditingController.text = value});
-                    });
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(width: 8),
+                    itemBuilder: (buildContext, index) => Hint(
+                        hintText: (snapshot.data ?? [])[index],
+                        onTap: (value) =>
+                            {textEditingController.text = value}));
               }),
         ),
       ));
@@ -89,12 +91,18 @@ class _SearchCoinBottomSheetState extends State<SearchCoinBottomSheet> {
         child: StreamBuilder(
           stream: state.searchResultController.stream,
           builder: (context, snapshot) {
-            return SliverList.builder(
+            return SliverList.separated(
                 itemCount: snapshot.data?.length ?? 0,
-                itemBuilder: (buildContext, index) {
-                  return CoinSearchResult(
-                      coin: (snapshot.data ?? [])[index], onTap: () {});
-                });
+                separatorBuilder: (context, index) => const SizedBox(
+                      height: 16,
+                    ),
+                itemBuilder: (buildContext, index) => CoinSearchResult(
+                    key: Key(snapshot.data?.elementAt(index).name ?? ''),
+                    coin: (snapshot.data ?? [])[index],
+                    onTap: (coin) {
+                      AutoRouter.of(context)
+                          .push(OneCoinDetailRoute(coin: coin));
+                    }));
           },
         ),
       );

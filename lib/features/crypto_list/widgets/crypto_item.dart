@@ -39,26 +39,24 @@ class CryptoItem extends StatelessWidget {
                     )
                   ],
                 ),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text(
-                        '\$',
-                        selectionColor: Colors.black,
-                        style: theme.textTheme.bodyMedium
-                            ?.copyWith(fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        "${coin.changePrcDay > 0 ? '+' : ''}${coin.changePrcDay.toStringAsFixed(3)}",
-                        style: theme.textTheme.bodySmall?.copyWith(
-                            color: coin.changePrcDay > 0
-                                ? Colors.green
-                                : Colors.red),
-                      )
-                    ],
-                  ),
-                )
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      '\$',
+                      selectionColor: Colors.black,
+                      style: theme.textTheme.bodyMedium
+                          ?.copyWith(fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "${coin.changePrcDay > 0 ? '+' : ''}${coin.changePrcDay.toStringAsFixed(3)}",
+                      style: theme.textTheme.bodySmall?.copyWith(
+                          color: coin.changePrcDay > 0
+                              ? Colors.green
+                              : Colors.red),
+                    )
+                  ],
+                ),
               ],
             )),
       ),

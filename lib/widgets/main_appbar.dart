@@ -21,13 +21,13 @@ class MainAppbar extends StatelessWidget implements PreferredSizeWidget {
             title,
             style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
-          Expanded(child: BlocBuilder<SettingsBloc, SettingsState>(
+          BlocBuilder<SettingsBloc, SettingsState>(
               builder: (context, state) {
             return const Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [_LightDarkThemeChanger()],
             );
-          }))
+          })
         ],
       ),
       shadowColor: const Color.fromARGB(255, 224, 224, 224),

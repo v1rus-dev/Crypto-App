@@ -55,8 +55,9 @@ class _CryptoAllListScreenState extends State<CryptoAllListScreen> {
                           AllListToolbar(onTap: () {
                             showModalBottomSheet(
                                 context: context,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(32)),
+                                shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.vertical(
+                                        top: Radius.circular(32))),
                                 showDragHandle: true,
                                 isScrollControlled: true,
                                 useRootNavigator: true,

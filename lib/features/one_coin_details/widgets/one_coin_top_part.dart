@@ -40,9 +40,10 @@ class OneCoinTopPart extends StatelessWidget {
                           style: theme.textTheme.bodySmall),
                     ],
                   ),
-                  Expanded(
-                      child: Row(
+                  const Expanded(child: SizedBox()),
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisSize: MainAxisSize.max,
                     children: [
                       IconButton(
                           splashRadius: 24,
@@ -61,7 +62,7 @@ class OneCoinTopPart extends StatelessWidget {
                           onPressed: () {},
                           icon: SvgPicture.asset(AppImages.star))
                     ],
-                  ))
+                  )
                 ],
               ),
               const Gap(16),
@@ -85,8 +86,8 @@ class OneCoinTopPart extends StatelessWidget {
                       )
                     ],
                   ),
-                  Expanded(
-                      child: Row(
+                  const Expanded(child: SizedBox()),
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Column(
@@ -128,7 +129,7 @@ class OneCoinTopPart extends StatelessWidget {
                         ],
                       ),
                     ],
-                  ))
+                  )
                 ],
               )
             ],
