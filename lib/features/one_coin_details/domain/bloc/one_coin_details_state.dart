@@ -2,7 +2,7 @@ part of 'one_coin_details_bloc.dart';
 
 // ignore: must_be_immutable
 final class OneCoinDetailsState extends Equatable {
-  CryptoCoin? coin;
+  CryptoCoin coin;
   bool isLoading;
   double price;
   double maxPrice;
@@ -11,7 +11,7 @@ final class OneCoinDetailsState extends Equatable {
   History history;
 
   OneCoinDetailsState(
-      {this.coin,
+      {required this.coin,
       this.isLoading = false,
       this.price = 0,
       this.maxPrice = 0,

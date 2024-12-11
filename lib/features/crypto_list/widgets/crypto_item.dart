@@ -1,5 +1,5 @@
 import 'package:crypto_currency/features/one_coin_details/view/one_coin_details_screen.dart';
-import 'package:crypto_currency/repositories/crypto_compare/models/crypto_coin.dart';
+import 'package:crypto_currency/data/database/entities/crypto_coin.dart';
 import 'package:crypto_currency/widgets/crypto_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';

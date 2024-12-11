@@ -5,6 +5,7 @@ part 'all_coins_info_entity.g.dart';
 
 @JsonSerializable(
     createToJson: false, explicitToJson: true, includeIfNull: false)
+// ignore: must_be_immutable
 class AllCoinsInfoEntity extends Equatable {
   @JsonKey(name: 'Name')
   final String name;

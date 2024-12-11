@@ -1,3 +1,4 @@
+import 'package:crypto_currency/common/favorites/bloc/favorites_bloc.dart';
 import 'package:crypto_currency/features/one_coin_details/domain/bloc/one_coin_details_bloc.dart';
 import 'package:crypto_currency/generated/l10n.dart';
 import 'package:crypto_currency/utils/app_images.dart';
@@ -27,16 +28,16 @@ class OneCoinTopPart extends StatelessWidget {
                   SizedBox(
                       width: 44,
                       height: 44,
-                      child: CryptoIcon(name: state.coin?.name ?? '')),
+                      child: CryptoIcon(name: state.coin.name)),
                   const Gap(16),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(state.coin?.name ?? '',
+                      Text(state.coin.name,
                           style: theme.textTheme.bodyMedium
                               ?.copyWith(fontWeight: FontWeight.bold)),
                       const Gap(4),
-                      Text(state.coin?.coinName ?? '',
+                      Text(state.coin.coinName,
                           style: theme.textTheme.bodySmall),
                     ],
                   ),
@@ -59,8 +60,13 @@ class OneCoinTopPart extends StatelessWidget {
                           icon: SvgPicture.asset(AppImages.share)),
                       IconButton(
                           splashRadius: 24,
-                          onPressed: () {},
-                          icon: SvgPicture.asset(AppImages.star))
+                          onPressed: () {
+                            BlocProvider.of<FavoritesBloc>(context)
+                                .add(AddCoinToFavorite(coin: state.coin));
+                          },
+                          icon: state.coin.isFavorite
+                              ? SvgPicture.asset(AppImages.starFilled)
+                              : SvgPicture.asset(AppImages.star))
                     ],
                   )
                 ],

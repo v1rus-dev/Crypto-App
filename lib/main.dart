@@ -1,9 +1,10 @@
-import 'dart:async';
-
+import 'package:crypto_currency/common/favorites/bloc/favorites_bloc.dart';
+import 'package:crypto_currency/common/favorites/datasource/favorites_datasource.dart';
+import 'package:crypto_currency/common/favorites/repository/favorites_repository.dart';
 import 'package:crypto_currency/common/settings/bloc/settings_bloc.dart';
 import 'package:crypto_currency/crypto_currency_app.dart';
 import 'package:crypto_currency/data/api/crypto_compare_api.dart';
-import 'package:crypto_currency/repositories/crypto_compare/models/crypto_coin.dart';
+import 'package:crypto_currency/data/database/entities/crypto_coin.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,8 +17,9 @@ import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  final talker = TalkerFlutter.init();
+  final talker = TalkerFlutter.init(
+    settings: TalkerSettings(enabled: false)
+  );
   GetIt.I.registerSingleton(talker);
 
   GetIt.I.registerSingleton(Dio());
@@ -26,6 +28,7 @@ void main() async {
   Bloc.observer = TalkerBlocObserver(
       talker: talker,
       settings: const TalkerBlocLoggerSettings(
+        enabled: false,
           printStateFullData: true, printEventFullData: false));
 
   const allListCoinsBox = 'all_coins_list_box';
@@ -40,11 +43,11 @@ void main() async {
 
   GetIt.I.registerSingleton<Box<CryptoCoin>>(allListBox);
 
-  runZonedGuarded(
-      () => runApp(MultiBlocProvider(providers: [
-            BlocProvider<SettingsBloc>(
-              create: (BuildContext context) => SettingsBloc(),
-            )
-          ], child: CryptoCurrencyApp())),
-      (error, stack) => GetIt.I.get<Talker>().handle(error, stack));
+  runApp(MultiBlocProvider(providers: [
+    BlocProvider<SettingsBloc>(create: (context) => SettingsBloc()),
+    BlocProvider<FavoritesBloc>(
+        create: (context) => FavoritesBloc(
+            repository:
+                FavoritesRepository(localDatasource: FavoritesDatasource())))
+  ], child: CryptoCurrencyApp()));
 }

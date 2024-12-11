@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:crypto_currency/router/router.gr.dart';
+import 'router.gr.dart';
 
 @AutoRouterConfig()
 class AppRouter extends RootStackRouter {

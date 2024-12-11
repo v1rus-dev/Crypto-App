@@ -1,16 +1,16 @@
-import 'package:crypto_currency/repositories/crypto_compare/models/crypto_coin.dart';
-import 'package:crypto_currency/utils/local_datasource.dart';
+import 'package:crypto_currency/data/database/entities/crypto_coin.dart';
+import 'package:crypto_currency/common/utils/local_datasource.dart';
 import 'package:get_it/get_it.dart';
 
 class LocalSearchCoinsDatasource extends LocalDatasource<CryptoCoin> {
-  LocalSearchCoinsDatasource() : super(box: GetIt.I.get());
+  LocalSearchCoinsDatasource() : super(dataBox: GetIt.I.get());
 
   Future<List<String>> getHints(String search, int maxCount) async {
-    final coinNameCompareValues = box.values
+    final coinNameCompareValues = dataBox.values
         .where((coin) =>
             coin.coinName.toLowerCase().startsWith(search.trim().toLowerCase()))
         .getHints(maxCount, (item) => item.coinName);
-    final nameCompareValues = box.values
+    final nameCompareValues = dataBox.values
         .where((coin) =>
             coin.name.toLowerCase().startsWith(search.trim().toLowerCase()))
         .getHints(maxCount, (item) => item.name);
@@ -20,7 +20,7 @@ class LocalSearchCoinsDatasource extends LocalDatasource<CryptoCoin> {
   }
 
   Future<List<CryptoCoin>> getResults(String search) async {
-    return box.values
+    return dataBox.values
         .where((coin) =>
             coin.coinName.toLowerCase().startsWith(search) ||
             coin.name.toLowerCase().startsWith(search))

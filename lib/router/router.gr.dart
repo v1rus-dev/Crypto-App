@@ -9,6 +9,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i7;
+import 'package:crypto_currency/data/database/entities/crypto_coin.dart' as _i9;
 import 'package:crypto_currency/features/account/view/account_screen.dart'
     as _i1;
 import 'package:crypto_currency/features/crypto_all_list/view/crypto_all_list_screen.dart'
@@ -19,8 +20,6 @@ import 'package:crypto_currency/features/home/view/home_screen.dart' as _i4;
 import 'package:crypto_currency/features/news/view/news_screen.dart' as _i5;
 import 'package:crypto_currency/features/one_coin_details/view/one_coin_details_screen.dart'
     as _i6;
-import 'package:crypto_currency/repositories/crypto_compare/models/crypto_coin.dart'
-    as _i9;
 import 'package:flutter/material.dart' as _i8;
 
 /// generated route for

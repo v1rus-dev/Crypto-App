@@ -4,7 +4,7 @@ import 'package:crypto_currency/features/one_coin_details/domain/datasource/one_
 import 'package:crypto_currency/features/one_coin_details/domain/datasource/one_coin_network_datasource.dart';
 import 'package:crypto_currency/features/one_coin_details/domain/repository/one_coin_repository.dart';
 import 'package:crypto_currency/features/one_coin_details/widgets/one_coin_details_success_screen.dart';
-import 'package:crypto_currency/repositories/crypto_compare/models/crypto_coin.dart';
+import 'package:crypto_currency/data/database/entities/crypto_coin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,7 +19,8 @@ class OneCoinDetailScreen extends StatefulWidget {
 }
 
 class _OneCoinDetailScreenState extends State<OneCoinDetailScreen> {
-  final _cryptoCoinBloc = OneCoinDetailsBloc(
+  late final OneCoinDetailsBloc _cryptoCoinBloc = OneCoinDetailsBloc(
+      coin: widget.coin,
       repository: OneCoinRepository(
           localDatasource: OneCoinLocalDatasource(),
           networkDatasource: OneCoinNetworkDatasource()));

@@ -1,5 +1,5 @@
 import 'package:crypto_currency/features/search_coin/domain/datasource/local_search_coins_datasource.dart';
-import 'package:crypto_currency/repositories/crypto_compare/models/crypto_coin.dart';
+import 'package:crypto_currency/data/database/entities/crypto_coin.dart';
 
 class SearchCoinRepository {
   final LocalSearchCoinsDatasource localCoinsDatasource;

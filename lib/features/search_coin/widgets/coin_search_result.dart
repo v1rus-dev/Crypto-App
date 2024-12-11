@@ -1,6 +1,6 @@
 import 'dart:ffi';
 
-import 'package:crypto_currency/repositories/crypto_compare/models/crypto_coin.dart';
+import 'package:crypto_currency/data/database/entities/crypto_coin.dart';
 import 'package:crypto_currency/utils/color_extensions.dart';
 import 'package:crypto_currency/widgets/crypto_icon.dart';
 import 'package:flutter/material.dart';

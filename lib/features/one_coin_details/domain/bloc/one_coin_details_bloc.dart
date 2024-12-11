@@ -3,14 +3,10 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:crypto_currency/data/api/entities/history/coin_history_entity.dart';
 import 'package:crypto_currency/data/api/entities/one_coin_info_entity.dart';
+import 'package:crypto_currency/data/database/entities/crypto_coin.dart';
 import 'package:crypto_currency/features/one_coin_details/domain/repository/one_coin_repository.dart';
-import 'package:crypto_currency/repositories/crypto_compare/models/models.dart';
 import 'package:crypto_currency/utils/app_interable_extensions.dart';
 import 'package:equatable/equatable.dart';
-import 'package:async/async.dart';
-import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 
 part 'one_coin_details_event.dart';
 part 'one_coin_details_state.dart';
@@ -20,10 +16,10 @@ class OneCoinDetailsBloc
   final OneCoinRepository repository;
 
   Timer? timer;
-  late CryptoCoin coin;
+  CryptoCoin coin;
 
-  OneCoinDetailsBloc({required this.repository})
-      : super(OneCoinDetailsState(isLoading: true)) {
+  OneCoinDetailsBloc({required this.coin, required this.repository})
+      : super(OneCoinDetailsState(isLoading: true, coin: coin)) {
     timer = Timer.periodic(const Duration(seconds: 10), (timer) async {
       OneCoinInfoEntity? result = await getOneCoinInfo(coin.name);
 

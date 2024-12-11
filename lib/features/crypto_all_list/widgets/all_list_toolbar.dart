@@ -1,4 +1,4 @@
-import 'package:crypto_currency/features/crypto_all_list/domain/bloc/crypto_all_list_bloc.dart';
+import 'package:crypto_currency/features/crypto_all_list/domain/cubit/crypto_all_list_cubit.dart';
 import 'package:crypto_currency/generated/l10n.dart';
 import 'package:crypto_currency/utils/app_images.dart';
 import 'package:crypto_currency/utils/color_extensions.dart';
@@ -19,7 +19,7 @@ class AllListToolbar extends StatefulWidget {
 class _AllListToolbarState extends State<AllListToolbar> {
   @override
   Widget build(BuildContext context) =>
-      BlocBuilder<CryptoAllListBloc, CryptoAllListState>(
+      BlocBuilder<CryptoAllListCubit, CryptoAllListState>(
         builder: (context, state) {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
