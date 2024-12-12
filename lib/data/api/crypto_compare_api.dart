@@ -1,5 +1,5 @@
 import 'package:crypto_currency/data/api/dto/all_coins_info_dto.dart';
-import 'package:crypto_currency/data/api/network_client_provider.dart';
+import 'package:crypto_currency/data/api/dio_service.dart';
 import 'package:crypto_currency/data/api/dto/history/coin_history_dto.dart';
 import 'package:crypto_currency/data/api/dto/one_coin_info_dto.dart';
 import 'package:crypto_currency/utils/env.dart';
@@ -9,12 +9,12 @@ class CryptoCompareApi {
   static const String fullURL = "https://cryptocompare.com";
   final API_KEY = Env.cryptoCompareApiKey;
 
-  final NetworkClientProvider clientProvider;
+  final DioService dioService;
 
-  const CryptoCompareApi({required this.clientProvider});
+  const CryptoCompareApi({required this.dioService});
 
   Future<Iterable<AllCoinsInfoDTO>> getAllList() async {
-    final response = await clientProvider.client.get(
+    final response = await dioService.client.get(
       '$baseUrl/data/all/coinlist',
     );
     final data = response.data['Data'] as Map<String, dynamic>;
@@ -27,8 +27,8 @@ class CryptoCompareApi {
     return result;
   }
 
-  Future<OneCoinInfoDTO?> getOneCoinInfo(String coinName) async {
-    final response = await clientProvider.client.get(
+  Future<OneCoinInfoDTO> getOneCoinInfo(String coinName) async {
+    final response = await dioService.client.get(
       '$baseUrl/data/pricemultifull',
       queryParameters: {'fsyms': coinName, 'tsyms': 'USD'},
     );
@@ -42,7 +42,7 @@ class CryptoCompareApi {
     String coinName,
     TypeOfHistory type,
   ) async {
-    final response = await clientProvider.client.get(
+    final response = await dioService.client.get(
       '$baseUrl/data/v2/${type.requestBody}',
       queryParameters: {'fsym': coinName, 'tsym': 'USD', 'limit': 10},
     );

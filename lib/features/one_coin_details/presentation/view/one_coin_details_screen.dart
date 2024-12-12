@@ -1,12 +1,8 @@
 import 'package:auto_route/annotations.dart';
 import 'package:crypto_currency/features/one_coin_details/domain/bloc/one_coin_details_bloc.dart';
-import 'package:crypto_currency/features/one_coin_details/domain/datasource/one_coin_local_datasource.dart';
-import 'package:crypto_currency/features/one_coin_details/domain/datasource/one_coin_network_datasource.dart';
-import 'package:crypto_currency/features/one_coin_details/domain/repository/one_coin_repository.dart';
-import 'package:crypto_currency/features/one_coin_details/presentation/widgets/one_coin_details_success_screen.dart';
-import 'package:crypto_currency/data/database/dto/crypto_coin_local_dto.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 
 @RoutePage()
 class OneCoinDetailScreen extends StatefulWidget {
@@ -20,37 +16,29 @@ class OneCoinDetailScreen extends StatefulWidget {
 
 class _OneCoinDetailScreenState extends State<OneCoinDetailScreen> {
   late final OneCoinDetailsBloc bloc = OneCoinDetailsBloc(
-      repository: OneCoinRepository(
-          localDatasource: OneCoinLocalDatasource(),
-          networkDatasource: OneCoinNetworkDatasource()));
+    repository: GetIt.I.get(),
+  );
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     bloc.add(OneCoinDetailsLoadData(coinName: widget.coinName));
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-      appBar: AppBar(title: Text('...')),
-      body: BlocProvider(
-        create: (context) => bloc,
-        child: BlocBuilder<OneCoinDetailsBloc, OneCoinDetailsState>(
-          bloc: bloc,
-          builder: (context, state) {
-            if (state.isLoading) {
-              return const Center(child: CircularProgressIndicator.adaptive());
-            } else {
-              return const OneCoinDetailsSuccessScreen();
-            }
-          },
-        ),
-      ));
-}
+  Widget build(BuildContext context) =>
+      BlocBuilder<OneCoinDetailsBloc, OneCoinDetailsState>(
+        bloc: bloc,
+        builder: (context, state) {
+          return Scaffold(
+              appBar: AppBar(title: Text(state.coinName)),
+              body: state.isLoading ? _buildLoading() : _buildSuccess(state));
+        },
+      );
 
-class OneCoinDetailScreenArguments {
-  final CryptoCoinLocalDTO coin;
+  Widget _buildSuccess(OneCoinDetailsState state) => CustomScrollView();
 
-  OneCoinDetailScreenArguments(this.coin);
+  Widget _buildLoading() => const Center(
+        child: CircularProgressIndicator.adaptive(),
+      );
 }

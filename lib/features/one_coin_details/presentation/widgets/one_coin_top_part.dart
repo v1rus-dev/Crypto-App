@@ -77,17 +77,19 @@ class OneCoinTopPart extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "\$ ${state.price.toStringAsFixed(state.price > 1 ? 3 : 6)}",
+                        // "\$ ${state.price.toStringAsFixed(state.price > 1 ? 3 : 6)}",
+                        '',
                         style:
                             theme.textTheme.titleLarge?.copyWith(fontSize: 28),
                       ),
                       const Gap(4),
                       Text(
-                        "${(state.changePrcDay > 0) ? '+' : '-'} ${state.changePrcDay.abs().toStringAsFixed(3)}",
-                        style: theme.textTheme.bodyMedium?.copyWith(
-                            color: (state.changePrcDay < 0)
-                                ? redColor
-                                : greenColor),
+                        // "${(state.changePrcDay > 0) ? '+' : '-'} ${state.changePrcDay.abs().toStringAsFixed(3)}",
+                        '',
+                        // style: theme.textTheme.bodyMedium?.copyWith(
+                        //     color: (state.changePrcDay < 0)
+                        //         ? redColor
+                        //         : greenColor),
                       )
                     ],
                   ),
@@ -107,8 +109,9 @@ class OneCoinTopPart extends StatelessWidget {
                               ),
                               Gap(10),
                               Text(
-                                state.maxPrice
-                                    .toStringAsFixed(state.price > 1 ? 3 : 6),
+                                // state.maxPrice
+                                //     .toStringAsFixed(state.price > 1 ? 3 : 6),
+                                '',
                                 style: theme.textTheme.bodyMedium
                                     ?.copyWith(color: Colors.black),
                               )
@@ -124,8 +127,9 @@ class OneCoinTopPart extends StatelessWidget {
                               ),
                               Gap(10),
                               Text(
-                                state.lowerPrice
-                                    .toStringAsFixed(state.price > 1 ? 3 : 6),
+                                // state.lowerPrice
+                                //     .toStringAsFixed(state.price > 1 ? 3 : 6),
+                                '',
                                 style: theme.textTheme.bodyMedium
                                     ?.copyWith(color: Colors.black),
                               )

@@ -3,12 +3,15 @@ import 'package:crypto_currency/common/favorites/data/datasource/favorites_datas
 import 'package:crypto_currency/common/favorites/data/repository_impl/favorites_repository_impl.dart';
 import 'package:crypto_currency/common/favorites/domain/bloc/favorites_bloc.dart';
 import 'package:crypto_currency/common/favorites/domain/repository/repository.dart';
-import 'package:crypto_currency/data/api/network_client_provider.dart';
+import 'package:crypto_currency/data/api/dio_service.dart';
 import 'package:crypto_currency/data/database/database.dart';
 import 'package:crypto_currency/features/all_list_coins/data/datasources/datasources.dart';
 import 'package:crypto_currency/features/all_list_coins/data/repository_impl/all_list_reposiory_impl.dart';
 import 'package:crypto_currency/features/all_list_coins/domain/bloc/all_list_coins_bloc.dart';
 import 'package:crypto_currency/features/all_list_coins/domain/repository/repository.dart';
+import 'package:crypto_currency/features/one_coin_details/data/repository_impl/one_coin_repository_impl.dart';
+import 'package:crypto_currency/features/one_coin_details/domain/datasource/one_coin_local_datasource.dart';
+import 'package:crypto_currency/features/one_coin_details/domain/repository/one_coin_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -26,6 +29,7 @@ Future<void> initLocator() async {
   _initApi();
   _initAllCoins();
   _initFavorites();
+  _initOneCoinInfo();
 }
 
 void _initLogger(bool enable) {
@@ -39,9 +43,9 @@ void _initCore() {
 
 void _initApi() {
   locator.registerSingleton(Dio());
-  final clientProvider = locator.registerSingleton(NetworkClientProvider());
+  final clientProvider = locator.registerSingleton(DioService());
   locator.registerLazySingleton<CryptoCompareApi>(
-    () => CryptoCompareApi(clientProvider: clientProvider),
+    () => CryptoCompareApi(dioService: clientProvider),
   );
 }
 
@@ -74,6 +78,10 @@ _initAllCoins() {
       repository: locator(),
     ),
   );
+}
+
+_initOneCoinInfo() {
+  locator.registerFactory<OneCoinRepository>(() => OneCoinRepositoryImpl());
 }
 
 _initFavorites() {

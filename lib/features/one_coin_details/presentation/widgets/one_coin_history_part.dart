@@ -101,21 +101,21 @@ class OneCoinHistoryPartState extends State<OneCoinHistoryPart> {
       );
 
   List<FlSpot> getSpots(OneCoinDetailsState state) {
-    switch (_selectedHistoryPart) {
-      case HistoryPart.Minute:
-        final res = state.history.minuteHistory.map((item) {
-          return FlSpot(item.x, item.y);
-        }).toList();
-        return res;
-      case HistoryPart.Hour:
-        return state.history.hourHistory.map((item) {
-          return FlSpot(item.x, item.y);
-        }).toList();
-      case HistoryPart.Day:
-        return state.history.dayHistory.map((item) {
-          return FlSpot(item.x, item.y);
-        }).toList();
-    }
+    // switch (_selectedHistoryPart) {
+    //   case HistoryPart.Minute:
+    //     final res = state.history.minuteHistory.map((item) {
+    //       return FlSpot(item.x, item.y);
+    //     }).toList();
+    //     return res;
+    //   case HistoryPart.Hour:
+    //     return state.history.hourHistory.map((item) {
+    //       return FlSpot(item.x, item.y);
+    //     }).toList();
+    //   case HistoryPart.Day:
+    //     return state.history.dayHistory.map((item) {
+    //       return FlSpot(item.x, item.y);
+    //     }).toList();
+    return List.empty();
   }
 }
 
