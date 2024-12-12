@@ -20,7 +20,7 @@ import 'data/database/dto/crypto_coin_local_dto.dart';
 final locator = GetIt.instance;
 
 Future<void> initLocator() async {
-  _initLogger();
+  _initLogger(true);
   await _initHive();
   _initCore();
   _initApi();
@@ -28,8 +28,8 @@ Future<void> initLocator() async {
   _initFavorites();
 }
 
-void _initLogger() {
-  final talker = TalkerFlutter.init(settings: TalkerSettings(enabled: false));
+void _initLogger(bool enable) {
+  final talker = TalkerFlutter.init(settings: TalkerSettings(enabled: enable));
   locator.registerSingleton(talker);
 }
 

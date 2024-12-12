@@ -1,17 +1,15 @@
-import 'dart:ffi';
-
-import 'package:crypto_currency/data/database/dto/crypto_coin_local_dto.dart';
 import 'package:crypto_currency/utils/color_extensions.dart';
 import 'package:crypto_currency/widgets/crypto_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 // ignore: must_be_immutable
-class CoinSearchResult extends StatelessWidget {
-  CoinSearchResult({super.key, required this.coin, this.onTap});
+class SimpleCoinListView extends StatelessWidget {
+  SimpleCoinListView({super.key, required this.name, required this.coinName, this.onTap});
 
-  final CryptoCoinLocalDTO coin;
-  Function(CryptoCoinLocalDTO)? onTap;
+  final String name;
+  final String coinName;
+  Function? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -20,24 +18,24 @@ class CoinSearchResult extends StatelessWidget {
       color: Colors.white,
       child: InkWell(
         onTap: () {
-          onTap?.call(coin);
+          onTap?.call();
         },
         child: Row(
           children: [
             const Gap(20),
-            SizedBox(width: 64, height: 64, child: CryptoIcon(name: coin.name)),
+            SizedBox(width: 64, height: 64, child: CryptoIcon(name: name)),
             const Gap(16),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  coin.name,
+                  name,
                   style: theme.textTheme.labelLarge
                       ?.copyWith(fontWeight: FontWeight.bold),
                 ),
                 const Gap(4),
                 Text(
-                  coin.coinName,
+                  coinName,
                   style: theme.textTheme.bodySmall
                       ?.copyWith(color: HexColor.fromHex('#727272')),
                 )

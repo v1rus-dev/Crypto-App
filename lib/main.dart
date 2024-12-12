@@ -18,13 +18,13 @@ void main() async {
   Bloc.observer = TalkerBlocObserver(
       talker: locator(),
       settings: const TalkerBlocLoggerSettings(
-          enabled: false, printStateFullData: true, printEventFullData: false));
+          enabled: true, printStateFullData: false, printEventFullData: false));
 
   runApp(MultiBlocProvider(
     providers: [
       BlocProvider.value(value: locator<SettingsBloc>()),
       BlocProvider.value(value: locator<FavoritesBloc>()),
-      BlocProvider.value(value: locator<AllListCoinsBloc>()),
+      BlocProvider.value(value: locator<AllListCoinsBloc>()..add(LoadCoins())),
     ],
     child: CryptoCurrencyApp(),
   ));

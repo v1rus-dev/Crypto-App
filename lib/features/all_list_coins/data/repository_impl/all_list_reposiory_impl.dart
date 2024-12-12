@@ -1,8 +1,13 @@
+import 'dart:convert';
+
+import 'package:crypto_currency/data/api/dto/dto.dart';
 import 'package:crypto_currency/data/database/dto/crypto_coin_local_dto.dart';
 import 'package:crypto_currency/features/all_list_coins/data/datasources/datasources.dart';
 import 'package:crypto_currency/features/all_list_coins/data/mappers/coin_entity_mapper.dart';
 import 'package:crypto_currency/features/all_list_coins/domain/entities/coin_entity.dart';
 import 'package:crypto_currency/features/all_list_coins/domain/repository/repository.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class AllListReposioryImpl implements AllListRepository {
   final AllCoinsRemoteDatasource remoteDatasource;
@@ -19,13 +24,32 @@ class AllListReposioryImpl implements AllListRepository {
   }
 
   @override
+  bool databaseIsEmpty() => localDatasource.isEmpty();
+
+  @override
   Future<void> loadCoins() async {
     final models = await remoteDatasource.loadAllCoins();
+    debugPrint('Models: ${models.toString()}');
+    final filteredModels = await _filterByAvailableIcons(models);
     return _updateDatabase(
-        models.map(CoinEntityMapper.fromNetworkToLocal));
+        filteredModels.map(CoinEntityMapper.fromNetworkToLocal));
   }
 
   Future<void> _updateDatabase(Iterable<CryptoCoinLocalDTO> list) async {
     return localDatasource.updateAllCoins(list);
+  }
+
+  Future<List<AllCoinsInfoDTO>> _filterByAvailableIcons(
+      Iterable<AllCoinsInfoDTO> list) async {
+    final String jsonString =
+        await rootBundle.loadString('assets/mapping/crypto_mapping.json');
+    final Map<String, dynamic> mapping = json.decode(jsonString);
+    List<AllCoinsInfoDTO> result = [];
+    for (var value in list) {
+      if (mapping.containsKey(value.name)) {
+        result.add(value);
+      }
+    }
+    return result;
   }
 }

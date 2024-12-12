@@ -3,6 +3,8 @@ import 'package:hive/hive.dart';
 
 class Database<T> {
   Box<T> get box => GetIt.I.get<Box<T>>();
+
+  bool get isEmpty => box.isEmpty;
 }
 
 class DatabaseConstants {

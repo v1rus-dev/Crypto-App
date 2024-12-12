@@ -22,8 +22,13 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "coins_list": MessageLookupByLibrary.simpleMessage("Список монет"),
         "high_value": MessageLookupByLibrary.simpleMessage("Макс"),
         "low_value": MessageLookupByLibrary.simpleMessage("Мин"),
+        "search_nothing_found_desc": MessageLookupByLibrary.simpleMessage(
+            "Ничего не найдено по запросу"),
+        "search_nothing_found_title":
+            MessageLookupByLibrary.simpleMessage("Ничего не найдено"),
         "search_token": MessageLookupByLibrary.simpleMessage("Поиск")
       };
 }

@@ -1,5 +1,8 @@
 {
     "high_value": "Макс",
     "low_value": "Мин",
-    "search_token": "Поиск"
+    "search_token": "Поиск",
+    "coins_list": "Список монет",
+    "search_nothing_found_title": "Ничего не найдено",
+    "search_nothing_found_desc": "Ничего не найдено по запросу"
 }

@@ -7,6 +7,8 @@ class AllCoinsLocalDatasource {
   Future<Iterable<CryptoCoinLocalDTO>> getAllList() async =>
       database.box.values;
 
+  bool isEmpty() => database.isEmpty;
+
   Future<void> updateAllCoins(Iterable<CryptoCoinLocalDTO> list) async {
     await database.box.clear();
     await database.box.addAll(list);

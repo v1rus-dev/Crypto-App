@@ -19,40 +19,19 @@ class OneCoinDetailsBloc
 
   OneCoinDetailsBloc({required this.repository})
       : super(OneCoinDetailsState(isLoading: true)) {
-    timer = Timer.periodic(const Duration(seconds: 10), (timer) async {
-      OneCoinInfoDTO? result = await getOneCoinInfo('BTC');
 
-      add(OneCoinDetailsUpdatePrices(cointInfoEntity: result));
-    });
-
+    on<OneCoinDetailsLoadData>(_loadDetailsData);
     on<OneCoinDetailsLoadingData>(_loadingDataEventHandler);
     on<OneCoinDetailsUpdatePrices>(_updatePricesState);
     on<OneCoinDetailsUpdateHistory>(_updateHistory);
   }
 
+  Future<void> _loadDetailsData(OneCoinDetailsLoadData event, Emitter<OneCoinDetailsState> emitter) async {
+
+  }
+
   Future<void> _loadingDataEventHandler(OneCoinDetailsLoadingData event,
       Emitter<OneCoinDetailsState> emitter) async {
-    // coin = event.coin;
-    // emitter.call(state.copyWith(coin: coin));
-    // final result = await repository.load(coin.name);
-
-    // if (result != null) {
-    //   emitter.call(state.copyWith(
-    //       isLoading: false,
-    //       price: result.price,
-    //       lowerPrice: result.lowDay,
-    //       maxPrice: result.highDay,
-    //       changePrcDay: result.changePrcDay));
-    // }
-
-    // final historyMinute = await repository.loadHistoryForMinute(coin.name);
-    // final historyHour = await repository.loadHistoryForHour(coin.name);
-    // final historyDay = await repository.loadHistoryForDay(coin.name);
-
-    // add(OneCoinDetailsUpdateHistory(
-    //     minuteHistory: historyMinute ?? [],
-    //     hourHistory: historyHour ?? [],
-    //     dayHistory: historyDay ?? []));
   }
 
   Future<void> _updatePricesState(OneCoinDetailsUpdatePrices event,

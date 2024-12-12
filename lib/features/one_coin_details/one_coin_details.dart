@@ -1,2 +1,2 @@
-export 'view/view.dart';
-export 'widgets/widgest.dart';
+export 'presentation/view/view.dart';
+export 'presentation/widgets/widgest.dart';

@@ -1,6 +1,6 @@
 import 'package:crypto_currency/features/one_coin_details/domain/bloc/one_coin_details_bloc.dart';
-import 'package:crypto_currency/features/one_coin_details/widgets/one_coin_history_part.dart';
-import 'package:crypto_currency/features/one_coin_details/widgets/one_coin_top_part.dart';
+import 'package:crypto_currency/features/one_coin_details/presentation/widgets/one_coin_history_part.dart';
+import 'package:crypto_currency/features/one_coin_details/presentation/widgets/one_coin_top_part.dart';
 import 'package:crypto_currency/utils/color_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

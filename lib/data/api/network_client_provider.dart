@@ -6,8 +6,15 @@ class NetworkClientProvider {
   Dio get client => GetIt.I.get<Dio>();
 
   NetworkClientProvider() {
-    client.interceptors.add(TalkerDioLogger(
+    client.interceptors.add(
+      TalkerDioLogger(
         talker: GetIt.I.get(),
-        settings: const TalkerDioLoggerSettings(printResponseMessage: false)));
+        settings: const TalkerDioLoggerSettings(
+          printResponseMessage: false,
+          printResponseData: false,
+          printResponseHeaders: false,
+        ),
+      ),
+    );
   }
 }

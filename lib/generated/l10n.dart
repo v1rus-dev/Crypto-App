@@ -79,6 +79,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Coins list`
+  String get coins_list {
+    return Intl.message(
+      'Coins list',
+      name: 'coins_list',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nothing found`
+  String get search_nothing_found_title {
+    return Intl.message(
+      'Nothing found',
+      name: 'search_nothing_found_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nothing found by`
+  String get search_nothing_found_desc {
+    return Intl.message(
+      'Nothing found by',
+      name: 'search_nothing_found_desc',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
