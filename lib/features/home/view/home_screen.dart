@@ -1,4 +1,3 @@
-import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:crypto_currency/router/router.gr.dart';
 import 'package:crypto_currency/utils/color_extensions.dart';
@@ -28,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return AutoTabsRouter(
       routes: const [
         CryptoListRoute(),
-        CryptoAllListRoute(),
+        AllListCoinsRoute(),
         NewsRoute(),
         AccountRoute()
       ],

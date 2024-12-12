@@ -1,6 +1,6 @@
 import 'dart:ffi';
 
-import 'package:crypto_currency/data/database/entities/crypto_coin.dart';
+import 'package:crypto_currency/data/database/dto/crypto_coin_local_dto.dart';
 import 'package:crypto_currency/utils/color_extensions.dart';
 import 'package:crypto_currency/widgets/crypto_icon.dart';
 import 'package:flutter/material.dart';
@@ -10,8 +10,8 @@ import 'package:gap/gap.dart';
 class CoinSearchResult extends StatelessWidget {
   CoinSearchResult({super.key, required this.coin, this.onTap});
 
-  final CryptoCoin coin;
-  Function(CryptoCoin)? onTap;
+  final CryptoCoinLocalDTO coin;
+  Function(CryptoCoinLocalDTO)? onTap;
 
   @override
   Widget build(BuildContext context) {

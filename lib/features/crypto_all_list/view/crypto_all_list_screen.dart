@@ -96,8 +96,6 @@ class _CryptoAllListScreenState extends State<CryptoAllListScreen> {
                   name: state.list[index].name,
                   fullName: state.list[index].coinName,
                   onTap: () {
-                    AutoRouter.of(context)
-                        .push(OneCoinDetailRoute(coin: state.list[index]));
                   },
                 );
               })

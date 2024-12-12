@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:crypto_currency/data/api/entities/history/coin_history_entity.dart';
-import 'package:crypto_currency/data/api/entities/one_coin_info_entity.dart';
-import 'package:crypto_currency/data/database/entities/crypto_coin.dart';
+import 'package:crypto_currency/data/api/dto/history/coin_history_dto.dart';
+import 'package:crypto_currency/data/api/dto/one_coin_info_dto.dart';
+import 'package:crypto_currency/data/database/dto/crypto_coin_local_dto.dart';
 import 'package:crypto_currency/features/one_coin_details/domain/repository/one_coin_repository.dart';
 import 'package:crypto_currency/utils/app_interable_extensions.dart';
 import 'package:equatable/equatable.dart';
@@ -16,12 +16,11 @@ class OneCoinDetailsBloc
   final OneCoinRepository repository;
 
   Timer? timer;
-  CryptoCoin coin;
 
-  OneCoinDetailsBloc({required this.coin, required this.repository})
-      : super(OneCoinDetailsState(isLoading: true, coin: coin)) {
+  OneCoinDetailsBloc({required this.repository})
+      : super(OneCoinDetailsState(isLoading: true)) {
     timer = Timer.periodic(const Duration(seconds: 10), (timer) async {
-      OneCoinInfoEntity? result = await getOneCoinInfo(coin.name);
+      OneCoinInfoDTO? result = await getOneCoinInfo('BTC');
 
       add(OneCoinDetailsUpdatePrices(cointInfoEntity: result));
     });
@@ -33,27 +32,27 @@ class OneCoinDetailsBloc
 
   Future<void> _loadingDataEventHandler(OneCoinDetailsLoadingData event,
       Emitter<OneCoinDetailsState> emitter) async {
-    coin = event.coin;
-    emitter.call(state.copyWith(coin: coin));
-    final result = await repository.load(coin.name);
+    // coin = event.coin;
+    // emitter.call(state.copyWith(coin: coin));
+    // final result = await repository.load(coin.name);
 
-    if (result != null) {
-      emitter.call(state.copyWith(
-          isLoading: false,
-          price: result.price,
-          lowerPrice: result.lowDay,
-          maxPrice: result.highDay,
-          changePrcDay: result.changePrcDay));
-    }
+    // if (result != null) {
+    //   emitter.call(state.copyWith(
+    //       isLoading: false,
+    //       price: result.price,
+    //       lowerPrice: result.lowDay,
+    //       maxPrice: result.highDay,
+    //       changePrcDay: result.changePrcDay));
+    // }
 
-    final historyMinute = await repository.loadHistoryForMinute(coin.name);
-    final historyHour = await repository.loadHistoryForHour(coin.name);
-    final historyDay = await repository.loadHistoryForDay(coin.name);
+    // final historyMinute = await repository.loadHistoryForMinute(coin.name);
+    // final historyHour = await repository.loadHistoryForHour(coin.name);
+    // final historyDay = await repository.loadHistoryForDay(coin.name);
 
-    add(OneCoinDetailsUpdateHistory(
-        minuteHistory: historyMinute ?? [],
-        hourHistory: historyHour ?? [],
-        dayHistory: historyDay ?? []));
+    // add(OneCoinDetailsUpdateHistory(
+    //     minuteHistory: historyMinute ?? [],
+    //     hourHistory: historyHour ?? [],
+    //     dayHistory: historyDay ?? []));
   }
 
   Future<void> _updatePricesState(OneCoinDetailsUpdatePrices event,
@@ -84,7 +83,7 @@ class OneCoinDetailsBloc
             }).toList())));
   }
 
-  Future<OneCoinInfoEntity?> getOneCoinInfo(String coinName) async {
+  Future<OneCoinInfoDTO?> getOneCoinInfo(String coinName) async {
     final result = await repository.load(coinName);
     return result;
   }

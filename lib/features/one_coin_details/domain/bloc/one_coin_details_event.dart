@@ -6,7 +6,7 @@ sealed class OneCoinDetailsEvent extends Equatable {
 
 final class OneCoinDetailsLoadingData extends OneCoinDetailsEvent {
   final Completer? completer;
-  final CryptoCoin coin;
+  final CryptoCoinLocalDTO coin;
 
   const OneCoinDetailsLoadingData({this.completer, required this.coin});
 
@@ -15,7 +15,7 @@ final class OneCoinDetailsLoadingData extends OneCoinDetailsEvent {
 }
 
 final class OneCoinDetailsUpdatePrices extends OneCoinDetailsEvent {
-  final OneCoinInfoEntity? cointInfoEntity;
+  final OneCoinInfoDTO? cointInfoEntity;
 
   const OneCoinDetailsUpdatePrices({required this.cointInfoEntity});
 
@@ -24,9 +24,9 @@ final class OneCoinDetailsUpdatePrices extends OneCoinDetailsEvent {
 }
 
 final class OneCoinDetailsUpdateHistory extends OneCoinDetailsEvent {
-  final List<CoinHistoryEntity> minuteHistory;
-  final List<CoinHistoryEntity> hourHistory;
-  final List<CoinHistoryEntity> dayHistory;
+  final List<CoinHistoryDTO> minuteHistory;
+  final List<CoinHistoryDTO> hourHistory;
+  final List<CoinHistoryDTO> dayHistory;
 
   const OneCoinDetailsUpdateHistory(
       {required this.minuteHistory,

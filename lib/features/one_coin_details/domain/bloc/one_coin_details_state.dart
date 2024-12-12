@@ -2,7 +2,6 @@ part of 'one_coin_details_bloc.dart';
 
 // ignore: must_be_immutable
 final class OneCoinDetailsState extends Equatable {
-  CryptoCoin coin;
   bool isLoading;
   double price;
   double maxPrice;
@@ -11,8 +10,7 @@ final class OneCoinDetailsState extends Equatable {
   History history;
 
   OneCoinDetailsState(
-      {required this.coin,
-      this.isLoading = false,
+      {this.isLoading = false,
       this.price = 0,
       this.maxPrice = 0,
       this.lowerPrice = 0,
@@ -22,9 +20,9 @@ final class OneCoinDetailsState extends Equatable {
 
   @override
   List<Object?> get props =>
-      [coin, isLoading, price, maxPrice, lowerPrice, changePrcDay, history];
+      [isLoading, price, maxPrice, lowerPrice, changePrcDay, history];
   OneCoinDetailsState copyWith(
-      {CryptoCoin? coin,
+      {CryptoCoinLocalDTO? coin,
       bool? isLoading,
       double? price,
       double? maxPrice,
@@ -32,7 +30,6 @@ final class OneCoinDetailsState extends Equatable {
       double? changePrcDay,
       History? history}) {
     return OneCoinDetailsState(
-        coin: coin ?? this.coin,
         isLoading: isLoading ?? this.isLoading,
         price: price ?? this.price,
         maxPrice: maxPrice ?? this.maxPrice,

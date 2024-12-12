@@ -4,11 +4,11 @@ final class CryptoAllListState extends Equatable {
   CryptoAllListState({required this.isLoading, required this.list});
 
   bool isLoading = false;
-  List<CryptoCoin> list = [];
+  List<CryptoCoinLocalDTO> list = [];
 
   @override
   List<Object?> get props => [isLoading, list];
-  CryptoAllListState copyWith({bool? isLoading, List<CryptoCoin>? list}) {
+  CryptoAllListState copyWith({bool? isLoading, List<CryptoCoinLocalDTO>? list}) {
     return CryptoAllListState(
         isLoading: isLoading ?? this.isLoading, list: list ?? this.list);
   }

@@ -1,5 +1,5 @@
-import 'package:crypto_currency/common/settings/bloc/settings_bloc.dart';
-import 'package:crypto_currency/common/settings/bloc/settings_state.dart';
+import 'package:crypto_currency/common/domain/settings/bloc/settings_bloc.dart';
+import 'package:crypto_currency/common/domain/settings/bloc/settings_state.dart';
 import 'package:crypto_currency/utils/app_images.dart';
 import 'package:crypto_currency/widgets/icon_button_wrapper.dart';
 import 'package:flutter/material.dart';

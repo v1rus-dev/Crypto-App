@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:crypto_currency/data/database/entities/crypto_coin.dart';
+import 'package:crypto_currency/data/database/dto/crypto_coin_local_dto.dart';
 import 'package:crypto_currency/features/crypto_all_list/domain/repository/crypto_all_list_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';

@@ -100,8 +100,7 @@ class _SearchCoinBottomSheetState extends State<SearchCoinBottomSheet> {
                     key: Key(snapshot.data?.elementAt(index).name ?? ''),
                     coin: (snapshot.data ?? [])[index],
                     onTap: (coin) {
-                      AutoRouter.of(context)
-                          .push(OneCoinDetailRoute(coin: coin));
+
                     }));
           },
         ),

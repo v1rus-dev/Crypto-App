@@ -4,15 +4,13 @@ import 'package:crypto_currency/features/one_coin_details/domain/datasource/one_
 import 'package:crypto_currency/features/one_coin_details/domain/datasource/one_coin_network_datasource.dart';
 import 'package:crypto_currency/features/one_coin_details/domain/repository/one_coin_repository.dart';
 import 'package:crypto_currency/features/one_coin_details/widgets/one_coin_details_success_screen.dart';
-import 'package:crypto_currency/data/database/entities/crypto_coin.dart';
+import 'package:crypto_currency/data/database/dto/crypto_coin_local_dto.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 @RoutePage()
 class OneCoinDetailScreen extends StatefulWidget {
-  const OneCoinDetailScreen({super.key, required this.coin});
-
-  final CryptoCoin coin;
+  const OneCoinDetailScreen({super.key});
 
   @override
   State<OneCoinDetailScreen> createState() => _OneCoinDetailScreenState();
@@ -20,7 +18,6 @@ class OneCoinDetailScreen extends StatefulWidget {
 
 class _OneCoinDetailScreenState extends State<OneCoinDetailScreen> {
   late final OneCoinDetailsBloc _cryptoCoinBloc = OneCoinDetailsBloc(
-      coin: widget.coin,
       repository: OneCoinRepository(
           localDatasource: OneCoinLocalDatasource(),
           networkDatasource: OneCoinNetworkDatasource()));
@@ -29,12 +26,6 @@ class _OneCoinDetailScreenState extends State<OneCoinDetailScreen> {
 
   @override
   void didChangeDependencies() {
-    setState(() {
-      title = widget.coin.name;
-    });
-
-    _cryptoCoinBloc.add(OneCoinDetailsLoadingData(coin: widget.coin));
-
     super.didChangeDependencies();
   }
 
@@ -57,7 +48,7 @@ class _OneCoinDetailScreenState extends State<OneCoinDetailScreen> {
 }
 
 class OneCoinDetailScreenArguments {
-  final CryptoCoin coin;
+  final CryptoCoinLocalDTO coin;
 
   OneCoinDetailScreenArguments(this.coin);
 }

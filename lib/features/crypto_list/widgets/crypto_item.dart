@@ -1,5 +1,4 @@
-import 'package:crypto_currency/features/one_coin_details/view/one_coin_details_screen.dart';
-import 'package:crypto_currency/data/database/entities/crypto_coin.dart';
+import 'package:crypto_currency/data/database/dto/crypto_coin_local_dto.dart';
 import 'package:crypto_currency/widgets/crypto_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -7,7 +6,7 @@ import 'package:gap/gap.dart';
 class CryptoItem extends StatelessWidget {
   const CryptoItem({super.key, required this.coin});
 
-  final CryptoCoin coin;
+  final CryptoCoinLocalDTO coin;
 
   @override
   Widget build(BuildContext context) {
@@ -48,13 +47,6 @@ class CryptoItem extends StatelessWidget {
                       style: theme.textTheme.bodyMedium
                           ?.copyWith(fontWeight: FontWeight.bold),
                     ),
-                    Text(
-                      "${coin.changePrcDay > 0 ? '+' : ''}${coin.changePrcDay.toStringAsFixed(3)}",
-                      style: theme.textTheme.bodySmall?.copyWith(
-                          color: coin.changePrcDay > 0
-                              ? Colors.green
-                              : Colors.red),
-                    )
                   ],
                 ),
               ],

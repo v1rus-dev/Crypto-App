@@ -1,8 +1,8 @@
-import 'package:crypto_currency/data/database/entities/crypto_coin.dart';
+import 'package:crypto_currency/data/database/dto/crypto_coin_local_dto.dart';
 import 'package:crypto_currency/common/utils/local_datasource.dart';
 import 'package:get_it/get_it.dart';
 
-class LocalSearchCoinsDatasource extends LocalDatasource<CryptoCoin> {
+class LocalSearchCoinsDatasource extends LocalDatasource<CryptoCoinLocalDTO> {
   LocalSearchCoinsDatasource() : super(dataBox: GetIt.I.get());
 
   Future<List<String>> getHints(String search, int maxCount) async {
@@ -19,7 +19,7 @@ class LocalSearchCoinsDatasource extends LocalDatasource<CryptoCoin> {
     return result.take(maxCount).toList();
   }
 
-  Future<List<CryptoCoin>> getResults(String search) async {
+  Future<List<CryptoCoinLocalDTO>> getResults(String search) async {
     return dataBox.values
         .where((coin) =>
             coin.coinName.toLowerCase().startsWith(search) ||
@@ -28,7 +28,7 @@ class LocalSearchCoinsDatasource extends LocalDatasource<CryptoCoin> {
   }
 }
 
-extension HintExt on Iterable<CryptoCoin> {
-  List<String> getHints(int maxCount, String Function(CryptoCoin) map) =>
+extension HintExt on Iterable<CryptoCoinLocalDTO> {
+  List<String> getHints(int maxCount, String Function(CryptoCoinLocalDTO) map) =>
       toList().take(maxCount * 2).map(map).toList();
 }

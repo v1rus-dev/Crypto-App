@@ -1,53 +1,31 @@
-import 'package:crypto_currency/common/favorites/bloc/favorites_bloc.dart';
-import 'package:crypto_currency/common/favorites/datasource/favorites_datasource.dart';
-import 'package:crypto_currency/common/favorites/repository/favorites_repository.dart';
-import 'package:crypto_currency/common/settings/bloc/settings_bloc.dart';
+import 'package:crypto_currency/common/favorites/domain/bloc/favorites_bloc.dart';
+import 'package:crypto_currency/common/domain/settings/bloc/settings_bloc.dart';
 import 'package:crypto_currency/crypto_currency_app.dart';
-import 'package:crypto_currency/data/api/crypto_compare_api.dart';
-import 'package:crypto_currency/data/database/entities/crypto_coin.dart';
-import 'package:dio/dio.dart';
+import 'package:crypto_currency/features/all_list_coins/domain/bloc/all_list_coins_bloc.dart';
+import 'package:crypto_currency/inject_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:talker_bloc_logger/talker_bloc_logger.dart';
-import 'package:talker_flutter/talker_flutter.dart';
 import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final talker = TalkerFlutter.init(
-    settings: TalkerSettings(enabled: false)
-  );
-  GetIt.I.registerSingleton(talker);
-
-  GetIt.I.registerSingleton(Dio());
-  GetIt.I.registerLazySingleton<CryptoCompareApi>(() => CryptoCompareApi());
-
-  Bloc.observer = TalkerBlocObserver(
-      talker: talker,
-      settings: const TalkerBlocLoggerSettings(
-        enabled: false,
-          printStateFullData: true, printEventFullData: false));
-
-  const allListCoinsBox = 'all_coins_list_box';
-
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  await Hive.initFlutter();
+  await initLocator();
 
-  Hive.registerAdapter(CryptoCoinAdapter());
+  Bloc.observer = TalkerBlocObserver(
+      talker: locator(),
+      settings: const TalkerBlocLoggerSettings(
+          enabled: false, printStateFullData: true, printEventFullData: false));
 
-  final allListBox = await Hive.openBox<CryptoCoin>(allListCoinsBox);
-
-  GetIt.I.registerSingleton<Box<CryptoCoin>>(allListBox);
-
-  runApp(MultiBlocProvider(providers: [
-    BlocProvider<SettingsBloc>(create: (context) => SettingsBloc()),
-    BlocProvider<FavoritesBloc>(
-        create: (context) => FavoritesBloc(
-            repository:
-                FavoritesRepository(localDatasource: FavoritesDatasource())))
-  ], child: CryptoCurrencyApp()));
+  runApp(MultiBlocProvider(
+    providers: [
+      BlocProvider.value(value: locator<SettingsBloc>()),
+      BlocProvider.value(value: locator<FavoritesBloc>()),
+      BlocProvider.value(value: locator<AllListCoinsBloc>()),
+    ],
+    child: CryptoCurrencyApp(),
+  ));
 }

@@ -1,4 +1,4 @@
-import 'package:crypto_currency/data/database/entities/crypto_coin.dart';
+import 'package:crypto_currency/data/database/dto/crypto_coin_local_dto.dart';
 import 'package:crypto_currency/utils/base_stream_controller.dart';
 
-class SearchResultController extends BaseStreamController<List<CryptoCoin>> {}
+class SearchResultController extends BaseStreamController<List<CryptoCoinLocalDTO>> {}

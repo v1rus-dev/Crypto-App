@@ -1,7 +1,7 @@
-import 'package:crypto_currency/data/api/entities/all_coins_info_entity.dart';
+import 'package:crypto_currency/data/api/dto/all_coins_info_dto.dart';
 import 'package:crypto_currency/features/crypto_all_list/domain/datasources/crypto_all_list_local_datasource.dart';
 import 'package:crypto_currency/features/crypto_all_list/domain/datasources/crypto_all_list_remote_datasource.dart';
-import 'package:crypto_currency/data/database/entities/crypto_coin.dart';
+import 'package:crypto_currency/data/database/dto/crypto_coin_local_dto.dart';
 
 class CryptoAllListRepository {
   final CryptoAllListLocalDatasource _localDatasource;
@@ -13,26 +13,25 @@ class CryptoAllListRepository {
       : _remoteDatasource = remoteDatasource,
         _localDatasource = localDatasource;
 
-  Future<List<AllCoinsInfoEntity>> downloadCryptoCoinsList() async {
+  Future<List<AllCoinsInfoDTO>> downloadCryptoCoinsList() async {
     final list = await _remoteDatasource.downloadAllList();
     return list;
   }
 
-  Future<List<CryptoCoin>> getList() => _localDatasource.getList();
+  Future<List<CryptoCoinLocalDTO>> getList() => _localDatasource.getList();
 
-  Future<List<CryptoCoin>> search(String search) =>
+  Future<List<CryptoCoinLocalDTO>> search(String search) =>
       _localDatasource.search(search);
 
   Future<void> updateAllCryptoCoinsListFromNetwork(
-      List<AllCoinsInfoEntity> list) async {
+      List<AllCoinsInfoDTO> list) async {
     final currentFavorites = await _localDatasource.getAllFavorites();
     final filteredList = list
-        .map((entity) => CryptoCoin(
+        .map((entity) => CryptoCoinLocalDTO(
             name: entity.name,
             coinName: entity.coinName,
             algorithm: entity.algorithm,
             isTrading: entity.isTrading,
-            changePrcDay: 16,
             isFavorite: currentFavorites
                 .map((item) => item.name)
                 .contains(entity.name)))
@@ -40,7 +39,7 @@ class CryptoAllListRepository {
     return _localDatasource.resetList(filteredList);
   }
 
-  Future<void> updateAllCryptoCoinsList(List<CryptoCoin> list) async {
+  Future<void> updateAllCryptoCoinsList(List<CryptoCoinLocalDTO> list) async {
     _localDatasource.resetList(list);
   }
 

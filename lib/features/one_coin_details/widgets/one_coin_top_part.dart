@@ -1,4 +1,4 @@
-import 'package:crypto_currency/common/favorites/bloc/favorites_bloc.dart';
+import 'package:crypto_currency/common/favorites/domain/bloc/favorites_bloc.dart';
 import 'package:crypto_currency/features/one_coin_details/domain/bloc/one_coin_details_bloc.dart';
 import 'package:crypto_currency/generated/l10n.dart';
 import 'package:crypto_currency/utils/app_images.dart';
@@ -28,16 +28,16 @@ class OneCoinTopPart extends StatelessWidget {
                   SizedBox(
                       width: 44,
                       height: 44,
-                      child: CryptoIcon(name: state.coin.name)),
+                      child: CryptoIcon(name: 'BTC')),
                   const Gap(16),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(state.coin.name,
+                      Text('BTC',
                           style: theme.textTheme.bodyMedium
                               ?.copyWith(fontWeight: FontWeight.bold)),
                       const Gap(4),
-                      Text(state.coin.coinName,
+                      Text('BTC',
                           style: theme.textTheme.bodySmall),
                     ],
                   ),
@@ -61,10 +61,9 @@ class OneCoinTopPart extends StatelessWidget {
                       IconButton(
                           splashRadius: 24,
                           onPressed: () {
-                            BlocProvider.of<FavoritesBloc>(context)
-                                .add(AddCoinToFavorite(coin: state.coin));
+
                           },
-                          icon: state.coin.isFavorite
+                          icon: false
                               ? SvgPicture.asset(AppImages.starFilled)
                               : SvgPicture.asset(AppImages.star))
                     ],
