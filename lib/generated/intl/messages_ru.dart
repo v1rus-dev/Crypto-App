@@ -25,6 +25,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "coins_list": MessageLookupByLibrary.simpleMessage("Список монет"),
         "high_value": MessageLookupByLibrary.simpleMessage("Макс"),
         "low_value": MessageLookupByLibrary.simpleMessage("Мин"),
+        "marker_detail":
+            MessageLookupByLibrary.simpleMessage("Детальная информация"),
         "search_nothing_found_desc": MessageLookupByLibrary.simpleMessage(
             "Ничего не найдено по запросу"),
         "search_nothing_found_title":

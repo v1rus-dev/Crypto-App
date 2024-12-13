@@ -4,4 +4,6 @@ import 'package:flutter/material.dart';
 extension ContextExt on BuildContext {
 
   S get lang => S.current;
+
+  ThemeData get theme => Theme.of(this);
 }

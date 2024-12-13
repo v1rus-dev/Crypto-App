@@ -4,5 +4,6 @@
     "search_token": "Search token",
     "coins_list": "Coins list",
     "search_nothing_found_title": "Nothing found",
-    "search_nothing_found_desc": "Nothing found by"
+    "search_nothing_found_desc": "Nothing found by",
+    "marker_detail": "Marker detail"
 }

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:crypto_currency/features/one_coin_details/domain/entities/coin_base_info.dart';
+import 'package:crypto_currency/features/one_coin_details/domain/entities/coin_history_info.dart';
 import 'package:crypto_currency/features/one_coin_details/domain/repository/one_coin_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
@@ -22,6 +23,9 @@ class OneCoinDetailsBloc
             fullCoinName: '',
             isLoading: true,
             coinBaseInfo: CoinBaseInfo.empty,
+            historyInfoMinute: List.empty(),
+            historyInfoHour: List.empty(),
+            historyInfoDay: List.empty(),
           ),
         ) {
     on<OneCoinDetailsLoadData>(_loadDetailsData);
@@ -32,7 +36,7 @@ class OneCoinDetailsBloc
     final localInfo = await repository.getLocalInfo(event.coinName);
 
     emitter.call(state.copyWith(
-        coinName: localInfo.coinName, fullCoinName: localInfo.name));
+        coinName: localInfo.name, fullCoinName: localInfo.coinName));
 
     final coinInfo = await repository.load(event.coinName);
 

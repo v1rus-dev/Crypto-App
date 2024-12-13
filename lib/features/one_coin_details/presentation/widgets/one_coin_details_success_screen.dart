@@ -1,10 +1,7 @@
 import 'package:crypto_currency/features/one_coin_details/domain/bloc/one_coin_details_bloc.dart';
-import 'package:crypto_currency/features/one_coin_details/presentation/widgets/one_coin_history_part.dart';
-import 'package:crypto_currency/features/one_coin_details/presentation/widgets/one_coin_top_part.dart';
-import 'package:crypto_currency/utils/color_extensions.dart';
+import 'widgest.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 
 class OneCoinDetailsSuccessScreen extends StatefulWidget {
   const OneCoinDetailsSuccessScreen({super.key});
@@ -25,16 +22,8 @@ class OneCoinDetailsSuccessScreenState
         body: ListView(
           physics: const AlwaysScrollableScrollPhysics(),
           padding: const EdgeInsets.all(0),
-          children: [
-            const OneCoinTopPart(),
-            const Gap(24),
-            Divider(
-              height: 1,
-              thickness: 2,
-              color: HexColor.fromHex("#E6E6E6"),
-            ),
-            const Gap(24),
-            const OneCoinHistoryPart()
+          children: const [
+            // OneCoinDetailsTopPart(state: ,)
           ],
         ),
       );

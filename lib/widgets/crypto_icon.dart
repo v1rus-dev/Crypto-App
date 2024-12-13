@@ -35,6 +35,10 @@ class _CryptoIconState extends State<CryptoIcon> {
     return FutureBuilder<String?>(
       future: _assetPath,
       builder: (context, snapshot) {
+        if (widget.name.isEmpty) {
+          return SizedBox();
+        }
+
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const CircularProgressIndicator();
         }

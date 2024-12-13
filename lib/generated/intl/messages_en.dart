@@ -25,6 +25,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "coins_list": MessageLookupByLibrary.simpleMessage("Coins list"),
         "high_value": MessageLookupByLibrary.simpleMessage("High"),
         "low_value": MessageLookupByLibrary.simpleMessage("Low"),
+        "marker_detail": MessageLookupByLibrary.simpleMessage("Marker detail"),
         "search_nothing_found_desc":
             MessageLookupByLibrary.simpleMessage("Nothing found by"),
         "search_nothing_found_title":

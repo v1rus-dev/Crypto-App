@@ -10,7 +10,6 @@ import 'package:crypto_currency/features/all_list_coins/data/repository_impl/all
 import 'package:crypto_currency/features/all_list_coins/domain/bloc/all_list_coins_bloc.dart';
 import 'package:crypto_currency/features/all_list_coins/domain/repository/repository.dart';
 import 'package:crypto_currency/features/one_coin_details/data/repository_impl/one_coin_repository_impl.dart';
-import 'package:crypto_currency/features/one_coin_details/domain/datasource/one_coin_local_datasource.dart';
 import 'package:crypto_currency/features/one_coin_details/domain/repository/one_coin_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';

@@ -10,4 +10,6 @@ class CoinHistoryInfo extends Equatable {
 
   @override
   List<Object?> get props => [time, high, low];
+
+  static get empty => const CoinHistoryInfo(time: 0, high: 0, low: 0);
 }

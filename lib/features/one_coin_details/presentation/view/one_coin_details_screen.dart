@@ -1,7 +1,10 @@
 import 'package:auto_route/annotations.dart';
+import 'package:crypto_currency/common/presentation/utils/context_ext.dart';
 import 'package:crypto_currency/features/one_coin_details/domain/bloc/one_coin_details_bloc.dart';
+import 'package:crypto_currency/features/one_coin_details/presentation/widgets/widgest.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 import 'package:get_it/get_it.dart';
 
 @RoutePage()
@@ -31,12 +34,24 @@ class _OneCoinDetailScreenState extends State<OneCoinDetailScreen> {
         bloc: bloc,
         builder: (context, state) {
           return Scaffold(
-              appBar: AppBar(title: Text(state.coinName)),
+              appBar: AppBar(title: Text(context.lang.marker_detail)),
               body: state.isLoading ? _buildLoading() : _buildSuccess(state));
         },
       );
 
-  Widget _buildSuccess(OneCoinDetailsState state) => CustomScrollView();
+  Widget _buildSuccess(OneCoinDetailsState state) => CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: OneCoinDetailsTopPart(
+              state: state,
+            ),
+          ),
+          const SliverGap(24),
+          SliverToBoxAdapter(
+            child: OneCoinHistoryPart(state: state),
+          )
+        ],
+      );
 
   Widget _buildLoading() => const Center(
         child: CircularProgressIndicator.adaptive(),

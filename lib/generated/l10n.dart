@@ -109,6 +109,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Marker detail`
+  String get marker_detail {
+    return Intl.message(
+      'Marker detail',
+      name: 'marker_detail',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

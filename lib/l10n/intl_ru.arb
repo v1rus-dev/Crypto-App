@@ -4,5 +4,6 @@
     "search_token": "Поиск",
     "coins_list": "Список монет",
     "search_nothing_found_title": "Ничего не найдено",
-    "search_nothing_found_desc": "Ничего не найдено по запросу"
+    "search_nothing_found_desc": "Ничего не найдено по запросу",
+    "marker_detail": "Детальная информация"
 }
