@@ -13,9 +13,9 @@ import 'package:crypto_currency/features/account/view/account_screen.dart'
     as _i1;
 import 'package:crypto_currency/features/all_list_coins/presentation/view/all_list_coins_screen.dart'
     as _i2;
-import 'package:crypto_currency/features/crypto_list/view/crypto_list_screen.dart'
-    as _i3;
-import 'package:crypto_currency/features/home/view/home_screen.dart' as _i4;
+import 'package:crypto_currency/features/home/view/home_screen.dart' as _i3;
+import 'package:crypto_currency/features/main_coins_info/presentation/view/main_coins_info_screen.dart'
+    as _i4;
 import 'package:crypto_currency/features/news/view/news_screen.dart' as _i5;
 import 'package:crypto_currency/features/one_coin_details/presentation/view/one_coin_details_screen.dart'
     as _i6;
@@ -60,26 +60,7 @@ class AllListCoinsRoute extends _i7.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i3.CryptoListScreen]
-class CryptoListRoute extends _i7.PageRouteInfo<void> {
-  const CryptoListRoute({List<_i7.PageRouteInfo>? children})
-      : super(
-          CryptoListRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'CryptoListRoute';
-
-  static _i7.PageInfo page = _i7.PageInfo(
-    name,
-    builder: (data) {
-      return const _i3.CryptoListScreen();
-    },
-  );
-}
-
-/// generated route for
-/// [_i4.HomeScreen]
+/// [_i3.HomeScreen]
 class HomeRoute extends _i7.PageRouteInfo<void> {
   const HomeRoute({List<_i7.PageRouteInfo>? children})
       : super(
@@ -92,7 +73,26 @@ class HomeRoute extends _i7.PageRouteInfo<void> {
   static _i7.PageInfo page = _i7.PageInfo(
     name,
     builder: (data) {
-      return const _i4.HomeScreen();
+      return const _i3.HomeScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [_i4.MainCoinsInfoScreen]
+class MainCoinsInfoRoute extends _i7.PageRouteInfo<void> {
+  const MainCoinsInfoRoute({List<_i7.PageRouteInfo>? children})
+      : super(
+          MainCoinsInfoRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'MainCoinsInfoRoute';
+
+  static _i7.PageInfo page = _i7.PageInfo(
+    name,
+    builder: (data) {
+      return const _i4.MainCoinsInfoScreen();
     },
   );
 }
