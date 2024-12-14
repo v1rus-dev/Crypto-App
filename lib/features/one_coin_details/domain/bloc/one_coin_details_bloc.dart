@@ -13,8 +13,6 @@ class OneCoinDetailsBloc
     extends Bloc<OneCoinDetailsEvent, OneCoinDetailsState> {
   final OneCoinRepository repository;
 
-  Timer? timer;
-
   OneCoinDetailsBloc({required this.repository})
       : super(
           OneCoinDetailsState(
@@ -23,6 +21,7 @@ class OneCoinDetailsBloc
             isLoading: true,
             coinBaseInfo: CoinBaseInfo.empty,
             isFavorite: false,
+            isLoadingHistory: true,
             historyInfoMinute: List.empty(),
             historyInfoHour: List.empty(),
             historyInfoDay: List.empty(),
@@ -61,6 +60,7 @@ class OneCoinDetailsBloc
     final historyDay = await repository.loadHistoryForDay(coinName);
 
     emitter.call(state.copyWith(
+      isLoadingHistory: false,
       historyInfoMinute: historyMinute.toList(),
       historyInfoHour: historyHour.toList(),
       historyInfoDay: historyDay.toList(),
@@ -73,11 +73,5 @@ class OneCoinDetailsBloc
         state.isFavorite != event.isFavorite) {
       emitter.call(state.copyWith(isFavorite: event.isFavorite));
     }
-  }
-
-  @override
-  Future<void> close() {
-    timer?.cancel();
-    return super.close();
   }
 }

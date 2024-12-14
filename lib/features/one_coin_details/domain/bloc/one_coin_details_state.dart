@@ -6,6 +6,7 @@ final class OneCoinDetailsState extends Equatable {
   final bool isLoading;
   final CoinBaseInfo coinBaseInfo;
   final bool isFavorite;
+  final bool isLoadingHistory;
   final List<CoinHistoryInfo> historyInfoMinute;
   final List<CoinHistoryInfo> historyInfoHour;
   final List<CoinHistoryInfo> historyInfoDay;
@@ -16,6 +17,7 @@ final class OneCoinDetailsState extends Equatable {
       required this.isLoading,
       required this.coinBaseInfo,
       required this.isFavorite,
+      required this.isLoadingHistory,
       required this.historyInfoMinute,
       required this.historyInfoHour,
       required this.historyInfoDay});
@@ -37,6 +39,7 @@ final class OneCoinDetailsState extends Equatable {
     bool? isLoading,
     CoinBaseInfo? coinBaseInfo,
     bool? isFavorite,
+    bool? isLoadingHistory,
     List<CoinHistoryInfo>? historyInfoMinute,
     List<CoinHistoryInfo>? historyInfoHour,
     List<CoinHistoryInfo>? historyInfoDay,
@@ -47,6 +50,7 @@ final class OneCoinDetailsState extends Equatable {
       isLoading: isLoading ?? this.isLoading,
       coinBaseInfo: coinBaseInfo ?? this.coinBaseInfo,
       isFavorite: isFavorite ?? this.isFavorite,
+      isLoadingHistory: isLoadingHistory ?? this.isLoadingHistory,
       historyInfoMinute: historyInfoMinute ?? this.historyInfoMinute,
       historyInfoHour: historyInfoHour ?? this.historyInfoHour,
       historyInfoDay: historyInfoDay ?? this.historyInfoDay,

@@ -9,6 +9,9 @@ class AllCoinsLocalDatasource {
 
   bool isEmpty() => database.isEmpty;
 
+  Future<List<CryptoCoinLocalDTO>> getFavoriteCoins() async =>
+      database.box.values.where((item) => item.isFavorite).toList();
+
   Future<void> updateAllCoins(Iterable<CryptoCoinLocalDTO> list) async {
     await database.box.clear();
     await database.box.addAll(list);

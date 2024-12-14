@@ -76,6 +76,7 @@ class _OneCoinDetailScreenState extends State<OneCoinDetailScreen> {
   @override
   void dispose() {
     timer?.cancel();
+    debugPrint("myyTag dispose");
     super.dispose();
   }
 }

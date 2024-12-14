@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 part 'crypto_coin_local_dto.g.dart';
@@ -43,4 +44,23 @@ class CryptoCoinLocalDTO extends HiveObject {
         platformType,
         isFavorite
       ];
+  CryptoCoinLocalDTO copyWith(
+      {String? name,
+      String? coinName,
+      ValueGetter<String?>? fullCoinName,
+      String? algorithm,
+      bool? isTrading,
+      ValueGetter<String?>? launchDate,
+      ValueGetter<String?>? platformType,
+      bool? isFavorite}) {
+    return CryptoCoinLocalDTO(
+        name: name ?? this.name,
+        coinName: coinName ?? this.coinName,
+        fullCoinName: fullCoinName != null ? fullCoinName() : this.fullCoinName,
+        algorithm: algorithm ?? this.algorithm,
+        isTrading: isTrading ?? this.isTrading,
+        launchDate: launchDate != null ? launchDate() : this.launchDate,
+        platformType: platformType != null ? platformType() : this.platformType,
+        isFavorite: isFavorite ?? this.isFavorite);
+  }
 }

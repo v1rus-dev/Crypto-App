@@ -1,6 +1,7 @@
 import 'package:crypto_currency/common/favorites/domain/bloc/favorites_bloc.dart';
 import 'package:crypto_currency/common/presentation/utils/context_ext.dart';
 import 'package:crypto_currency/features/one_coin_details/domain/bloc/one_coin_details_bloc.dart';
+import 'package:crypto_currency/features/one_coin_details/presentation/widgets/favorite_button.dart';
 import 'package:crypto_currency/utils/app_images.dart';
 import 'package:crypto_currency/utils/color_extensions.dart';
 import 'package:crypto_currency/widgets/crypto_icon.dart';
@@ -16,21 +17,18 @@ class OneCoinDetailsTopPart extends StatelessWidget {
   final OneCoinDetailsState state;
 
   @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _buildHeader(context),
-        const Gap(16),
-        _buildInfo(context),
-        const Gap(24),
-        Divider(
-          color: HexColor.fromHex('#E6E6E6'),
-        )
-      ],
-    );
-  }
+  Widget build(BuildContext context) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildHeader(context),
+          const Gap(16),
+          _buildInfo(context),
+          const Gap(24),
+          Divider(
+            color: HexColor.fromHex('#E6E6E6'),
+          )
+        ],
+      );
 
   Widget _buildHeader(BuildContext context) {
     final theme = Theme.of(context);
@@ -136,14 +134,14 @@ class OneCoinDetailsTopPart extends StatelessWidget {
               icon: SvgPicture.asset(AppImages.document), onPressed: () {}),
           IconButtonWrapper(
               icon: SvgPicture.asset(AppImages.share), onPressed: () {}),
-          IconButtonWrapper(
-              icon: SvgPicture.asset(
-                  state.isFavorite ? AppImages.starFilled : AppImages.star),
-              onPressed: () {
-                context
-                    .read<FavoritesBloc>()
-                    .add(UpdateCoinFavorite(coinName: state.coinName));
-              }),
+          FavoriteButton(
+            isFavorite: state.isFavorite,
+            onTap: () {
+              context
+                  .read<FavoritesBloc>()
+                  .add(UpdateCoinFavorite(coinName: state.coinName));
+            },
+          ),
         ],
       );
 }

@@ -36,7 +36,16 @@ class AllListReposioryImpl implements AllListRepository {
   }
 
   Future<void> _updateDatabase(Iterable<CryptoCoinLocalDTO> list) async {
-    return localDatasource.updateAllCoins(list);
+    final favoriteCoins = await localDatasource.getFavoriteCoins();
+    final result = <CryptoCoinLocalDTO>[];
+    for (var item in list) {
+      if (favoriteCoins.map((item) => item.name).contains(item.name)) {
+        result.add(item.copyWith(isFavorite: true));
+      } else {
+        result.add(item);
+      }
+    }
+    return localDatasource.updateAllCoins(result);
   }
 
   Future<List<AllCoinsInfoDTO>> _filterByAvailableIcons(
