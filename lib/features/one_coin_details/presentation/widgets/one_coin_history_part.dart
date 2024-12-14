@@ -52,7 +52,7 @@ class OneCoinHistoryPartState extends State<OneCoinHistoryPart> {
       );
 
   Widget buildHistoryCharts(BuildContext context) => Padding(
-        padding: const EdgeInsets.only(top: 4),
+        padding: const EdgeInsets.symmetric(vertical: 8),
         child: LineChart(
           LineChartData(
               gridData: const FlGridData(show: false),
