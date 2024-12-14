@@ -12,3 +12,8 @@ final class OneCoinDetailsLoadData extends OneCoinDetailsEvent {
   @override
   List<Object?> get props => [coinName];
 }
+
+final class OneCoinDetailsUpdateHistory extends OneCoinDetailsEvent {
+  @override
+  List<Object?> get props => [];
+}

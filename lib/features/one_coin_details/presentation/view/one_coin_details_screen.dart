@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:auto_route/annotations.dart';
 import 'package:crypto_currency/common/presentation/utils/context_ext.dart';
 import 'package:crypto_currency/features/one_coin_details/domain/bloc/one_coin_details_bloc.dart';
@@ -22,10 +23,16 @@ class _OneCoinDetailScreenState extends State<OneCoinDetailScreen> {
     repository: GetIt.I.get(),
   );
 
+  Timer? timer;
+
   @override
   void initState() {
     super.initState();
     bloc.add(OneCoinDetailsLoadData(coinName: widget.coinName));
+    bloc.add(OneCoinDetailsUpdateHistory());
+    timer = Timer.periodic(const Duration(seconds: 10), (timer) {
+      bloc.add(OneCoinDetailsUpdateHistory());
+    });
   }
 
   @override
@@ -56,4 +63,10 @@ class _OneCoinDetailScreenState extends State<OneCoinDetailScreen> {
   Widget _buildLoading() => const Center(
         child: CircularProgressIndicator.adaptive(),
       );
+
+  @override
+  void dispose() {
+    timer?.cancel();
+    super.dispose();
+  }
 }

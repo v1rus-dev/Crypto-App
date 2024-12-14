@@ -40,6 +40,7 @@ class OneCoinHistoryPartState extends State<OneCoinHistoryPart> {
             onValueChanged: (HistoryPart? value) {
               if (value != null) {
                 setState(() {
+                  debugPrint('myTag Change selected history part: $value');
                   _selectedHistoryPart = value;
                 });
               }
@@ -97,18 +98,17 @@ class OneCoinHistoryPartState extends State<OneCoinHistoryPart> {
   List<FlSpot> getSpots(OneCoinDetailsState state) {
     switch (_selectedHistoryPart) {
       case HistoryPart.Minute:
-        final res = state.historyInfoMinute.map((item) {
-          return FlSpot(item.time.toDouble(), item.high);
-        }).toList();
-        return res;
+        return state.historyInfoMinute
+            .map((item) => FlSpot(item.time.toDouble(), item.high))
+            .toList();
       case HistoryPart.Hour:
-        return state.historyInfoHour.map((item) {
-          return FlSpot(item.time.toDouble(), item.high);
-        }).toList();
+        return state.historyInfoHour
+            .map((item) => FlSpot(item.time.toDouble(), item.high))
+            .toList();
       case HistoryPart.Day:
-        return state.historyInfoDay.map((item) {
-          return FlSpot(item.time.toDouble(), item.high);
-        }).toList();
+        return state.historyInfoDay
+            .map((item) => FlSpot(item.time.toDouble(), item.high))
+            .toList();
     }
   }
 }

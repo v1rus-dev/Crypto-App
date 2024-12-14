@@ -19,7 +19,15 @@ final class OneCoinDetailsState extends Equatable {
       required this.historyInfoDay});
 
   @override
-  List<Object?> get props => [coinName, fullCoinName, isLoading];
+  List<Object?> get props => [
+        coinName,
+        fullCoinName,
+        isLoading,
+        coinBaseInfo,
+        historyInfoMinute,
+        historyInfoHour,
+        historyInfoDay,
+      ];
   OneCoinDetailsState copyWith({
     String? coinName,
     String? fullCoinName,

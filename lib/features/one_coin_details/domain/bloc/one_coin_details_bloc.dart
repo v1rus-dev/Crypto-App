@@ -5,7 +5,6 @@ import 'package:crypto_currency/features/one_coin_details/domain/entities/coin_b
 import 'package:crypto_currency/features/one_coin_details/domain/entities/coin_history_info.dart';
 import 'package:crypto_currency/features/one_coin_details/domain/repository/one_coin_repository.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
 
 part 'one_coin_details_event.dart';
 part 'one_coin_details_state.dart';
@@ -29,6 +28,7 @@ class OneCoinDetailsBloc
           ),
         ) {
     on<OneCoinDetailsLoadData>(_loadDetailsData);
+    on<OneCoinDetailsUpdateHistory>(_updateHistory);
   }
 
   Future<void> _loadDetailsData(OneCoinDetailsLoadData event,
@@ -41,7 +41,25 @@ class OneCoinDetailsBloc
     final coinInfo = await repository.load(event.coinName);
 
     emitter.call(state.copyWith(coinBaseInfo: coinInfo, isLoading: false));
-    debugPrint('CoinInfo: ${coinInfo.toString()}');
+  }
+
+  Future<void> _updateHistory(OneCoinDetailsUpdateHistory event,
+      Emitter<OneCoinDetailsState> emitter) async {
+    final coinName = state.coinName;
+
+    if (coinName.isEmpty) {
+      return;
+    }
+
+    final historyMinute = await repository.loadHistoryForMinute(coinName);
+    final historyHour = await repository.loadHistoryForHour(coinName);
+    final historyDay = await repository.loadHistoryForDay(coinName);
+
+    emitter.call(state.copyWith(
+      historyInfoMinute: historyMinute.toList(),
+      historyInfoHour: historyHour.toList(),
+      historyInfoDay: historyDay.toList(),
+    ));
   }
 
   @override

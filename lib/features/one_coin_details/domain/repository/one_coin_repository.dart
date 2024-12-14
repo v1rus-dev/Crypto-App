@@ -8,9 +8,9 @@ abstract class OneCoinRepository {
 
   Future<CoinLocalInfo> getLocalInfo(String coinName);
 
-  Future<List<CoinHistoryInfo>> loadHistoryForMinute(String coinName);
+  Future<Iterable<CoinHistoryInfo>> loadHistoryForMinute(String coinName);
 
-  Future<List<CoinHistoryInfo>> loadHistoryForHour(String coinName);
+  Future<Iterable<CoinHistoryInfo>> loadHistoryForHour(String coinName);
 
-  Future<List<CoinHistoryInfo>> loadHistoryForDay(String coinName);
+  Future<Iterable<CoinHistoryInfo>> loadHistoryForDay(String coinName);
 }
