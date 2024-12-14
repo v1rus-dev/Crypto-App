@@ -6,8 +6,8 @@ import 'package:crypto_currency/features/one_coin_details/domain/entities/coin_h
 import 'package:crypto_currency/features/one_coin_details/domain/entities/coin_local_info.dart';
 
 class OneCoinInfoMapper {
-  static CoinLocalInfo mapFromDatabase(CryptoCoinLocalDTO dto) =>
-      CoinLocalInfo(name: dto.name, coinName: dto.coinName);
+  static CoinLocalInfo mapFromDatabase(CryptoCoinLocalDTO dto) => CoinLocalInfo(
+      name: dto.name, coinName: dto.coinName, isFavorite: dto.isFavorite);
 
   static CoinBaseInfo mapBaseInfoFromNetwork(OneCoinInfoDTO dto) =>
       CoinBaseInfo(
@@ -18,6 +18,6 @@ class OneCoinInfoMapper {
         totalVolumeOfDay: dto.totalVoduleOfDay,
       );
 
-      static CoinHistoryInfo mapHistoryFromNetwork(CoinHistoryDTO dto) =>
-        CoinHistoryInfo(time: dto.time, high: dto.high, low: dto.low);
+  static CoinHistoryInfo mapHistoryFromNetwork(CoinHistoryDTO dto) =>
+      CoinHistoryInfo(time: dto.time, high: dto.high, low: dto.low);
 }

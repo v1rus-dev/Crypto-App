@@ -1,6 +1,4 @@
-import 'package:crypto_currency/common/utils/future_ext.dart';
 import 'package:crypto_currency/common/utils/future_list_ext.dart';
-import 'package:crypto_currency/data/api/dto/dto.dart';
 import 'package:crypto_currency/features/one_coin_details/data/datasources/datasources.dart';
 import 'package:crypto_currency/features/one_coin_details/data/mappers/one_coin_info_mapper.dart';
 import 'package:crypto_currency/features/one_coin_details/domain/entities/coin_base_info.dart';

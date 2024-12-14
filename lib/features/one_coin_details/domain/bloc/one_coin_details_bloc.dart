@@ -22,6 +22,7 @@ class OneCoinDetailsBloc
             fullCoinName: '',
             isLoading: true,
             coinBaseInfo: CoinBaseInfo.empty,
+            isFavorite: false,
             historyInfoMinute: List.empty(),
             historyInfoHour: List.empty(),
             historyInfoDay: List.empty(),
@@ -29,6 +30,7 @@ class OneCoinDetailsBloc
         ) {
     on<OneCoinDetailsLoadData>(_loadDetailsData);
     on<OneCoinDetailsUpdateHistory>(_updateHistory);
+    on<UpdateFavoriteStateEvent>(_updateFavoriteState);
   }
 
   Future<void> _loadDetailsData(OneCoinDetailsLoadData event,
@@ -36,7 +38,10 @@ class OneCoinDetailsBloc
     final localInfo = await repository.getLocalInfo(event.coinName);
 
     emitter.call(state.copyWith(
-        coinName: localInfo.name, fullCoinName: localInfo.coinName));
+      coinName: localInfo.name,
+      fullCoinName: localInfo.coinName,
+      isFavorite: localInfo.isFavorite,
+    ));
 
     final coinInfo = await repository.load(event.coinName);
 
@@ -60,6 +65,14 @@ class OneCoinDetailsBloc
       historyInfoHour: historyHour.toList(),
       historyInfoDay: historyDay.toList(),
     ));
+  }
+
+  Future<void> _updateFavoriteState(UpdateFavoriteStateEvent event,
+      Emitter<OneCoinDetailsState> emitter) async {
+    if (state.coinName == event.coinName &&
+        state.isFavorite != event.isFavorite) {
+      emitter.call(state.copyWith(isFavorite: event.isFavorite));
+    }
   }
 
   @override

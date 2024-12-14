@@ -1,16 +1,14 @@
-import 'package:crypto_currency/common/utils/local_datasource.dart';
+import 'package:crypto_currency/data/database/database.dart';
 import 'package:crypto_currency/data/database/dto/crypto_coin_local_dto.dart';
 
-class FavoritesDatasource extends LocalDatasource<CryptoCoinLocalDTO> {
-  FavoritesDatasource({required super.dataBox});
+class FavoritesDatasource {
 
-  Future<void> addCryptoCoinToFavorite(CryptoCoinLocalDTO coin) async {
-    coin.isFavorite = true;
-    coin.save();
-  }
+  Database<CryptoCoinLocalDTO> database = Database();
 
-  Future<void> removeCryptoCoinFromFavorite(CryptoCoinLocalDTO coin) async {
-    coin.isFavorite = false;
+  Future<bool> updateFavorite(String coinName) async {
+    final coin = database.box.values.firstWhere((item) => item.name == coinName);
+    coin.isFavorite = !coin.isFavorite;
     coin.save();
+    return coin.isFavorite;
   }
 }

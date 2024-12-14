@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:auto_route/annotations.dart';
+import 'package:crypto_currency/common/favorites/domain/bloc/favorites_bloc.dart';
 import 'package:crypto_currency/common/presentation/utils/context_ext.dart';
 import 'package:crypto_currency/features/one_coin_details/domain/bloc/one_coin_details_bloc.dart';
 import 'package:crypto_currency/features/one_coin_details/presentation/widgets/widgest.dart';
@@ -37,13 +38,21 @@ class _OneCoinDetailScreenState extends State<OneCoinDetailScreen> {
 
   @override
   Widget build(BuildContext context) =>
-      BlocBuilder<OneCoinDetailsBloc, OneCoinDetailsState>(
-        bloc: bloc,
-        builder: (context, state) {
-          return Scaffold(
-              appBar: AppBar(title: Text(context.lang.marker_detail)),
-              body: state.isLoading ? _buildLoading() : _buildSuccess(state));
+      BlocListener<FavoritesBloc, FavoritesBlocState>(
+        listener: (context, state) {
+          if (state is FavoritesUpdated) {
+            bloc.add(UpdateFavoriteStateEvent(
+                coinName: state.coinName, isFavorite: state.newValue));
+          }
         },
+        child: BlocBuilder<OneCoinDetailsBloc, OneCoinDetailsState>(
+          bloc: bloc,
+          builder: (context, state) {
+            return Scaffold(
+                appBar: AppBar(title: Text(context.lang.marker_detail)),
+                body: state.isLoading ? _buildLoading() : _buildSuccess(state));
+          },
+        ),
       );
 
   Widget _buildSuccess(OneCoinDetailsState state) => CustomScrollView(

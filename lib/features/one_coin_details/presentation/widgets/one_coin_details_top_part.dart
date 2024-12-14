@@ -1,3 +1,4 @@
+import 'package:crypto_currency/common/favorites/domain/bloc/favorites_bloc.dart';
 import 'package:crypto_currency/common/presentation/utils/context_ext.dart';
 import 'package:crypto_currency/features/one_coin_details/domain/bloc/one_coin_details_bloc.dart';
 import 'package:crypto_currency/utils/app_images.dart';
@@ -5,6 +6,7 @@ import 'package:crypto_currency/utils/color_extensions.dart';
 import 'package:crypto_currency/widgets/crypto_icon.dart';
 import 'package:crypto_currency/widgets/icon_button_wrapper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 
@@ -23,7 +25,9 @@ class OneCoinDetailsTopPart extends StatelessWidget {
         const Gap(16),
         _buildInfo(context),
         const Gap(24),
-        Divider(color: HexColor.fromHex('#E6E6E6'),)
+        Divider(
+          color: HexColor.fromHex('#E6E6E6'),
+        )
       ],
     );
   }
@@ -133,7 +137,13 @@ class OneCoinDetailsTopPart extends StatelessWidget {
           IconButtonWrapper(
               icon: SvgPicture.asset(AppImages.share), onPressed: () {}),
           IconButtonWrapper(
-              icon: SvgPicture.asset(AppImages.star), onPressed: () {}),
+              icon: SvgPicture.asset(
+                  state.isFavorite ? AppImages.starFilled : AppImages.star),
+              onPressed: () {
+                context
+                    .read<FavoritesBloc>()
+                    .add(UpdateCoinFavorite(coinName: state.coinName));
+              }),
         ],
       );
 }

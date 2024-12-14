@@ -84,8 +84,8 @@ _initOneCoinInfo() {
 }
 
 _initFavorites() {
-  locator.registerLazySingleton(() => FavoritesDatasource(dataBox: locator()));
-  locator.registerLazySingleton(() => FavoritesBloc(repository: locator()));
+  locator.registerLazySingleton(() => FavoritesDatasource());
   locator.registerLazySingleton<FavoritesRepository>(
-      () => FavoritesRepositoryImpl(datasource: locator()));
+      () => FavoritesRepositoryImpl(localDatasource: locator.get()));
+  locator.registerLazySingleton(() => FavoritesBloc(repository: locator()));
 }

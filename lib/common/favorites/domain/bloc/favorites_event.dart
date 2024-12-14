@@ -12,10 +12,11 @@ final class UpdateFavoritesList extends FavoritesEvent {
   List<Object> get props => [];
 }
 
-final class AddCoinToFavorite extends FavoritesEvent {
-  const AddCoinToFavorite({required this.coin});
-  final CryptoCoinLocalDTO coin;
+final class UpdateCoinFavorite extends FavoritesEvent {
+  final String coinName;
+
+  const UpdateCoinFavorite({required this.coinName});
 
   @override
-  List<Object> get props => [coin];
+  List<Object> get props => [coinName];
 }

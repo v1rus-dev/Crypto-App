@@ -1,3 +1,3 @@
 abstract class FavoritesRepository {
-  Future<void> updateFavoriteState(String coinName);
+  Future<bool> updateFavoriteState(String coinName);
 }
