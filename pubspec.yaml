@@ -63,6 +63,7 @@ dependencies:
   talker_bloc_logger: ^4.5.2
   sliver_tools: ^0.2.12
   freezed: ^2.5.7
+  flutter_layout_grid: ^2.0.7
 
 dev_dependencies:
   flutter_test:

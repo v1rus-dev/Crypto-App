@@ -1,21 +1,13 @@
 part of 'main_coins_info_bloc.dart';
 
-@immutable
-sealed class MainCoinInfoState extends Equatable {}
-
-final class MainCoinsInfoStateInitial extends MainCoinInfoState {
-  @override
-  List<Object?> get props => [];
-}
-
-final class ListOfCoins extends MainCoinInfoState {
+final class MainCoinsInfoState extends Equatable {
   final List<CoinInfo> coins;
 
-  ListOfCoins({required this.coins});
+  const MainCoinsInfoState({required this.coins});
 
   @override
   List<Object> get props => [coins];
-  ListOfCoins copyWith({List<CoinInfo>? coins}) {
-    return ListOfCoins(coins: coins ?? this.coins);
+  MainCoinsInfoState copyWith({List<CoinInfo>? coins}) {
+    return MainCoinsInfoState(coins: coins ?? this.coins);
   }
 }

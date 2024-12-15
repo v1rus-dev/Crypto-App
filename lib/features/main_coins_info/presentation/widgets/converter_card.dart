@@ -3,15 +3,14 @@ import 'package:crypto_currency/widgets/crypto_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
-class ConverterCard extends StatelessWidget {
-  ConverterCard({super.key, this.onTap});
+// ignore: must_be_immutable
+class CardConverter extends StatelessWidget {
+  CardConverter({super.key, this.onTap});
 
   Function? onTap;
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     return Material(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       color: Colors.grey[200],
@@ -30,10 +29,11 @@ class ConverterCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
                     context.lang.converter,
-                    style: TextStyle(fontSize: 38, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        fontSize: 38, fontWeight: FontWeight.bold),
                   ),
                 ),
                 const Gap(16),
@@ -62,7 +62,6 @@ class ConverterCard extends StatelessWidget {
                       Icons.double_arrow_outlined,
                       size: 32,
                     ),
-
                     Stack(
                       alignment: AlignmentDirectional.center,
                       children: [
@@ -71,8 +70,6 @@ class ConverterCard extends StatelessWidget {
                         _icon('SHIB', const EdgeInsets.only(left: 40, top: 10)),
                       ],
                     ),
-                    // Icon(Icons.arrow_forward_ios_rounded, size: 32,),
-                    // Icon(Icons.arrow_forward_ios_rounded, size: 32,)
                   ],
                 )
               ],

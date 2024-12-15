@@ -44,45 +44,33 @@ class MainCoinsInfoScreenState extends State<MainCoinsInfoScreen> {
                   ]
                 : null,
           ),
-          body: buildMainUI(context),
+          body: BlocBuilder<MainCoinInfoBloc, MainCoinsInfoState>(
+              builder: (context, state) => CustomScrollView(
+                    slivers: [
+                      const SliverGap(20),
+                      SliverToBoxAdapter(
+                          child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: CardConverter(onTap: () {
+                          context.router.push(const ConverterRoute());
+                        }),
+                      )),
+                      const SliverGap(20),
+                      SliverList.separated(
+                          itemCount: state.coins.length,
+                          separatorBuilder: (context, index) => const SizedBox(
+                                height: 16,
+                              ),
+                          itemBuilder: (context, index) => CoinInfoItem(
+                                key: Key(state.coins[index].name),
+                                coinInfo: state.coins[index],
+                                onTap: () {
+                                  context.router.push(OneCoinDetailRoute(
+                                      coinName: state.coins[index].name));
+                                },
+                              ))
+                    ],
+                  )),
         ),
-      );
-
-  @override
-  Widget buildMainUI(BuildContext context) =>
-      BlocBuilder<MainCoinInfoBloc, MainCoinInfoState>(
-        builder: (context, state) => switch (state) {
-          MainCoinsInfoStateInitial() => _buildInitial(context),
-          ListOfCoins() => _buildList(context, state)
-        },
-      );
-
-  _buildInitial(BuildContext context) => Container();
-
-  _buildList(BuildContext context, ListOfCoins state) => CustomScrollView(
-        slivers: [
-          const SliverGap(20),
-          SliverToBoxAdapter(
-              child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: ConverterCard(onTap: () {
-              context.router.push(const ConverterRoute());
-            }),
-          )),
-          const SliverGap(20),
-          SliverList.separated(
-              itemCount: state.coins.length,
-              separatorBuilder: (context, index) => const SizedBox(
-                    height: 16,
-                  ),
-              itemBuilder: (context, index) => CoinInfoItem(
-                    key: Key(state.coins[index].name),
-                    coinInfo: state.coins[index],
-                    onTap: () {
-                      context.router.push(OneCoinDetailRoute(
-                          coinName: state.coins[index].name));
-                    },
-                  ))
-        ],
       );
 }
