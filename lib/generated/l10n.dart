@@ -149,6 +149,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Converter`
+  String get converter {
+    return Intl.message(
+      'Converter',
+      name: 'converter',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

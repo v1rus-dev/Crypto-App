@@ -49,7 +49,10 @@ class _OneCoinDetailScreenState extends State<OneCoinDetailScreen> {
           bloc: bloc,
           builder: (context, state) {
             return Scaffold(
-                appBar: AppBar(title: Text(context.lang.marker_detail)),
+                appBar: AppBar(
+                  title: Text(context.lang.marker_detail),
+                  centerTitle: true,
+                ),
                 body: state.isLoading ? _buildLoading() : _buildSuccess(state));
           },
         ),

@@ -8,5 +8,6 @@
     "marker_detail": "Marker detail",
     "minute": "Minute",
     "hour": "Hour",
-    "day": "Day"
+    "day": "Day",
+    "converter": "Converter"
 }
