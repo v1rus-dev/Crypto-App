@@ -1,11 +1,9 @@
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class CoinInfo extends Equatable {
-  final String name;
-  final String coinName;
+part 'coin_info.freezed.dart';
 
-  const CoinInfo({required this.name, required this.coinName});
-
-  @override
-  List<Object> get props => [name, coinName];
+@freezed
+class CoinInfo with _$CoinInfo {
+  const factory CoinInfo({required String name, required String coinName}) =
+      _CoinInfo;
 }

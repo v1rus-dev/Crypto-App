@@ -14,6 +14,7 @@ class AppRouter extends RootStackRouter {
           AutoRoute(page: NewsRoute.page),
           AutoRoute(page: AccountRoute.page),
         ]),
-        AutoRoute(page: OneCoinDetailRoute.page)
+        AutoRoute(page: OneCoinDetailRoute.page),
+        AutoRoute(page: ConverterRoute.page)
       ];
 }

@@ -10,6 +10,7 @@ import 'package:crypto_currency/features/all_list_coins/data/repository_impl/all
 import 'package:crypto_currency/features/all_list_coins/domain/bloc/all_list_coins_bloc.dart';
 import 'package:crypto_currency/features/all_list_coins/domain/repository/repository.dart';
 import 'package:crypto_currency/features/main_coins_info/data/repositories/main_coins_info_repository_impl.dart';
+import 'package:crypto_currency/features/main_coins_info/domain/bloc/main_coins_info_bloc.dart';
 import 'package:crypto_currency/features/main_coins_info/domain/repositories/main_coins_info_repository.dart';
 import 'package:crypto_currency/features/one_coin_details/data/repository_impl/one_coin_repository_impl.dart';
 import 'package:crypto_currency/features/one_coin_details/domain/repository/one_coin_repository.dart';
@@ -96,4 +97,6 @@ _initFavorites() {
 _initMainCoins() {
   locator.registerLazySingleton<MainCoinsInfoRepository>(
       () => MainCoinsInfoRepositoryImpl());
+  locator.registerLazySingleton<MainCoinInfoBloc>(
+      () => MainCoinInfoBloc(repository: locator()));
 }

@@ -2,6 +2,7 @@ import 'package:crypto_currency/common/favorites/domain/bloc/favorites_bloc.dart
 import 'package:crypto_currency/common/domain/settings/bloc/settings_bloc.dart';
 import 'package:crypto_currency/crypto_currency_app.dart';
 import 'package:crypto_currency/features/all_list_coins/domain/bloc/all_list_coins_bloc.dart';
+import 'package:crypto_currency/features/main_coins_info/domain/bloc/main_coins_info_bloc.dart';
 import 'package:crypto_currency/inject_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,6 +26,8 @@ void main() async {
       BlocProvider.value(value: locator<SettingsBloc>()),
       BlocProvider.value(value: locator<FavoritesBloc>()),
       BlocProvider.value(value: locator<AllListCoinsBloc>()..add(LoadCoins())),
+      BlocProvider.value(
+          value: locator<MainCoinInfoBloc>()..add(GetFavoriteCoinsEvent())),
     ],
     child: CryptoCurrencyApp(),
   ));

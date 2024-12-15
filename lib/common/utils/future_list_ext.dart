@@ -1,5 +1,5 @@
-extension FutureListExt<T, R> on Future<Iterable<T>> {
-  Future<Iterable<R>> mapList(R Function(T) mapper) async {
+extension FutureListExt<T> on Future<Iterable<T>> {
+  Future<Iterable<R>> mapList<R>(R Function(T) mapper) async {
     final value = await this;
     return value.map((item) => mapper.call(item));
   }
