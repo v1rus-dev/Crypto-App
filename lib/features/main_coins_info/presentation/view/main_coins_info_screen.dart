@@ -1,11 +1,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:crypto_currency/common/favorites/domain/bloc/favorites_bloc.dart';
 import 'package:crypto_currency/features/main_coins_info/domain/bloc/main_coins_info_bloc.dart';
-import 'package:crypto_currency/features/main_coins_info/presentation/widgets/main_part.dart';
+import 'package:crypto_currency/features/main_coins_info/presentation/widgets/coin_info_item.dart';
+import 'package:crypto_currency/features/main_coins_info/presentation/widgets/converter_card.dart';
+import 'package:crypto_currency/router/router.gr.dart';
 import 'package:crypto_currency/widgets/main_appbar.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 import 'package:get_it/get_it.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
@@ -41,7 +44,45 @@ class MainCoinsInfoScreenState extends State<MainCoinsInfoScreen> {
                   ]
                 : null,
           ),
-          body: const MainPart(),
+          body: buildMainUI(context),
         ),
+      );
+
+  @override
+  Widget buildMainUI(BuildContext context) =>
+      BlocBuilder<MainCoinInfoBloc, MainCoinInfoState>(
+        builder: (context, state) => switch (state) {
+          MainCoinsInfoStateInitial() => _buildInitial(context),
+          ListOfCoins() => _buildList(context, state)
+        },
+      );
+
+  _buildInitial(BuildContext context) => Container();
+
+  _buildList(BuildContext context, ListOfCoins state) => CustomScrollView(
+        slivers: [
+          const SliverGap(20),
+          SliverToBoxAdapter(
+              child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: ConverterCard(onTap: () {
+              context.router.push(const ConverterRoute());
+            }),
+          )),
+          const SliverGap(20),
+          SliverList.separated(
+              itemCount: state.coins.length,
+              separatorBuilder: (context, index) => const SizedBox(
+                    height: 16,
+                  ),
+              itemBuilder: (context, index) => CoinInfoItem(
+                    key: Key(state.coins[index].name),
+                    coinInfo: state.coins[index],
+                    onTap: () {
+                      context.router.push(OneCoinDetailRoute(
+                          coinName: state.coins[index].name));
+                    },
+                  ))
+        ],
       );
 }

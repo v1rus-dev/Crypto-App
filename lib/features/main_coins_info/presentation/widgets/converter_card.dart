@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class ConverterCard extends StatelessWidget {
-  const ConverterCard({super.key});
+  ConverterCard({super.key, this.onTap});
+
+  Function? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +18,9 @@ class ConverterCard extends StatelessWidget {
       child: InkWell(
         customBorder:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        onTap: () {},
+        onTap: () {
+          onTap?.call();
+        },
         child: SizedBox(
           width: double.infinity,
           height: 160,
