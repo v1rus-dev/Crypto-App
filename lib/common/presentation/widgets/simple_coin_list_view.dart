@@ -5,11 +5,12 @@ import 'package:gap/gap.dart';
 
 // ignore: must_be_immutable
 class SimpleCoinListView extends StatelessWidget {
-  SimpleCoinListView({super.key, required this.name, required this.coinName, this.onTap});
+  SimpleCoinListView(
+      {super.key, required this.name, required this.coinName, this.onTap});
 
   final String name;
   final String coinName;
-  Function? onTap;
+  Function(String)? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class SimpleCoinListView extends StatelessWidget {
       color: Colors.white,
       child: InkWell(
         onTap: () {
-          onTap?.call();
+          onTap?.call(name);
         },
         child: Row(
           children: [

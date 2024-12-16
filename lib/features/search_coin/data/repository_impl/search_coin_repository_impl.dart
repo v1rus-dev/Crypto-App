@@ -14,7 +14,7 @@ class SearchCoinRepositoryImpl implements SearchCoinRepository {
 
   @override
   Future<List<SearchCoin>> getResult(String search) async {
-    final searchedList = await datasource.findCoins(search);
+    final searchedList = await datasource.findCoins(search.toLowerCase());
     return searchedList.map(SearchMapper.mapFromDatabase).toList();
   }
 }

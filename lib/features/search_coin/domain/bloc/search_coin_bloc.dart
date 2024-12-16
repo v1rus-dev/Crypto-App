@@ -10,18 +10,16 @@ class SearchCoinBloc extends Bloc<SearchCoinEvent, SearchCoinState> {
   final SearchCoinRepository searchCoinRepository;
 
   SearchCoinBloc({required this.searchCoinRepository})
-      : super(SearchCoinState(nothingFound: false, hints: [], searchResults: [])) {
+      : super(const SearchCoinState(
+            nothingFound: false, hints: [], searchResults: [])) {
     on<SearchCoinUpdateSearchEvent>(_updateSearch);
   }
 
   Future<void> _updateSearch(SearchCoinUpdateSearchEvent event,
       Emitter<SearchCoinState> emitter) async {
     if (event.search.isEmpty) {
-      emitter.call(state.copyWith(
-        nothingFound: false,
-        hints: [],
-        searchResults: []
-      ));
+      emitter.call(
+          state.copyWith(nothingFound: false, hints: [], searchResults: []));
       return;
     }
 
@@ -30,24 +28,13 @@ class SearchCoinBloc extends Bloc<SearchCoinEvent, SearchCoinState> {
 
     if (event.search.isNotEmpty && hints.isNotEmpty || results.isNotEmpty) {
       emitter.call(state.copyWith(
-        nothingFound: false,
-        hints: hints,
-        searchResults: results
-      ));
+          nothingFound: false, hints: hints, searchResults: results));
       return;
     }
 
     if (event.search.isNotEmpty && hints.isEmpty && results.isEmpty) {
       emitter.call(state.copyWith(
-        nothingFound: true,
-        hints: hints,
-        searchResults: results
-      ));
+          nothingFound: true, hints: hints, searchResults: results));
     }
-  }
-
-  @override
-  Future<void> close() {
-    return super.close();
   }
 }

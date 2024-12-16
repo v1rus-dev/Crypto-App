@@ -19,7 +19,7 @@ void main() async {
   Bloc.observer = TalkerBlocObserver(
       talker: locator(),
       settings: const TalkerBlocLoggerSettings(
-          enabled: true, printStateFullData: true, printEventFullData: false));
+          enabled: true, printStateFullData: true, printEventFullData: true));
 
   runApp(MultiBlocProvider(
     providers: [

@@ -19,10 +19,9 @@ class SearchCoinLocalDatasource {
   }
 
   Future<Iterable<CryptoCoinLocalDTO>> findCoins(String search) async =>
-      database.box.values
-          .where((coin) =>
-              coin.coinName.toLowerCase().startsWith(search) ||
-              coin.name.toLowerCase().startsWith(search));
+      database.box.values.where((coin) =>
+          coin.coinName.toLowerCase().startsWith(search) ||
+          coin.name.toLowerCase().startsWith(search));
 }
 
 extension HintExt on Iterable<CryptoCoinLocalDTO> {

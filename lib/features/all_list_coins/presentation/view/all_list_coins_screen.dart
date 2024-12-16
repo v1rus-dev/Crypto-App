@@ -72,7 +72,12 @@ class _AllListCoinsScreenState extends State<AllListCoinsScreen> {
                             useRootNavigator: true,
                             useSafeArea: true,
                             builder: (buildContext) {
-                              return const SearchCoinBottomSheet();
+                              return SearchCoinBottomSheet(
+                                onTap: (name) {
+                                  AutoRouter.of(context).popAndPush(
+                                      OneCoinDetailRoute(coinName: name));
+                                },
+                              );
                             });
                       }),
                     ),
@@ -86,11 +91,14 @@ class _AllListCoinsScreenState extends State<AllListCoinsScreen> {
                   ),
                   itemBuilder: (BuildContext context, int index) =>
                       SimpleCoinListView(
-                          key: Key(state.listOfCoins[index].name),
-                          name: state.listOfCoins[index].name,
-                          coinName: state.listOfCoins[index].coinName, onTap: () {
-                            AutoRouter.of(context).push(OneCoinDetailRoute(coinName: state.listOfCoins[index].name));
-                          },),
+                    key: Key(state.listOfCoins[index].name),
+                    name: state.listOfCoins[index].name,
+                    coinName: state.listOfCoins[index].coinName,
+                    onTap: (name) {
+                      AutoRouter.of(context)
+                          .push(OneCoinDetailRoute(coinName: name));
+                    },
+                  ),
                 )
               ],
             ),

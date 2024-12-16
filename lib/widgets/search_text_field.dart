@@ -3,12 +3,18 @@ import 'package:flutter/material.dart';
 
 class SearchTextField extends StatefulWidget {
   const SearchTextField(
-      {super.key, required this.hintText, this.leadingIcon, this.onChanged, this.controller});
+      {super.key,
+      required this.hintText,
+      this.leadingIcon,
+      this.onChanged,
+      this.controller,
+      this.focusNode});
 
   final String hintText;
   final Widget? leadingIcon;
   final ValueChanged<String>? onChanged;
   final TextEditingController? controller;
+  final FocusNode? focusNode;
 
   @override
   State<SearchTextField> createState() => _SearchTextFieldState();
@@ -20,6 +26,7 @@ class _SearchTextFieldState extends State<SearchTextField> {
     return TextField(
       onChanged: widget.onChanged,
       controller: widget.controller,
+      focusNode: widget.focusNode,
       style: const TextStyle(fontSize: 14, color: Colors.black),
       decoration: InputDecoration(
         prefixIconConstraints:

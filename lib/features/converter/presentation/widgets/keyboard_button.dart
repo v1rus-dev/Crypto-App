@@ -1,8 +1,7 @@
-import 'dart:nativewrappers/_internal/vm/lib/ffi_allocation_patch.dart';
-
 import 'package:crypto_currency/features/converter/domain/entities/keyboard_type.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class KeyboardButton extends StatefulWidget {
   KeyboardButton({super.key, required this.type, this.onTap});
 

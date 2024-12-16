@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class Hint extends StatelessWidget {
   Hint({super.key, required this.hintText, this.onTap});
 
   final String hintText;
-  void Function(String)? onTap;
+  Function(String)? onTap;
 
   @override
   Widget build(BuildContext context) => Material(
