@@ -5,6 +5,7 @@ import 'package:crypto_currency/features/converter/presentation/widgets/converte
 import 'package:crypto_currency/features/converter/presentation/widgets/converter_keyboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 
 @RoutePage()
 class ConverterScreen extends StatefulWidget {
@@ -30,10 +31,12 @@ class _ConverterScreenState extends State<ConverterScreen> {
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 20),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                Gap(20),
                 ConverterInfo(),
+                Spacer(),
                 ConverterKeyboard(),
+                Gap(20),
               ],
             ),
           ),

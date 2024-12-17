@@ -8,9 +8,7 @@ import 'package:gap/gap.dart';
 
 // ignore: must_be_immutable
 class SearchCoinBottomSheet extends StatefulWidget {
-  SearchCoinBottomSheet({super.key, this.onTap});
-
-  Function(String)? onTap;
+  const SearchCoinBottomSheet({super.key});
 
   @override
   State<SearchCoinBottomSheet> createState() => _SearchCoinBottomSheetState();
@@ -43,7 +41,9 @@ class _SearchCoinBottomSheetState extends State<SearchCoinBottomSheet> {
           return SearchState(
               state: state,
               textEditingController: textEditingController,
-              onTap: widget.onTap,
+              onTap: (coinName) {
+                Navigator.of(context).pop(coinName);
+              },
               focusNode: focusNode,
               child: CustomScrollView(
                 slivers: [

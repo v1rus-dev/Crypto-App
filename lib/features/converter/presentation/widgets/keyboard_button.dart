@@ -6,7 +6,7 @@ class KeyboardButton extends StatefulWidget {
   KeyboardButton({super.key, required this.type, this.onTap});
 
   final KeyboardType type;
-  Function(KeyboardType)? onTap;
+  Function(BuildContext, KeyboardType)? onTap;
 
   @override
   State<KeyboardButton> createState() => _KeyboardButtonState();
@@ -29,17 +29,28 @@ class _KeyboardButtonState extends State<KeyboardButton>
   }
 
   @override
-  Widget build(BuildContext context) => Material(
-        // borderRadius: BorderRadius.circular(4),
-        child: InkWell(
-          onTap: () {
-            widget.onTap?.call(widget.type);
+  Widget build(BuildContext context) => SizedBox(
+        width: double.infinity,
+        child: TextButton(
+          onPressed: () {
+            widget.onTap?.call(context, widget.type);
           },
-          // borderRadius: BorderRadius.circular(4),
-          child: AspectRatio(
-            aspectRatio: 2,
-            child: Center(
-              child: Text(getText(widget.type)),
+          clipBehavior: Clip.antiAlias,
+          style: TextButton.styleFrom(
+            backgroundColor: Colors.grey[200],
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            child: Text(
+              getText(widget.type),
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 24,
+                color: Colors.black,
+              ),
             ),
           ),
         ),

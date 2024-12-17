@@ -1,6 +1,5 @@
 import 'package:crypto_currency/features/converter/domain/entities/keyboard_type.dart';
 import 'package:crypto_currency/features/converter/presentation/widgets/keyboard_button.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class KeyboardButtonWrapper extends StatelessWidget {

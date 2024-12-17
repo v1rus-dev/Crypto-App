@@ -30,7 +30,7 @@ class _AllListCoinsScreenState extends State<AllListCoinsScreen> {
             case AllListCoinsLoading():
               return _loading();
             case AllListCoinsLoaded():
-              return _coinsLoaded(state);
+              return _coinsLoaded(context, state);
           }
         },
       );
@@ -39,72 +39,73 @@ class _AllListCoinsScreenState extends State<AllListCoinsScreen> {
         child: CircularProgressIndicator.adaptive(),
       );
 
-  Widget _coinsLoaded(AllListCoinsLoaded state) => Scaffold(
-        body: SafeArea(
-          child: RefreshIndicator.adaptive(
-            edgeOffset: 150,
-            onRefresh: swipeDownRefresh,
-            child: CustomScrollView(
-              slivers: [
-                SliverAppBar(
-                  title: Text(context.lang.coins_list),
-                  elevation: 0.5,
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(16),
-                      bottomRight: Radius.circular(16),
-                    ),
-                  ),
-                  floating: true,
-                  pinned: true,
-                  bottom: PreferredSize(
-                    preferredSize: const Size.fromHeight(70),
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 0, 20, 16),
-                      child: AllListCoinsToolbar(onTap: () {
-                        showModalBottomSheet(
-                            context: context,
-                            shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.vertical(
-                                    top: Radius.circular(32))),
-                            showDragHandle: true,
-                            isScrollControlled: true,
-                            useRootNavigator: true,
-                            useSafeArea: true,
-                            builder: (buildContext) {
-                              return SearchCoinBottomSheet(
-                                onTap: (name) {
-                                  AutoRouter.of(context).popAndPush(
-                                      OneCoinDetailRoute(coinName: name));
-                                },
-                              );
-                            });
-                      }),
-                    ),
+  Widget _coinsLoaded(BuildContext context, AllListCoinsLoaded state) {
+    final router = context.router;
+    return Scaffold(
+      body: SafeArea(
+        child: RefreshIndicator.adaptive(
+          edgeOffset: 150,
+          onRefresh: swipeDownRefresh,
+          child: CustomScrollView(
+            slivers: [
+              SliverAppBar(
+                title: Text(context.lang.coins_list),
+                elevation: 0.5,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(16),
+                    bottomRight: Radius.circular(16),
                   ),
                 ),
-                const SliverGap(20),
-                SliverList.separated(
-                  itemCount: state.listOfCoins.length,
-                  separatorBuilder: (context, index) => const SizedBox(
-                    height: 16,
+                floating: true,
+                pinned: true,
+                bottom: PreferredSize(
+                  preferredSize: const Size.fromHeight(70),
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 16),
+                    child: AllListCoinsToolbar(onTap: () async {
+                      final result = await showModalBottomSheet(
+                          context: context,
+                          shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(32))),
+                          showDragHandle: true,
+                          isScrollControlled: true,
+                          useRootNavigator: true,
+                          useSafeArea: true,
+                          builder: (buildContext) {
+                            return const SearchCoinBottomSheet();
+                          });
+                      if (result != null) {
+                        router.push(OneCoinDetailRoute(coinName: result));
+                      }
+                    }),
                   ),
-                  itemBuilder: (BuildContext context, int index) =>
-                      SimpleCoinListView(
-                    key: Key(state.listOfCoins[index].name),
-                    name: state.listOfCoins[index].name,
-                    coinName: state.listOfCoins[index].coinName,
-                    onTap: (name) {
-                      AutoRouter.of(context)
-                          .push(OneCoinDetailRoute(coinName: name));
-                    },
-                  ),
-                )
-              ],
-            ),
+                ),
+              ),
+              const SliverGap(20),
+              SliverList.separated(
+                itemCount: state.listOfCoins.length,
+                separatorBuilder: (context, index) => const SizedBox(
+                  height: 16,
+                ),
+                itemBuilder: (BuildContext context, int index) =>
+                    SimpleCoinListView(
+                  key: Key(state.listOfCoins[index].name),
+                  name: state.listOfCoins[index].name,
+                  coinName: state.listOfCoins[index].coinName,
+                  onTap: (name) {
+                    AutoRouter.of(context)
+                        .push(OneCoinDetailRoute(coinName: name));
+                  },
+                ),
+              )
+            ],
           ),
         ),
-      );
+      ),
+    );
+  }
 
   Future<void> swipeDownRefresh() async {
     final completer = Completer();
