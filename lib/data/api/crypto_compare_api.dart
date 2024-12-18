@@ -1,8 +1,10 @@
 import 'package:crypto_currency/data/api/dto/all_coins_info_dto.dart';
 import 'package:crypto_currency/data/api/dio_service.dart';
+import 'package:crypto_currency/data/api/dto/coin_price_dto.dart';
 import 'package:crypto_currency/data/api/dto/history/coin_history_dto.dart';
 import 'package:crypto_currency/data/api/dto/one_coin_info_dto.dart';
 import 'package:crypto_currency/utils/env.dart';
+import 'package:flutter/foundation.dart';
 
 class CryptoCompareApi {
   static const String baseUrl = "https://min-api.cryptocompare.com";
@@ -36,6 +38,24 @@ class CryptoCompareApi {
         (response.data as Map<String, dynamic>)['RAW'] as Map<String, dynamic>;
     final coinData = rawData[coinName] as Map<String, dynamic>;
     return OneCoinInfoDTO.fromJson(coinData['USD']);
+  }
+
+  Future<List<CoinPriceDto>> featchMultipleSymbolsPrice(
+      List<String> coinNames) async {
+    final response = await dioService.client.get('$baseUrl/data/pricemulti',
+        queryParameters: {'fsyms': coinNames.join(','), 'tsyms': 'USD'});
+    final result = <CoinPriceDto>[];
+
+    final data = response.data as Map<String, dynamic>;
+
+    data.forEach((value, dataInfo) {
+      final internalData = dataInfo as Map<String, dynamic>;
+      debugPrint("Internal data: ${internalData}");
+      result
+          .add(CoinPriceDto(coinName: value, price: internalData['USD'] ?? 0));
+    });
+
+    return result;
   }
 
   Future<List<CoinHistoryDTO>?> getHistoryFor(

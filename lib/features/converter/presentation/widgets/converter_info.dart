@@ -26,7 +26,7 @@ class ConverterInfo extends StatelessWidget {
           return const SearchCoinBottomSheet();
         });
     debugPrint("RESULT: ${result as String?}");
-    assert(result == null || result is String);
+    assert(result is String);
     return result;
   }
 
@@ -43,6 +43,7 @@ class ConverterInfo extends StatelessWidget {
               hint: 'Из',
               isSelected: state.selectedType is FromSide,
               selectedCoin: state.selectedCoinFrom,
+              isLoadingPrice: state.loadPriceForFrom,
               onTap: () {
                 context
                     .read<ConverterBloc>()
@@ -63,6 +64,7 @@ class ConverterInfo extends StatelessWidget {
               hint: "В",
               isSelected: state.selectedType is ToSide,
               selectedCoin: state.selectedCoinTo,
+              isLoadingPrice: state.loadPriceForTo,
               onTap: () {
                 context
                     .read<ConverterBloc>()

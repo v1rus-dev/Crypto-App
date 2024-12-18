@@ -12,6 +12,7 @@ class ConverterCard extends StatefulWidget {
     required this.isSelected,
     required this.hint,
     required this.selectedCoin,
+    required this.isLoadingPrice,
     this.onTap,
     this.onTapOnSelectedCoin,
   });
@@ -21,6 +22,7 @@ class ConverterCard extends StatefulWidget {
   final bool isSelected;
   final String hint;
   final String selectedCoin;
+  final bool isLoadingPrice;
   VoidCallback? onTap;
   VoidCallback? onTapOnSelectedCoin;
 
@@ -50,22 +52,28 @@ class _ConverterCardState extends State<ConverterCard> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 300),
-                  child: widget.count.isEmpty
-                      ? Text(
-                          widget.hint,
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey,
-                              fontSize: 24),
-                        )
-                      : AutoSizeText(
-                          widget.count,
-                          maxFontSize: 24,
-                          maxLines: 1,
-                          minFontSize: 18,
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 24),
+                  duration: const Duration(milliseconds: 10),
+                  child: widget.isLoadingPrice
+                      ? const CircularProgressIndicator.adaptive()
+                      : AnimatedSwitcher(
+                          duration: const Duration(milliseconds: 300),
+                          child: widget.count.isEmpty
+                              ? Text(
+                                  widget.hint,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.grey,
+                                      fontSize: 24),
+                                )
+                              : AutoSizeText(
+                                  widget.count,
+                                  maxFontSize: 24,
+                                  maxLines: 1,
+                                  minFontSize: 18,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 24),
+                                ),
                         ),
                 ),
                 const Spacer(),

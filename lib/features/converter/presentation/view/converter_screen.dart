@@ -1,8 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:crypto_currency/common/presentation/utils/context_ext.dart';
 import 'package:crypto_currency/features/converter/domain/bloc/converter_bloc.dart';
+import 'package:crypto_currency/features/converter/domain/entities/load_coins_price_for.dart';
 import 'package:crypto_currency/features/converter/presentation/widgets/converter_info.dart';
 import 'package:crypto_currency/features/converter/presentation/widgets/converter_keyboard.dart';
+import 'package:crypto_currency/inject_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -16,7 +18,8 @@ class ConverterScreen extends StatefulWidget {
 }
 
 class _ConverterScreenState extends State<ConverterScreen> {
-  final ConverterBloc bloc = ConverterBloc();
+  final ConverterBloc bloc = ConverterBloc(repository: locator())
+    ..add(LoadCoinsPrices(priceFor: LoadCoinsPriceInitial()));
 
   @override
   Widget build(BuildContext context) {

@@ -9,6 +9,9 @@ import 'package:crypto_currency/features/all_list_coins/data/datasources/datasou
 import 'package:crypto_currency/features/all_list_coins/data/repository_impl/all_list_reposiory_impl.dart';
 import 'package:crypto_currency/features/all_list_coins/domain/bloc/all_list_coins_bloc.dart';
 import 'package:crypto_currency/features/all_list_coins/domain/repository/repository.dart';
+import 'package:crypto_currency/features/converter/data/datasource/converter_network_datasource.dart';
+import 'package:crypto_currency/features/converter/data/repository_impl/converter_repository_impl.dart';
+import 'package:crypto_currency/features/converter/domain/repositories/converter_repository.dart';
 import 'package:crypto_currency/features/main_coins_info/data/repositories/main_coins_info_repository_impl.dart';
 import 'package:crypto_currency/features/main_coins_info/domain/bloc/main_coins_info_bloc.dart';
 import 'package:crypto_currency/features/main_coins_info/domain/repositories/main_coins_info_repository.dart';
@@ -33,6 +36,7 @@ Future<void> initLocator() async {
   _initFavorites();
   _initOneCoinInfo();
   _initMainCoins();
+  _initConverter();
 }
 
 void _initLogger(bool enable) {
@@ -99,4 +103,11 @@ _initMainCoins() {
       () => MainCoinsInfoRepositoryImpl());
   locator.registerLazySingleton<MainCoinInfoBloc>(
       () => MainCoinInfoBloc(repository: locator()));
+}
+
+_initConverter() {
+  locator.registerLazySingleton<ConverterNetworkDatasource>(
+      () => ConverterNetworkDatasource(api: locator()));
+  locator.registerLazySingleton<ConverterRepository>(
+      () => ConverterRepositoryImpl(networkDatasource: locator()));
 }

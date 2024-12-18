@@ -1,11 +1,11 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'coin_price.freezed.dart';
+part 'coin_price_dto.freezed.dart';
 
 @freezed
-class CoinPrice with _$CoinPrice {
-  const factory CoinPrice({
+class CoinPriceDto with _$CoinPriceDto {
+  factory CoinPriceDto({
     required String coinName,
     required double price,
-  }) = _CoinPrice;
+  }) = _CoinPriceDto;
 }

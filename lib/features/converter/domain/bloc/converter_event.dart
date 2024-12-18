@@ -36,3 +36,12 @@ final class SetCoinType extends ConverterEvent {
   @override
   List<Object> get props => [type, coin];
 }
+
+final class LoadCoinsPrices extends ConverterEvent {
+  final LoadCoinsPriceFor priceFor;
+
+  const LoadCoinsPrices({required this.priceFor});
+
+  @override
+  List<Object> get props => [priceFor];
+}
